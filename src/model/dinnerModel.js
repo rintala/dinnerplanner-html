@@ -8,8 +8,6 @@ class DinnerModel {
     // and selected dishes for the dinner menu
     this.numberOfGuests = 10;
     this.menuDishes = [];
-    this.addDishToMenu(1);
-    this.addDishToMenu(100);
   }
 
   setNumberOfGuests(num) {
