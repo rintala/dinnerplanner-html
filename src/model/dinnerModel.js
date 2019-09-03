@@ -2,7 +2,8 @@
 class DinnerModel {
   constructor() {
     this.dishes = dishesConst;
-
+    this.GROUP_ID = 16;
+    this.API_KEY = ""; // leaving this out for push to git
     //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
@@ -62,10 +63,9 @@ class DinnerModel {
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-  addDishToMenu(id) {
+  addDishToMenu(data) {
     //TODO Lab 0
-    const inputDish = this.getDish(id);
-
+    const inputDish = data;
     if (inputDish !== undefined) {
       const filteredMenuDishes = [];
       for (let dish of this.menuDishes) {
@@ -82,49 +82,136 @@ class DinnerModel {
   removeDishFromMenu(id) {
     //TODO Lab 0
     var newMenuDishes = [];
-    for (let dish of this.dishes) {
+
+    for (let dish of this.menuDishes) {
       if (dish.id !== id) {
         newMenuDishes.push(dish);
       }
     }
+
     this.menuDishes = newMenuDishes;
+  }
+
+  handleHTTPError(response) {
+    if (response.ok) return response;
+    throw Error(response.statusText);
   }
 
   //Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
+    document.getElementById("loader").style.display = "block";
+    const URL =
+      "http://sunset.nada.kth.se:8080/iprog/group/" +
+      this.GROUP_ID +
+      "/recipes/search";
+
     if (type === undefined) {
-      return this.dishes;
-    }
-    return this.dishes.filter(function(dish) {
-      let found = true;
-      if (query) {
-        found = false;
-        dish.ingredients.forEach(function(ingredient) {
-          if (ingredient.name.indexOf(query) !== -1) {
-            found = true;
-          }
-        });
-        if (dish.name.indexOf(query) !== -1) {
-          found = true;
+      return fetch(URL, {
+        method: "GET",
+        headers: {
+          "X-Mashape-Key": this.API_KEY
         }
+      })
+        .then(this.handleHTTPError)
+        .then(response =>
+          response.json().then(data => {
+            document.getElementById("loader").style.display = "none";
+            return data.results;
+          })
+        )
+        .catch(console.error);
+    }
+    let queryToInclude = "?query=pizza&type=main-dish";
+
+    if (query !== undefined) {
+      queryToInclude = "?query=" + query;
+    }
+    const URLWithParams = URL + queryToInclude;
+    return fetch(URLWithParams, {
+      method: "GET",
+      headers: {
+        "X-Mashape-Key": this.API_KEY
       }
-      if (type === "") {
-        return found;
-      }
-      return dish.type === type && found;
-    });
+    })
+      .then(this.handleHTTPError)
+      .then(response =>
+        response.json().then(data => {
+          if (data.results.length === 0) {
+            URLSearchIngredients =
+              "http://sunset.nada.kth.se:8080/iprog/group/" +
+              this.GROUP_ID +
+              "/recipes/findByIngredients" +
+              "?ingredients=" +
+              query;
+
+            fetch(URLSearchIngredients, {
+              method: "GET",
+              headers: {
+                "X-Mashape-Key": this.API_KEY
+              }
+            })
+              .then(this.handleHTTPError)
+              .then(response =>
+                response.json().then(object => {
+                  document.getElementById("loader").style.display = "none";
+                  return object;
+                })
+              )
+              .catch(console.error);
+          } else {
+            document.getElementById("loader").style.display = "none";
+            return data.results;
+          }
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        // want to try searching for ingredients eventhough the first api call fails
+        fetch(URLSearchIngredients, {
+          method: "GET",
+          headers: {
+            "X-Mashape-Key": this.API_KEY
+          }
+        })
+          .then(this.handleHTTPError)
+          .then(response =>
+            response.json().then(object => {
+              document.getElementById("loader").style.display = "none";
+              return object;
+            })
+          )
+          .catch(console.error);
+      });
   }
 
+  handleHTTPErrorGetDish(response) {
+    if (response.ok) {
+      return response.json().then(object => object);
+    } else {
+      return { code: response.status };
+    }
+  }
   //Returns a dish of specific ID
   getDish(id) {
-    for (let dsh of this.dishes) {
-      if (dsh.id === id) {
-        return dsh;
+    document.getElementById("loader").style.display = "block";
+    const URL =
+      "http://sunset.nada.kth.se:8080/iprog/group/" +
+      this.GROUP_ID +
+      "/recipes/" +
+      id +
+      "/information";
+
+    return fetch(URL, {
+      method: "GET",
+      headers: {
+        "X-Mashape-Key": this.API_KEY
       }
-    }
-    return undefined;
+    })
+      .then(this.handleHTTPErrorGetDish)
+      .then((document.getElementById("loader").style.display = "none"))
+      .catch(console.error);
   }
 }
 
