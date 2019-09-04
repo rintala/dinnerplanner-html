@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
   //We instantiate our model
   const model = new DinnerModel();
 
@@ -8,5 +8,4 @@ window.onload = function () {
    * In other places you should limit the search only to the children
    * of the specific view you're working with (see exampleView.js).
    */
-
 };

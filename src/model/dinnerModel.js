@@ -3,7 +3,11 @@ class DinnerModel {
   constructor() {
     this.dishes = dishesConst;
     this.GROUP_ID = 16;
-    this.API_KEY = ""; // leaving this out for push to git
+    this.API_KEY = config.SECRET_API_KEY;
+    this.baseURLRecipes =
+      "http://sunset.nada.kth.se:8080/iprog/group/" +
+      this.GROUP_ID +
+      "/recipes/";
     //TODO Lab 0
     // implement the data structure that will hold number of guests
     // and selected dishes for the dinner menu
@@ -102,33 +106,23 @@ class DinnerModel {
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
     document.getElementById("loader").style.display = "block";
-    const URL =
-      "http://sunset.nada.kth.se:8080/iprog/group/" +
-      this.GROUP_ID +
-      "/recipes/search";
+    const URL = this.baseURLRecipes + "search";
 
-    if (type === undefined) {
-      return fetch(URL, {
-        method: "GET",
-        headers: {
-          "X-Mashape-Key": this.API_KEY
-        }
-      })
-        .then(this.handleHTTPError)
-        .then(response =>
-          response.json().then(data => {
-            document.getElementById("loader").style.display = "none";
-            return data.results;
-          })
-        )
-        .catch(console.error);
-    }
-    let queryToInclude = "?query=pizza&type=main-dish";
+    let queryToInclude = "";
 
-    if (query !== undefined) {
-      queryToInclude = "?query=" + query;
+    if (type == undefined) {
+      if (query !== undefined) {
+        queryToInclude = "?query=" + query;
+      }
+    } else {
+      queryToInclude = "?type=" + type;
+      if (query !== undefined) {
+        queryToInclude = queryToInclude + "&query=" + query;
+      }
     }
-    const URLWithParams = URL + queryToInclude;
+
+    let URLWithParams = URL + queryToInclude;
+
     return fetch(URLWithParams, {
       method: "GET",
       headers: {
@@ -138,52 +132,11 @@ class DinnerModel {
       .then(this.handleHTTPError)
       .then(response =>
         response.json().then(data => {
-          if (data.results.length === 0) {
-            URLSearchIngredients =
-              "http://sunset.nada.kth.se:8080/iprog/group/" +
-              this.GROUP_ID +
-              "/recipes/findByIngredients" +
-              "?ingredients=" +
-              query;
-
-            fetch(URLSearchIngredients, {
-              method: "GET",
-              headers: {
-                "X-Mashape-Key": this.API_KEY
-              }
-            })
-              .then(this.handleHTTPError)
-              .then(response =>
-                response.json().then(object => {
-                  document.getElementById("loader").style.display = "none";
-                  return object;
-                })
-              )
-              .catch(console.error);
-          } else {
-            document.getElementById("loader").style.display = "none";
-            return data.results;
-          }
+          document.getElementById("loader").style.display = "none";
+          return data.results;
         })
       )
-      .catch(err => {
-        console.log(err);
-        // want to try searching for ingredients eventhough the first api call fails
-        fetch(URLSearchIngredients, {
-          method: "GET",
-          headers: {
-            "X-Mashape-Key": this.API_KEY
-          }
-        })
-          .then(this.handleHTTPError)
-          .then(response =>
-            response.json().then(object => {
-              document.getElementById("loader").style.display = "none";
-              return object;
-            })
-          )
-          .catch(console.error);
-      });
+      .catch(err => console.log(err));
   }
 
   handleHTTPErrorGetDish(response) {
@@ -196,12 +149,7 @@ class DinnerModel {
   //Returns a dish of specific ID
   getDish(id) {
     document.getElementById("loader").style.display = "block";
-    const URL =
-      "http://sunset.nada.kth.se:8080/iprog/group/" +
-      this.GROUP_ID +
-      "/recipes/" +
-      id +
-      "/information";
+    const URL = this.baseURLRecipes + id + "/information";
 
     return fetch(URL, {
       method: "GET",
