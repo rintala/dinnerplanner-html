@@ -15,6 +15,19 @@ class DinnerModel {
     this.menuDishes = [];
   }
 
+  _handleHTTPError(response) {
+    if (response.ok) return response;
+    throw Error(response.statusText);
+  }
+
+  _handleHTTPErrorGetDish(response) {
+    if (response.ok) {
+      return response.json().then(object => object);
+    } else {
+      return { code: response.status };
+    }
+  }
+
   setNumberOfGuests(num) {
     //TODO Lab 0
     if (num >= 0) {
@@ -96,40 +109,25 @@ class DinnerModel {
     this.menuDishes = newMenuDishes;
   }
 
-  handleHTTPError(response) {
-    if (response.ok) return response;
-    throw Error(response.statusText);
-  }
-
   //Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
-  getAllDishes(type, query) {
+  getAllDishes(type = "", query = "") {
     document.getElementById("loader").style.display = "block";
-    const URL = this.baseURLRecipes + "search";
+    const URL = this.baseURLRecipes + "search?";
 
-    let queryToInclude = "";
+    let searchParams = new URLSearchParams();
 
-    if (type == undefined) {
-      if (query !== undefined) {
-        queryToInclude = "?query=" + query;
-      }
-    } else {
-      queryToInclude = "?type=" + type;
-      if (query !== undefined) {
-        queryToInclude = queryToInclude + "&query=" + query;
-      }
-    }
+    searchParams.append("query", query);
+    searchParams.append("type", type);
 
-    let URLWithParams = URL + queryToInclude;
-
-    return fetch(URLWithParams, {
+    return fetch(URL + searchParams, {
       method: "GET",
       headers: {
         "X-Mashape-Key": this.API_KEY
       }
     })
-      .then(this.handleHTTPError)
+      .then(this._handleHTTPError)
       .then(response =>
         response.json().then(data => {
           document.getElementById("loader").style.display = "none";
@@ -139,13 +137,6 @@ class DinnerModel {
       .catch(err => console.log(err));
   }
 
-  handleHTTPErrorGetDish(response) {
-    if (response.ok) {
-      return response.json().then(object => object);
-    } else {
-      return { code: response.status };
-    }
-  }
   //Returns a dish of specific ID
   getDish(id) {
     document.getElementById("loader").style.display = "block";
@@ -157,7 +148,7 @@ class DinnerModel {
         "X-Mashape-Key": this.API_KEY
       }
     })
-      .then(this.handleHTTPErrorGetDish)
+      .then(this._handleHTTPErrorGetDish)
       .then((document.getElementById("loader").style.display = "none"))
       .catch(console.error);
   }

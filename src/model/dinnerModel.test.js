@@ -1,5 +1,5 @@
-const assert = chai.assert;
-const expect = chai.expect;
+/* const assert = chai.assert;
+const expect = chai.expect; */
 
 describe("DinnerModel", () => {
   let model = new DinnerModel();

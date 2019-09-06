@@ -3,7 +3,7 @@ class HomeView {
     this.container = container;
     this.startBtn = null;
   }
-  
+
   render() {
     var content = /* template */ `
     <div class="header d-flex align-items-center justify-content-center">
@@ -26,6 +26,6 @@ class HomeView {
   }
 
   afterRender() {
-    this.startBtn = this.container.find("#startBtn");
+    this.startBtn = this.container.querySelector("#startBtn");
   }
 }
