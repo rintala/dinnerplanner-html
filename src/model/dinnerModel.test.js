@@ -87,10 +87,4 @@ describe("DinnerModel", () => {
       });
     }).timeout(10000);
   });
-
-  describe("loading indicator", () => {
-    it("checks if the loading indicator is still visible on the page", () => {
-      expect(document.getElementById("loader").style.display).to.equal("none");
-    });
-  });
 });
