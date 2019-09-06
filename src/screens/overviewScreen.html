@@ -20,12 +20,15 @@
     />
     <link rel="stylesheet" href="../style.css" />
   </head>
+  <script src="../model/dinnerModel.js"></script>
   <script src="../view/overviewView.js"></script>
   <script>
     function renderView() {
+      let model = new DinnerModel();
       document.getElementById("loader").style.display = "none";
       let viewInstance = new OverviewView(
-        document.getElementById("viewContainer")
+        document.getElementById("viewContainer"),
+        model
       );
       viewInstance.render();
     }
@@ -63,7 +66,6 @@
 
     <!-- The application JavaScript code -->
     <script src="../../config.js"></script>
-    <script src="../model/dinnerModel.js"></script>
     <script src="../app.js"></script>
     <script type="text/javascript">
       window.onload = () => renderView();

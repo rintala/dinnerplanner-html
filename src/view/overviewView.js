@@ -5,12 +5,16 @@ class OverviewView {
   }
 
   render() {
-    var content = /* template */ `
+    console.log("MODEL", this.model);
+    var content =
+      /* template */ `
           <div>
           <div id="overviewHeader">
             <p class="text-center p-max-width">
                 My Dinner:
-                <span class="value-num-guests">3</span> people
+                <span class="value-num-guests">` +
+      this.model.numberOfGuests +
+      `</span> people
             </p>
             <a id="goBackBtn" class="button" onClick="location.href='../screens/searchScreen.html';">
               Go back and edit dinner
@@ -22,7 +26,7 @@ class OverviewView {
             <div class="dishItem">3</div>
             <div class="dishItem">4</div>
           </div>
-          <a id="printBtn" class="button">
+          <a id="toPrintBtn" class="button">
             Print Full Recipe
           </a>
         </div>

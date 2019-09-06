@@ -11,7 +11,10 @@ describe("DinnerPlanner App", () => {
     model = new DinnerModel();
     homeView = new HomeView(document.querySelector("#page-content"));
     searchView = new SearchView(document.querySelector("#page-content"), model);
-    overviewView = new OverviewView(document.querySelector("#page-content"), model);
+    overviewView = new OverviewView(
+      document.querySelector("#page-content"),
+      model
+    );
   });
 
   describe("Home View", () => {
@@ -38,16 +41,16 @@ describe("DinnerPlanner App", () => {
       expect(dishSearch).to.not.be.a("null");
     });
 
-    it("displays a loading message", (done) => {
+    it("displays a loading message", done => {
       const loader = document.getElementById("loader");
       expect(loader).to.not.be.a("null");
 
       // setTimeout(() => {
-        done();
+      done();
       // }, 3000);
     }).timeout(3000);
 
-    it("displays dishes", (done) => {
+    it("displays dishes", done => {
       const dishes = document.getElementById("dishItems");
       expect(dishes).to.not.be.a("null");
       done();
@@ -59,12 +62,14 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
+        expect(v.innerHTML).to.equal("" + model.getNumberOfGuests());
       }
     });
 
     it("Has data on current dishes", () => {
-      const valueHolders = document.getElementsByClassName("value-main-course-name");
+      const valueHolders = document.getElementsByClassName(
+        "value-main-course-name"
+      );
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
@@ -77,7 +82,7 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getTotalMenuPrice());
+        expect(v.innerHTML).to.equal("" + model.getTotalMenuPrice());
       }
     });
   });
@@ -98,18 +103,19 @@ describe("DinnerPlanner App", () => {
       expect(printBtn).to.not.be.a("null");
     });
 
-
     it("Has a number of guests value", () => {
       const valueHolders = document.getElementsByClassName("value-num-guests");
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getNumberOfGuests());
+        expect(v.innerHTML).to.equal("" + model.getNumberOfGuests());
       }
     });
 
     it("Has data on current dishes", () => {
-      const valueHolders = document.getElementsByClassName("value-main-course-name");
+      const valueHolders = document.getElementsByClassName(
+        "value-main-course-name"
+      );
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
@@ -122,7 +128,7 @@ describe("DinnerPlanner App", () => {
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
-        expect(v.innerHTML).to.equal(""+model.getTotalMenuPrice());
+        expect(v.innerHTML).to.equal("" + model.getTotalMenuPrice());
       }
     });
   });
