@@ -10,7 +10,7 @@ class SearchSideBarView {
         <div>
         <p class="text-center p-max-width">
             My dinner
-            People <span class="value-num-guests">3</span>
+            People <span class="value-num-guests">${this.model.numberOfGuests}</span>
         </p>
         </div>
         <div style="display: flex; justify-content: space-between">

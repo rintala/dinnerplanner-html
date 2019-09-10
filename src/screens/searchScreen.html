@@ -20,27 +20,13 @@
     />
     <link rel="stylesheet" href="../style.css" />
   </head>
-  <script src="../view/searchSideBarView.js"></script>
-  <script src="../view/searchView.js"></script>
-  <script>
-    function renderViews() {
-      document.getElementById("loader").style.display = "none";
 
-      let viewInstance = new SearchView(
-        document.getElementById("viewContainer")
-      );
-      viewInstance.render();
-    }
-  </script>
   <body>
     <div id="loaderWrapper"></div>
     <div class="header">
       Dinner Planner
     </div>
     <div class="container page-content">
-      <div id="loader" class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
       <div id="viewContainer"></div>
     </div>
 
@@ -63,8 +49,22 @@
     ></script>
 
     <!-- The application JavaScript code -->
+    <script>
+      function renderViews() {
+        let viewInstance = new SearchView(
+          document.getElementById("viewContainer"),
+          model
+        );
+        viewInstance.render();
+        document.getElementById("loader").style.display = "none";
+      }
+    </script>
     <script src="../../config.js"></script>
     <script src="../model/dinnerModel.js"></script>
+    <script src="../view/homeView.js"></script>
+    <script src="../view/searchSideBarView.js"></script>
+    <script src="../view/searchView.js"></script>
+    <script src="../view/overviewView.js"></script>
     <script src="../app.js"></script>
 
     <script type="text/javascript">

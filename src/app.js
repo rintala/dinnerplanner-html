@@ -1,7 +1,9 @@
+console.log("%c app is being run", "font-size: 5em; color: green");
+const model = new DinnerModel();
+
 window.onload = function() {
   //We instantiate our model
-  const model = new DinnerModel();
-
+  /*   const model = new DinnerModel(); */
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
    * query for elements in the whole document.
