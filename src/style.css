@@ -7,6 +7,24 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+.dish {
+  width: 25%;
+}
+
+.border {
+  border-style: solid;
+  border-color: black !important;
+  border-width: 3px !important;
+}
+.text {
+  background-color: #d6d1d1;
+  margin-top: 0.2rem;
+  padding: 0.2rem;
+  text-align: center;
+}
+.image {
+  width: 100%;
+}
 
 #loaderWrapper {
   position: fixed;
@@ -15,7 +33,7 @@
 }
 
 .header {
-  font-family: "Sofia";
+  font-family: 'Sofia';
   font-size: 44px;
   font-weight: bold;
   display: flex;
@@ -36,7 +54,7 @@
 }
 
 #dishSearchView {
-  display: "flex";
+  display: 'flex';
 }
 
 #dishItems {

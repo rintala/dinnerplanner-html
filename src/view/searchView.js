@@ -5,8 +5,6 @@ class SearchView {
   }
 
   render() {
-    const dish1 = this.model.getDish(1);
-    console.log("dish1", dish1);
     var content = `
       <div id="dishSearchViewWrapper">
       <div id="loader" class="spinner-border" role="status">
@@ -21,21 +19,26 @@ class SearchView {
           </a>
         </div>
         <div id="dishItems">
-          <div class="dishItem">
-            <span class="value-main-course-name">1</span>
-          </div>
-          <div class="dishItem">2</div>
-          <div class="dishItem">3</div>
-          <div class="dishItem">4</div>
+            <span id="dishContainer">
+            </span>
         </div>
-        
       </div>`;
-
-    console.log("this containe", this.container);
+    this.model.getAllDishes().then(data => {
+      data.forEach(dish => {
+        this.model.getDish(dish.id).then(data => {
+          document.getElementById('dishContainer').innerHTML += `
+          <div class="dish">
+            <img class="image border" src="${data.image}"/>
+            <p class="text border">${data.title}</p>
+          </div>`;
+        });
+      });
+    });
+    console.log('this containe', this.container);
     this.container.innerHTML = content;
-    console.log("undefined?", this.model);
+    console.log('undefined?', this.model);
     let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById("sideBarView"),
+      document.getElementById('sideBarView'),
       this.model
     );
     sideBarViewInstance.render();
