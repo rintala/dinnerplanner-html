@@ -1,18 +1,15 @@
-class OverviewView {
+class PrintoutView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
   }
 
   render() {
-    console.log("MODEL", this.model);
-
     var content = `
       <div id="loader" class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       <div id="dishSearchViewWrapper">
-        
         <div id="dishSearchBody">
           <div id="dishSearchHeader">
             <p class="text-center p-max-width" style="font-size: 30px">
@@ -24,9 +21,7 @@ class OverviewView {
             </a>
           </div>
           <div id="dishItems"></div>
-          <a id="toPrintBtn" class="button" onclick="location.href='../screens/printoutScreen.html';">
-              Print Full Recipe
-          </a>
+      
         </div>
       </div>`;
     this.model
@@ -47,9 +42,7 @@ class OverviewView {
 
         this.afterRender();
       })
-      .then(() => console.log("resolvedd", document, "<= doc"))
-      .then(() => resolve())
-      .catch(error => {});
+      .catch(error => error);
 
     this.container.innerHTML = content;
     this.afterRender();
