@@ -113,7 +113,6 @@ class DinnerModel {
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type = "", query = "") {
-    /* document.getElementById("loader").style.display = "block"; */
     const URL = this.baseURLRecipes + "search?";
 
     let searchParams = new URLSearchParams();
@@ -130,7 +129,6 @@ class DinnerModel {
       .then(this._handleHTTPError)
       .then(response =>
         response.json().then(data => {
-          document.getElementById("loader").style.display = "none";
           return data.results;
         })
       )
@@ -139,7 +137,6 @@ class DinnerModel {
 
   //Returns a dish of specific ID
   getDish(id) {
-    /* document.getElementById("loader").style.display = "block"; */
     const URL = this.baseURLRecipes + id + "/information";
 
     return fetch(URL, {
@@ -149,7 +146,6 @@ class DinnerModel {
       }
     })
       .then(this._handleHTTPErrorGetDish)
-      .then((document.getElementById("loader").style.display = "none"))
       .catch(console.error);
   }
 }
