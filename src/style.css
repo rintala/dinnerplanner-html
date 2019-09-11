@@ -7,9 +7,6 @@
   padding-left: 5px;
   padding-right: 5px;
 }
-.dish {
-  width: 25%;
-}
 
 .border {
   border-style: solid;
@@ -33,7 +30,7 @@
 }
 
 .header {
-  font-family: 'Sofia';
+  font-family: "Sofia";
   font-size: 44px;
   font-weight: bold;
   display: flex;
@@ -51,10 +48,14 @@
 #dishSearchViewWrapper {
   padding: 10px;
   background-color: beige;
+  display: flex;
+  flex-direction: row;
 }
 
-#dishSearchView {
-  display: 'flex';
+#dishSearchHeader {
+  padding: 20px;
+  background-color: rgb(171, 171, 172);
+  width: 100%;
 }
 
 #dishItems {
@@ -63,6 +64,12 @@
   padding: 20px;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.dish {
+  padding: 10px;
+  flex: 1 1 150px;
 }
 
 .dishItem {
@@ -78,6 +85,7 @@
 #sideBarView {
   padding: 10px;
   background-color: gray;
+  width: 200px;
 }
 
 #viewContainer {
