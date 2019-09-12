@@ -13,16 +13,17 @@ class OverviewView {
         
         <div id="dishSearchBody">
           <div id="dishSearchHeader">
-            <p class="text-center p-max-width" style="font-size: 30px">
+            <p class="text-center p-max-width" style="font-size: 20px;padding: 10px; padding-top: 20px;">
               My dinner:
               <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
             </p>
-            <div>SEK <span class="value-total-price"></span></div>
+            
             <a id="goBackBtn" class="button" onclick="location.href='../screens/searchScreen.html';">
               Go back and edit dinner
             </a>
           </div>
           <div id="dishItems"></div>
+          <div><b>Total: <span class="value-total-price"></span> SEK</b></div>
           <a id="toPrintBtn" class="button" onclick="location.href='../screens/printoutScreen.html';">
               Print Full Recipe
           </a>
@@ -38,6 +39,7 @@ class OverviewView {
               dish.image
             )}"/>
             <p class="dishText value-main-course-name">${dish.title}</p>
+            <p class="dishText">${dish.pricePerServing} SEK</p>
           </div>`;
     });
 

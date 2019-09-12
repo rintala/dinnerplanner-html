@@ -34,9 +34,9 @@ class SearchSideBarView {
     console.log("full menu", menuDishes);
     menuDishes.forEach(menuDish => {
       document.getElementById("dishesInfo").innerHTML += `
-      <div id="dishInfo" >
-        Name: <span class="value-main-course-name">${menuDish.title}</span> 
-        Price: <span>${menuDish.pricePerServing}</span>
+      <div class="dishInfo" >
+       <span class="value-main-course-name">${menuDish.title}</span> 
+       <span>${menuDish.pricePerServing}</span>
       </div>`;
     });
 
