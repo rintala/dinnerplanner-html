@@ -6,10 +6,9 @@
   cursor: pointer;
   padding-left: 5px;
   padding-right: 5px;
-
+  box-shadow: 2px 2px #2b2a2a;
   text-transform: capitalize;
 }
-
 .dropDownMenu {
   border-style: solid;
   border-color: black !important;
@@ -112,7 +111,10 @@
   font-size: 1.2rem;
   padding-left: 1rem;
 }
-
+.dishOverViewImage {
+  height: 20rem;
+  width: 20rem;
+}
 #dishSearchHeader {
   background-color: rgb(171, 171, 172);
   display: flex;
@@ -148,6 +150,11 @@
   .dishText {
     width: 10rem;
   }
+}
+
+.ingredietsContainer {
+  background-color: #f5d07e;
+  padding: 1rem;
 }
 
 .dishItem {
@@ -254,4 +261,20 @@
 }
 .dishIngredientPrice {
   width: 100%;
+}
+
+hr {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 8px auto;
+  height: 0;
+  width: 100%;
+  max-height: 0;
+  font-size: 1px;
+  line-height: 0;
+  clear: both;
+  border: none;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #ffffff;
 }

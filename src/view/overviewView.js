@@ -6,59 +6,62 @@ class OverviewView {
 
   cutOverflowingText = text => {
     if (text.length > 20) {
-      return text.substr(0, 20) + "...";
+      return text.substr(0, 20) + '...';
     }
     return text;
   };
 
   render() {
     var content = `
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      <div id="dishSearchViewWrapper">
+      <div id='dishSearchViewWrapper'>
+        <div id='sideBarView'></div>
+        <div>
+          <p id='dishTitle'></p>
+          <img id='dishImg' class="dishOverViewImage"/> 
+          <button class="button">Back to search</button>
         
-        <div id="dishSearchBody">
-          <div id="dishSearchHeader">
-            <p class="text-center p-max-width" style="font-size: 20px;padding: 10px; padding-top: 20px;">
-              My dinner:
-              <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
-            </p>
-            
-            <a id="goBackBtn" class="button" onclick="location.href='../screens/searchScreen.html';">
-              Go back and edit dinner
-            </a>
-          </div>
-          <div id="dishItems"></div>
-          <div><b>Total: <span class="value-total-price"></span> SEK</b></div>
-          <a id="toPrintBtn" class="button" onclick="location.href='../screens/printoutScreen.html';">
-              Print Full Recipe
-          </a>
-          
         </div>
-      </div>`;
+        <div class="ingredietsContainer">
+          <div>
+            <p>Ingrediends for x people</p>
+          </div>
+          <hr>
+          <div id="dishIngredients"></div>
+          <hr>
+          <button class='button' id='addToMenuButton'>Add to menu</button>
+          <p id="totalPrice"></p>
+        </div>
+        
+      </div>
+      `;
     this.container.innerHTML = content;
-    console.log("gettfullmenu", this.model.getFullMenu());
-    this.model.getFullMenu().forEach(dish => {
-      document.getElementById("dishItems").innerHTML += `
-          <div class="dish">
-            <img class="dishImage image border" src="${this.model.getDishImageURLFromString(
-              dish.image
-            )}"/>
-            <p class="dishText value-main-course-name">${cutOverflowingText(
-              dish.title
-            )}</p>
-            <p class="dishText">${dish.pricePerServing} SEK</p>
-          </div>`;
+
+    this.model.getDish(442678).then(dish => {
+      document.getElementById('dishTitle').innerHTML = dish.title;
+      document.getElementById('dishImg').src = this.model.getFullDishImageURL(dish.imageUrls);
+      dish.extendedIngredients.forEach(ingredient => {
+        document.getElementById('dishIngredients').innerHTML += `
+        <span>
+          <p>${ingredient.name}</p>
+          <p>${ingredient.measures.metric.amount}</p>
+          <p>${ingredient.measures.metric.unitShort}</p>
+        </span>
+        `;
+        document.getElementById('totalPrice').innerHTML = dish.pricePerServing; //This is not working
+        document.getElementById('addToMenuButton').onclick = () => {
+          console.log('adding dish to menu');
+          this.model.addDishToMenu(dish);
+        };
+      });
     });
 
-    const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName(
-      "value-total-price"
-    )[0].innerHTML = totalMenuPrice;
+    let sideBarViewInstance = new SearchSideBarView(
+      document.getElementById('sideBarView'),
+      this.model
+    );
+    sideBarViewInstance.render();
 
     this.afterRender();
   }
-
   afterRender() {}
 }
