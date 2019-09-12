@@ -14,7 +14,7 @@ class PrintoutView {
           <div id="dishSearchHeader">
             <p class="text-center p-max-width" style="font-size: 30px">
               My dinner:
-              <span class="value-num-guests">${this.model.numberOfGuests}</span> people
+              <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
             </p>
             <a id="goBackBtn" class="button" onclick="location.href='../screens/searchScreen.html';">
               Go back and edit dinner

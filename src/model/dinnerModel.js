@@ -139,12 +139,22 @@ class DinnerModel {
   }
 
   getFullDishImageURL(imageNameArray) {
-    if (!imageNameArray) {
-      return (
-        this.spoonacularImagesURL +
-        "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
-      );
+    console.log("img array name", imageNameArray);
+    if (imageNameArray && imageNameArray.length) {
+      return this.spoonacularImagesURL + imageNameArray[0];
     }
-    return this.spoonacularImagesURL + imageNameArray[0];
+    return (
+      this.spoonacularImagesURL +
+      "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
+    );
+  }
+  getDishImageURLFromString(imageNameString) {
+    if (imageNameString) {
+      return imageNameString;
+    }
+    return (
+      this.spoonacularImagesURL +
+      "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
+    );
   }
 }
