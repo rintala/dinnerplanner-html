@@ -45,6 +45,7 @@
   justify-content: center;
   background-color: lightgray;
   height: 15vh;
+  padding: 10px;
 }
 
 .container {
@@ -53,16 +54,13 @@
 }
 
 #dishSearchViewWrapper {
-  padding: 10px;
   background-color: beige;
   display: flex;
   flex-direction: row;
 }
 
 #dishSearchHeader {
-  padding: 20px;
   background-color: rgb(171, 171, 172);
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -80,6 +78,17 @@
 .dish {
   padding: 10px;
   flex: 1 1 150px;
+}
+
+@media (min-width: 469px) {
+  /* CSS in here for desktop only */
+  .dishImage {
+    width: 10vh;
+    height: 10vh;
+  }
+  .dishText {
+    width: 10vh;
+  }
 }
 
 .dishItem {

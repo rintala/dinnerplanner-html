@@ -34,10 +34,10 @@ class OverviewView {
     this.model.getFullMenu().forEach(dish => {
       document.getElementById("dishItems").innerHTML += `
           <div class="dish">
-            <img class="image border" src="${this.model.getDishImageURLFromString(
+            <img class="dishImage image border" src="${this.model.getDishImageURLFromString(
               dish.image
             )}"/>
-            <p class="value-main-course-name">${dish.title}</p>
+            <p class="dishText value-main-course-name">${dish.title}</p>
           </div>`;
     });
 

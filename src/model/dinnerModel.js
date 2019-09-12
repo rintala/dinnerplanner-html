@@ -139,7 +139,6 @@ class DinnerModel {
   }
 
   getFullDishImageURL(imageNameArray) {
-    console.log("img array name", imageNameArray);
     if (imageNameArray && imageNameArray.length) {
       return this.spoonacularImagesURL + imageNameArray[0];
     }
