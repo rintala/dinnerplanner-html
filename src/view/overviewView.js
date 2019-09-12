@@ -4,6 +4,13 @@ class OverviewView {
     this.model = model;
   }
 
+  cutOverflowingText = text => {
+    if (text.length > 20) {
+      return text.substr(0, 20) + "...";
+    }
+    return text;
+  };
+
   render() {
     var content = `
       <div id="loader" class="spinner-border" role="status">
@@ -38,7 +45,9 @@ class OverviewView {
             <img class="dishImage image border" src="${this.model.getDishImageURLFromString(
               dish.image
             )}"/>
-            <p class="dishText value-main-course-name">${dish.title}</p>
+            <p class="dishText value-main-course-name">${cutOverflowingText(
+              dish.title
+            )}</p>
             <p class="dishText">${dish.pricePerServing} SEK</p>
           </div>`;
     });

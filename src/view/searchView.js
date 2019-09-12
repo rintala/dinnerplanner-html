@@ -58,7 +58,7 @@ class SearchView {
             <img class="dishImage image border" src="${this.model.getFullDishImageURL(
               dish.imageUrls
             )}"/>
-            <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
+            <p class="dishText text border value-main-course-name">${cutOverflowingText(
               dish.title
             )}</p>
           </div>`;
