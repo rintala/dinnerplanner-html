@@ -89,7 +89,7 @@ class DinnerModel {
     return fetch(url, {
       method: 'GET',
       headers: {
-        'X-Mashape-Key': apikey
+        'X-Mashape-Key': config.SECRET_API_KEY
       }
     })
       .then(res => {
@@ -110,7 +110,7 @@ class DinnerModel {
     return fetch(url, {
       method: 'GET',
       headers: {
-        'X-Mashape-Key': apikey
+        'X-Mashape-Key': config.SECRET_API_KEY
       }
     })
       .then(res => {
