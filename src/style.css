@@ -119,6 +119,7 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
+  width: auto;
 }
 
 #dishItems {

@@ -11,6 +11,31 @@ class SearchView {
     return text;
   };
 
+  getAllDishes() {
+    document.getElementById('dishItems').innerHTML = '';
+    const query = document.getElementById('searchKeyword').value;
+    let dishType = document.getElementById('dropDownMenu').value;
+
+    if (dishType === 'all') dishType = '';
+
+    this.model
+      .getAllDishes(dishType, query)
+      .then(data => {
+        data.forEach(dish => {
+          document.getElementById('dishItems').innerHTML += `
+        <div class="dish">
+          <img class="dishImage image border" src="${this.model.getFullDishImageURL(
+            dish.imageUrls
+          )}"/>
+          <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
+            dish.title
+          )}</p>
+        </div>`;
+        });
+      })
+      .catch(error => error);
+  }
+
   render() {
     const dishTypes = [
       'all',
@@ -32,7 +57,7 @@ class SearchView {
             <div id='dishSearchView'>
               <input id='searchKeyword' class="border" type='text' placeholder='Enter keywords'></input>
               <select id='dropDownMenu' class="dropDownMenu"></select>
-              <button id='searchBtn' class="button"> search </button>
+              <button id='searchBtn' class="button" @onclick(this.searchButton())> search </button>
               <div id='loader' class='spinner-border' role='status'>
                 <span class='sr-only'>Loading...</span>
               </div>      
@@ -49,28 +74,17 @@ class SearchView {
       document.getElementById('dropDownMenu').innerHTML += `<option>${dishName}</option>`;
     });
 
-    this.model
-      .getAllDishes()
-      .then(data => {
-        data.forEach(dish => {
-          document.getElementById('dishItems').innerHTML += `
-          <div class="dish">
-            <img class="dishImage image border" src="${this.model.getFullDishImageURL(
-              dish.imageUrls
-            )}"/>
-            <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
-              dish.title
-            )}</p>
-          </div>`;
-        });
-      })
-      .catch(error => error);
+    this.getAllDishes();
 
     let sideBarViewInstance = new SearchSideBarView(
       document.getElementById('sideBarView'),
       this.model
     );
     sideBarViewInstance.render();
+
+    document.getElementById('searchBtn').onclick = () => {
+      this.getAllDishes();
+    };
 
     this.afterRender();
   }
