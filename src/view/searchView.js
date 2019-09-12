@@ -6,12 +6,22 @@ class SearchView {
 
   cutOverflowingText = text => {
     if (text.length > 20) {
-      return text.substr(0, 20) + "...";
+      return text.substr(0, 20) + '...';
     }
     return text;
   };
 
   render() {
+    const dishTypes = [
+      'all',
+      'lunch',
+      'main course',
+      'morning meal',
+      'brunch',
+      'main dish',
+      'breakfast',
+      'dinner'
+    ];
     var content = `
       <div id="loader" class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
@@ -28,15 +38,22 @@ class SearchView {
               </a>
             </div>
           </div>
-          
-          <div id="dishItems"></div>
+
+          <div id='dishItems'></div>
         </div>
-      </div>`;
+      </div>
+      `;
+    this.container.innerHTML = content;
+
+    dishTypes.forEach(dishName => {
+      document.getElementById('dropDownMenu').innerHTML += `<option>${dishName}</option>`;
+    });
+
     this.model
       .getAllDishes()
       .then(data => {
         data.forEach(dish => {
-          document.getElementById("dishItems").innerHTML += `
+          document.getElementById('dishItems').innerHTML += `
           <div class="dish">
             <img class="dishImage image border" src="${this.model.getFullDishImageURL(
               dish.imageUrls
@@ -49,9 +66,8 @@ class SearchView {
       })
       .catch(error => error);
 
-    this.container.innerHTML = content;
     let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById("sideBarView"),
+      document.getElementById('sideBarView'),
       this.model
     );
     sideBarViewInstance.render();
