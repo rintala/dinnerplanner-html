@@ -5,8 +5,8 @@ class SearchView {
   }
 
   cutOverflowingText = text => {
-    if (text.length > 20) {
-      return text.substr(0, 20) + '...';
+    if (text.length > 15) {
+      return text.substr(0, 15) + '...';
     }
     return text;
   };
@@ -23,19 +23,19 @@ class SearchView {
       'dinner'
     ];
     var content = `
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      <div id="dishSearchViewWrapper">
-        <div id="sideBarView"></div>
-        <div id="dishSearchBody">
-          <div id="dishSearchHeader">
-            <div id="searchDescription"><b>Find a Dish</b></div>
-            <div id="dishSearchView">
-              <input id="searchKeyword" type="text" placeholder="Enter keywords"></input>
-              <a id="searchBtn" class="button">
-                search
-              </a>
+      <div id='dishSearchViewWrapper'>
+        <div id='sideBarView'></div>
+        <div id='dishSearchBody'>
+          <div id='dishSearchHeader'>
+            <div><p class="title">Find a dish</p></div>
+            
+            <div id='dishSearchView'>
+              <input id='searchKeyword' class="border" type='text' placeholder='Enter keywords'></input>
+              <select id='dropDownMenu' class="dropDownMenu"></select>
+              <button id='searchBtn' class="button"> search </button>
+              <div id='loader' class='spinner-border' role='status'>
+                <span class='sr-only'>Loading...</span>
+              </div>      
             </div>
           </div>
 
@@ -58,7 +58,7 @@ class SearchView {
             <img class="dishImage image border" src="${this.model.getFullDishImageURL(
               dish.imageUrls
             )}"/>
-            <p class="dishText text border value-main-course-name">${cutOverflowingText(
+            <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
               dish.title
             )}</p>
           </div>`;

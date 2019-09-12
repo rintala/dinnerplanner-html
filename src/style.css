@@ -107,22 +107,18 @@
   align-items: stretch;
 }
 
-.size-12 {
-  flex-grow: 12;
-}
-.size-8 {
-  flex-grow: 8;
-}
-.size-4 {
-  flex-grow: 4;
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-left: 1rem;
 }
 
 #dishSearchHeader {
   background-color: rgb(171, 171, 172);
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  text-align: center;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
 }
 
 #dishItems {
@@ -133,7 +129,9 @@
   align-items: top;
   flex-wrap: wrap;
 }
-
+.dish {
+  padding-right: 0.5rem;
+}
 .dishContainer {
   padding: 10px;
   flex: 1 1 150px;
@@ -143,11 +141,11 @@
 @media (min-width: 469px) {
   /* CSS in here for desktop only */
   .dishImage {
-    width: 10vh;
-    height: 10vh;
+    width: 10rem;
+    height: 10rem;
   }
   .dishText {
-    width: 10vh;
+    width: 10rem;
   }
 }
 
