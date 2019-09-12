@@ -25,22 +25,20 @@ class SearchView {
           <div id="dishItems"></div>
         </div>
       </div>`;
-    this.model
-      .getAllDishes()
-      .then(data => {
-        data.forEach(dish => {
+
+    this.model.getAllDishes().then(data => {
+      data.forEach(dish => {
+        this.model.getDish(dish.id).then(data => {
           document.getElementById("dishItems").innerHTML += `
           <div class="dish">
-            <img class="dishImage image border" src="${this.model.getFullDishImageURL(
-              dish.imageUrls
-            )}"/>
+            <img class="dishImage image border" src="${data.image}"/>
             <p class="dishText text border value-main-course-name">${cutOverflowingText(
-              dish.title
+              data.title
             )}</p>
           </div>`;
         });
-      })
-      .catch(error => error);
+      });
+    });
 
     this.container.innerHTML = content;
     let sideBarViewInstance = new SearchSideBarView(
