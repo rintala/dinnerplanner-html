@@ -5,8 +5,7 @@ class SearchView {
   }
 
   render() {
-    return new Promise((resolve, reject) => {
-      var content = `
+    var content = `
       <div id="loader" class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
         </div>
@@ -26,36 +25,29 @@ class SearchView {
           <div id="dishItems"></div>
         </div>
       </div>`;
-      this.model
-        .getAllDishes()
-        .then(data => {
-          data.forEach(dish => {
-            this.model.getDish(dish.id).then(data => {
-              document.getElementById("dishItems").innerHTML += `
+    this.model
+      .getAllDishes()
+      .then(data => {
+        data.forEach(dish => {
+          document.getElementById("dishItems").innerHTML += `
           <div class="dish">
-            <img class="image border" src="${data.image}"/>
-            <p class="text border value-main-course-name">${data.title}</p>
+            <img class="image border" src="${this.model.getFullDishImageURL(
+              dish.imageUrls
+            )}"/>
+            <p class="text border value-main-course-name">${dish.title}</p>
           </div>`;
-            });
-          });
-        })
-        .then(() => {
-          this.container.innerHTML = content;
-          let sideBarViewInstance = new SearchSideBarView(
-            document.getElementById("sideBarView"),
-            this.model
-          );
-          sideBarViewInstance.render();
-
-          this.afterRender();
-        })
-        .then(() => console.log("resolvedd", document, "<= doc"))
-        .then(() => resolve())
-        .catch(error => {
-          console.log("errorrr", error);
-          return reject(error);
         });
-    });
+      })
+      .catch(error => error);
+
+    this.container.innerHTML = content;
+    let sideBarViewInstance = new SearchSideBarView(
+      document.getElementById("sideBarView"),
+      this.model
+    );
+    sideBarViewInstance.render();
+
+    this.afterRender();
   }
   afterRender() {}
 }

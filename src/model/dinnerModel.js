@@ -1,8 +1,32 @@
 //DinnerModel class
 class DinnerModel {
   constructor() {
+    this.dishes = [];
+    this.GROUP_ID = 16;
+    this.API_KEY = config.SECRET_API_KEY;
+    this.baseURLRecipes =
+      "http://sunset.nada.kth.se:8080/iprog/group/" +
+      this.GROUP_ID +
+      "/recipes/";
+    this.spoonacularImagesURL = "https://spoonacular.com/recipeImages/";
+    //TODO Lab 0
+    // implement the data structure that will hold number of guests
+    // and selected dishes for the dinner menu
     this.guests = 0;
     this.menu = [];
+  }
+
+  _handleHTTPError(response) {
+    if (response.ok) return response;
+    throw Error(response.statusText);
+  }
+
+  _handleHTTPErrorGetDish(response) {
+    if (response.ok) {
+      return response.json().then(object => object);
+    } else {
+      return { code: response.status };
+    }
   }
 
   setNumberOfGuests(num) {
@@ -45,6 +69,9 @@ class DinnerModel {
   }
 
   getTotalMenuPrice() {
+    if (this.menu.length === 0) {
+      return 0;
+    }
     return this.menu
       .map(dish => {
         return dish.pricePerServing;
@@ -57,7 +84,10 @@ class DinnerModel {
       this.menu.push(dishToAdd);
     } else {
       this.menu = Array.from(
-        new Set([...this.menu.filter(dish => dish.id !== dishToAdd.id), dishToAdd])
+        new Set([
+          ...this.menu.filter(dish => dish.id !== dishToAdd.id),
+          dishToAdd
+        ])
       );
     }
   }
@@ -66,20 +96,12 @@ class DinnerModel {
     this.menu = this.menu.filter(dish => dish.id !== id);
   }
 
-  displayLoader() {
-    if (document.getElementById('loader').style.display === 'none') {
-      document.getElementById('loader').style.display = 'inline';
-    } else {
-      document.getElementById('loader').style.display = 'none';
-    }
-  }
-
   //Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
   //query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
   //if you don't pass any query, all the dishes will be returned
   getAllDishes(type, query) {
     //TODO:
-    this.displayLoader();
+
     let url;
     if (!type && !query) {
       url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?`;
@@ -87,9 +109,9 @@ class DinnerModel {
       url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?query=${query}&dishTypes=${type}`;
     }
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-Mashape-Key': config.SECRET_API_KEY
+        "X-Mashape-Key": config.SECRET_API_KEY
       }
     })
       .then(res => {
@@ -100,32 +122,29 @@ class DinnerModel {
         }
       })
       .then(data => data.results)
-      .catch(err => err)
-      .finally(() => this.displayLoader());
+      .catch(err => err);
   }
 
   //Returns a dish of specific ID
   getDish(id) {
     let url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/${id}/information`;
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-Mashape-Key': config.SECRET_API_KEY
+        "X-Mashape-Key": config.SECRET_API_KEY
       }
     })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          return { code: res.status };
-        }
-      })
-      .then(data => {
-        this.displayLoader();
-        return data;
-      })
-      .catch(err => {
-        return err;
-      });
+      .then(this._handleHTTPErrorGetDish)
+      .catch(console.error);
+  }
+
+  getFullDishImageURL(imageNameArray) {
+    if (!imageNameArray) {
+      return (
+        this.spoonacularImagesURL +
+        "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
+      );
+    }
+    return this.spoonacularImagesURL + imageNameArray[0];
   }
 }

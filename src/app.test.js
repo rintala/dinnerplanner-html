@@ -27,11 +27,13 @@ describe("DinnerPlanner App", () => {
 
   describe("Search view", () => {
     beforeEach(async () => {
-      model.addDishToMenu(559251);
-      await searchView.render();
+      const dishToAdd = await model.getDish(559251);
+      model.addDishToMenu(dishToAdd);
+      searchView.render();
     });
 
     it("has a sidebar", () => {
+      console.log("has sidebar");
       const sidebar = document.getElementById("sideBarView");
       expect(sidebar).to.not.be.a("null");
     });
@@ -42,6 +44,7 @@ describe("DinnerPlanner App", () => {
     });
 
     it("displays a loading message", done => {
+      console.log("loadingmsg dom", document);
       const loader = document.getElementById("loader");
       expect(loader).to.not.be.a("null");
       done();
@@ -83,9 +86,10 @@ describe("DinnerPlanner App", () => {
     });
   });
 
-  describe("Confirmation page", () => {
-    beforeEach(() => {
-      model.addDishToMenu(559251);
+  describe("Overview page", () => {
+    beforeEach(async () => {
+      const dishToAdd = await model.getDish(559251);
+      model.addDishToMenu(dishToAdd);
       overviewView.render();
     });
 
@@ -112,6 +116,7 @@ describe("DinnerPlanner App", () => {
       const valueHolders = document.getElementsByClassName(
         "value-main-course-name"
       );
+      console.log("docuiment in overview", document);
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
