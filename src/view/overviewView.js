@@ -51,6 +51,7 @@ class OverviewView {
         document.getElementById('addToMenuButton').onclick = () => {
           console.log('adding dish to menu');
           this.model.addDishToMenu(dish);
+          console.log('dish in menu: ', this.model.getFullMenu());
         };
       });
     });

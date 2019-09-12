@@ -19,8 +19,7 @@ class SearchSideBarView {
           <span>Dish name</span>
           <span>Cost</span>
         </div>
-        <div id="dishesInfo">
-        </div>
+        <div id="dishesInfo"></div>
         
         <div id="totalPrice">SEK <span class="value-total-price"></span></div>
         <a id="confirmBtn" class="button" onClick="location.href='../screens/overviewScreen.html';">
@@ -31,9 +30,9 @@ class SearchSideBarView {
     this.container.innerHTML = content;
 
     const menuDishes = this.model.getFullMenu();
-    console.log("full menu", menuDishes);
+    console.log('full menu', menuDishes);
     menuDishes.forEach(menuDish => {
-      document.getElementById("dishesInfo").innerHTML += `
+      document.getElementById('dishesInfo').innerHTML += `
       <div class="dishInfo" >
        <span class="value-main-course-name">${menuDish.title}</span> 
        <span>${menuDish.pricePerServing}</span>
@@ -41,9 +40,7 @@ class SearchSideBarView {
     });
 
     const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName(
-      "value-total-price"
-    )[0].innerHTML = totalMenuPrice;
+    document.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
 
     this.afterRender();
   }
