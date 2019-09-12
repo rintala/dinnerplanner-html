@@ -175,3 +175,50 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+#dishIngredients {
+  width: 100%;
+}
+
+.dishIngredient {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#dishIngredientsTitle {
+  font-family: Sofia;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+}
+
+#dishDetailsTitle {
+  font-size: 20px;
+  font-family: Sofia;
+  font-weight: bold;
+}
+
+#dishDetailsWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+#dishDetailsBody {
+  padding-top: 10px;
+}
+
+#dishDetails {
+  padding: 20px;
+}
+
+.dishIngredientMeasure {
+  width: 100%;
+}
+.dishIngredientTitle {
+  width: 100%;
+}
+.dishIngredientPrice {
+  width: 100%;
+}

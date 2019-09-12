@@ -4,13 +4,6 @@ class SearchView {
     this.model = model;
   }
 
-  cutOverflowingText = text => {
-    if (text.length > 20) {
-      return text.substr(0, 20) + "...";
-    }
-    return text;
-  };
-
   render() {
     var content = `
       <div id="loader" class="spinner-border" role="status">
@@ -41,7 +34,7 @@ class SearchView {
             <img class="dishImage image border" src="${this.model.getFullDishImageURL(
               dish.imageUrls
             )}"/>
-            <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
+            <p class="dishText text border value-main-course-name">${cutOverflowingText(
               dish.title
             )}</p>
           </div>`;
