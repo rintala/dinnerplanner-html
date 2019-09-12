@@ -14,7 +14,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sofia"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../style.css" />
   </head>
 
@@ -52,12 +55,16 @@
     <!-- The application JavaScript code -->
     <script>
       function renderViews() {
-        let viewInstance = new SearchView(document.getElementById('viewContainer'), model);
+        let viewInstance = new SearchView(
+          document.getElementById("viewContainer"),
+          model
+        );
         viewInstance.render();
-        document.getElementById('loader').style.display = 'none';
+        document.getElementById("loader").style.display = "none";
       }
     </script>
     <script src="../../config.js"></script>
+    <script src="../utils.js"></script>
     <script src="../model/dinnerModel.js"></script>
     <script src="../view/homeView.js"></script>
     <script src="../view/searchSideBarView.js"></script>

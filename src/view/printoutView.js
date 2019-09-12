@@ -24,25 +24,19 @@ class PrintoutView {
       
         </div>
       </div>`;
-    this.model
-      .getAllDishes()
-      .then(data => {
-        data.forEach(dish => {
-          this.model.getDish(dish.id).then(data => {
-            document.getElementById("dishItems").innerHTML += `
+    this.model.getAllDishes().then(data => {
+      data.forEach(dish => {
+        this.model.getDish(dish.id).then(data => {
+          document.getElementById("dishItems").innerHTML += `
           <div class="dish">
-            <img class="image border" src="${data.image}"/>
-            <p class="text border value-main-course-name">${data.title}</p>
+            <img class="dishImage image border" src="${data.image}"/>
+            <p class="dishText text border value-main-course-name">${cutOverflowingText(
+              data.title
+            )}</p>
           </div>`;
-          });
         });
-      })
-      .then(() => {
-        this.container.innerHTML = content;
-
-        this.afterRender();
-      })
-      .catch(error => error);
+      });
+    });
 
     this.container.innerHTML = content;
     this.afterRender();
