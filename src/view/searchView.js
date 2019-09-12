@@ -20,7 +20,7 @@ class SearchView {
         <div id="sideBarView"></div>
         <div id="dishSearchBody">
           <div id="dishSearchHeader">
-            <div>Add another one</div>
+            <div id="searchDescription"><b>Find a Dish</b></div>
             <div id="dishSearchView">
               <input id="searchKeyword" type="text" placeholder="Enter keywords"></input>
               <a id="searchBtn" class="button">

@@ -3,19 +3,26 @@ class SearchSideBarView {
     this.container = container;
     this.model = model;
   }
-
+  /* <input style="width: 30px; padding-left: 20px" type="number" value="${this.model.getNumberOfGuests()}"></input> */
   render() {
     var content = /* template */ `
         <div>
         <div>
-        <p class="text-center p-max-width">
-            My dinner
-            People <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
-        </p>
+              <div id="sideBarTitle">My dinner</div>
+              <div id="peopleCounter">
+                People 
+                <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
+             
+              </div>
         </div>
-        <div id="dishesInfo" style="display: flex; justify-content: space-between">
+        <div id="dishesInfoTitle">
+          <span>Dish name</span>
+          <span>Cost</span>
         </div>
-        <div>SEK <span class="value-total-price"></span></div>
+        <div id="dishesInfo">
+        </div>
+        
+        <div id="totalPrice">SEK <span class="value-total-price"></span></div>
         <a id="confirmBtn" class="button" onClick="location.href='../screens/overviewScreen.html';">
           Confirm dinner
         </a>

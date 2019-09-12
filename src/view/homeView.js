@@ -8,7 +8,7 @@ class HomeView {
     var self = this;
     var content = /* template */ `
     
-    <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
+    <div id="homeWrapper" class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
         <p class="text-center p-max-width">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam
           magna nulla, congue ut elementum hendrerit, dignissim at mauris. Quisque ac felis sed nibh elementum euismod a sit amet

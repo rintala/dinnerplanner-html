@@ -26,8 +26,33 @@
   padding: 0.2rem;
   text-align: center;
 }
+
+#searchDescription {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  font-family: "Sofia";
+}
+
+#sideBarTitle {
+  font-size: 18px;
+  font-family: "Sofia";
+  font-weight: bold;
+  padding: 10px;
+}
+
 .image {
   width: 100%;
+}
+
+#homeWrapper {
+  width: 80%;
 }
 
 #loaderWrapper {
@@ -102,9 +127,36 @@
 }
 
 #sideBarView {
-  padding: 10px;
   background-color: gray;
-  width: 200px;
+  width: 40%;
+}
+
+#peopleCounter {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ababac;
+  padding: 10px;
+}
+
+#dishesInfoTitle {
+  font-family: "Sofia";
+  font-weight: bold;
+  justify-content: space-between;
+  display: flex;
+  padding: 10px;
+}
+
+#dishesInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#totalPrice {
+  text-align: right;
+  padding: 10px;
 }
 
 #viewContainer {
