@@ -1,11 +1,11 @@
-window.onload = function () {
-  console.log("start");
+window.onload = function() {
+  console.log('start');
   //We instantiate our model
   const model = new DinnerModel();
 
-  const container = document.getElementsByClassName("page-content")[0]
+  const container = document.getElementsByClassName('page-content')[0];
   const view = new OverviewView(container, model);
-  view.render()
+  view.render();
 
   /**
    * IMPORTANT: app.js is the only place where you are allowed to
@@ -13,5 +13,4 @@ window.onload = function () {
    * In other places you should limit the search only to the children
    * of the specific view you're working with.
    */
-
 };
