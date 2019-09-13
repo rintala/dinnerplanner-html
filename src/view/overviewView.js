@@ -23,14 +23,14 @@ class OverviewView {
   async render() {
     /* Adding some dishes to display - should be removed when adding UI is implemented */
 
-    await this.addingDishesToMenu(818941);
-    await this.addingDishesToMenu(547775);
-    await this.addingDishesToMenu(592479);
+    // await this.addingDishesToMenu(818941);
+    // await this.addingDishesToMenu(547775);
+    // await this.addingDishesToMenu(592479);
 
     var content = `
       <div>
         <div id='pageHeader'>
-          <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
+          <p>My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people</p>
           <button class="button">Go back and edit dinner</button>
         </div>
         <hr>
@@ -42,7 +42,7 @@ class OverviewView {
             <p class="value-total-price"></p>
           </div>
           <hr> 
-          <button class="button">Print full recipe</button>
+          <button id="toPrintBtn" class="button">Print full recipe</button>
         </div>
       </div>`;
 
