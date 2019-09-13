@@ -19,8 +19,8 @@ class DetailsView {
     this.model
       .getDish(559251)
       .then(dish => {
-        console.log("dish", dish);
-        var ingredientsHTML = "";
+        console.log('dish', dish);
+        var ingredientsHTML = '';
         dish.extendedIngredients.forEach(ingredient => {
           const ingredientRow = `<div class="dishIngredient">
                   <div class="dishIngredientMeasure">
@@ -34,11 +34,11 @@ class DetailsView {
                     SEK 
                   </div>
                 </div>`;
-          console.log("ingredientRow", ingredientRow);
+          console.log('ingredientRow', ingredientRow);
           ingredientsHTML += ingredientRow;
         });
 
-        document.getElementById("dishItem").innerHTML +=
+        document.getElementById('dishItem').innerHTML +=
           `
           <div>
             <div id="dishDetailsWrapper">
@@ -54,7 +54,13 @@ class DetailsView {
               <div id="dishIngredientsTitle">Ingredients</div>` +
           ingredientsHTML +
           `
+          <hr>
+          <div>
+            <button class="button">Add dish to menu</button>
+            <p>${dish.pricePerServing}</p>
+          </div>
               </div>
+              
             </div>
             
           </div>
@@ -65,7 +71,7 @@ class DetailsView {
 
     this.container.innerHTML = content;
     let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById("sideBarView"),
+      document.getElementById('sideBarView'),
       this.model
     );
     sideBarViewInstance.render();

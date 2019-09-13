@@ -9,6 +9,7 @@
   box-shadow: 2px 2px #2b2a2a;
   text-transform: capitalize;
 }
+
 .dropDownMenu {
   border-style: solid;
   border-color: black !important;
@@ -172,6 +173,11 @@
   width: 40%;
 }
 
+#pageHeader {
+  font-size: 1.7rem;
+  font-weight: bold;
+  display: inline;
+}
 #peopleCounter {
   padding-top: 10px;
   padding-bottom: 10px;

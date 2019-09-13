@@ -30,12 +30,17 @@ class OverviewView {
     var content = `
       <div>
         <div id='pageHeader'>
-          <p>My dinner: ${this.model.get}</p>
+          <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
+          <button class="button">Go back and edit dinner</button>
         </div>
+        <hr>
         <div id='pageBody'>
           <div id='dishItems'></div>  
           <div id='priceDiv'></div>
-          <div class="value-total-price"></div>
+          <div>
+            <p>Total Cost</p>
+            <p class="value-total-price"></p>
+          </div>
         </div>
       </div>`;
 
