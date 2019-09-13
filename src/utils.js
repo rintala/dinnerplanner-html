@@ -4,3 +4,11 @@ cutOverflowingText = text => {
   }
   return text;
 };
+
+displayLoader = () => {
+  document.getElementById('loader').style.display = 'inline-block';
+};
+
+hideLoader = () => {
+  document.getElementById('loader').style.display = 'none';
+};

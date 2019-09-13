@@ -41,6 +41,8 @@ class OverviewView {
             <p>Total Cost</p>
             <p class="value-total-price"></p>
           </div>
+          <hr> 
+          <button class="button">Print full recipe</button>
         </div>
       </div>`;
 

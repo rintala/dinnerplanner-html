@@ -12,6 +12,7 @@ class SearchView {
   };
 
   getAllDishes() {
+    displayLoader();
     document.getElementById('dishItems').innerHTML = '';
     const query = document.getElementById('searchKeyword').value;
     let dishType = document.getElementById('dropDownMenu').value;
@@ -33,7 +34,8 @@ class SearchView {
         </div>`;
         });
       })
-      .catch(error => error);
+      .catch(error => error)
+      .finally(() => hideLoader());
   }
 
   render() {
