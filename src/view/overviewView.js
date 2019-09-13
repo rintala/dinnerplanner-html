@@ -1,70 +1,32 @@
 class OverviewView {
-  constructor(container, model) {
-    this.container = container;
-    this.model = model;
-  }
-
-  addingDishesToMenu = id => {
-    return new Promise(resolve => {
-      this.model.getDish(id).then(dish => {
-        this.model.addDishToMenu(dish);
-        resolve();
-      });
-    });
-  };
-
-  cutOverflowingText = text => {
-    if (text.length > 20) {
-      return text.substr(0, 20) + '...';
+    constructor(container, model) {
+        this.container = container;
+        this.model = model;
     }
-    return text;
-  };
 
-  async render() {
-    /* Adding some dishes to display - should be removed when adding UI is implemented */
+    // An example of creating HTML procedurally. Think about the pros and cons of this approach.
+    render() {
+      const paragraph = this.container.appendChild(document.createElement('P'))
+      paragraph.innerHTML = "This dinner will be Awesome!";
 
-    await this.addingDishesToMenu(818941);
-    await this.addingDishesToMenu(547775);
-    await this.addingDishesToMenu(592479);
+      const num_people_val = 3;
+      const paragraph2 = this.container.appendChild(document.createElement('P'))
+      const num_people = paragraph2.appendChild(document.createElement('SPAN'))
+      num_people.innerHTML = num_people_val;
+      paragraph2.innerHTML += " people are coming!";
 
-    var content = `
-      <div>
-        <div id='pageHeader'>
-          <p>My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people</p>
-          <button class="button">Go back and edit dinner</button>
-        </div>
-        <hr>
-        <div id='pageBody'>
-          <div id='dishItems'></div>  
-          <div id='priceDiv'></div>
-          <div>
-            <p>Total Cost</p>
-            <p class="value-total-price"></p>
-          </div>
-          <hr> 
-          <button id="toPrintBtn" class="button">Print full recipe</button>
-        </div>
-      </div>`;
+      const paragraph3 = this.container.appendChild(document.createElement('P'))
+      paragraph3.innerHTML = "We will be eating the following:";
 
-    this.container.innerHTML = content;
-    console.log('gettfullmenu', this.model.getFullMenu());
-    this.model.getFullMenu().forEach(dish => {
-      console.log('dish', dish);
-      document.getElementById('dishItems').innerHTML += `
-          <div class="dish">
-            <img class="dishImage border" src="${this.model.getDishImageURLFromString(
-              dish.image
-            )}"/>
-            <p class="dishText value-main-course-name">${this.cutOverflowingText(dish.title)}</p>
-            <p class="dishText">${dish.pricePerServing} SEK</p>
-          </div>`;
-    });
+      const list = this.container.appendChild(document.createElement('UL'))
 
-    const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
+      for(const food of ["Bread!", "Ham!", "Pizza!"]) {
+        list.appendChild(document.createElement('UL')).innerHTML = food;
+      }
 
-    this.afterRender();
-  }
+      this.afterRender();
+    }
 
-  afterRender() {}
+    afterRender() {
+    }
 }

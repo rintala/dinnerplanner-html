@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dinner planner</title>
-    <script src="src/view/overviewView.js"></script>
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -14,16 +14,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Sofia"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="header">
-      Dinner Planner
-    </div>
     <div class="container page-content">
       <h1>Dinner planner</h1>
       <div id="loader" class="spinner-border" role="status">
@@ -50,9 +42,11 @@
     ></script>
 
     <!-- The application JavaScript code -->
-    <script src="config.js"></script>
     <script src="src/model/dinnerModel.js"></script>
+    <script src="config.js"></script>
     <script src="src/view/overviewView.js"></script>
+    <script src="src/view/homeView.js"></script>
+    <script src="src/view/searchView.js"></script>
     <script src="src/app.js"></script>
   </body>
 </html>
