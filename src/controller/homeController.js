@@ -1,7 +1,8 @@
 class HomeController {
-  constructor(view, model) {
+  constructor(view, model, generalStateController) {
     this.view = view;
     this.model = model;
+    this.controller = generalStateController;
 
     // TODO lab 3
   }
