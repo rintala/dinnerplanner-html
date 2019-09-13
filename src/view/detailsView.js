@@ -6,9 +6,7 @@ class DetailsView {
 
   render() {
     var content = `
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
+
       <div id="dishSearchViewWrapper">
         <div id="sideBarView"></div>
         <div id="dishSearchBody">

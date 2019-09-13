@@ -52,7 +52,7 @@ class OverviewView {
       console.log('dish', dish);
       document.getElementById('dishItems').innerHTML += `
           <div class="dish">
-            <img class="dishImage image border" src="${this.model.getDishImageURLFromString(
+            <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
             )}"/>
             <p class="dishText value-main-course-name">${this.cutOverflowingText(dish.title)}</p>

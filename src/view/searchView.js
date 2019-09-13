@@ -49,9 +49,11 @@ class SearchView {
       'breakfast',
       'dinner'
     ];
+
+    // TODO: create a new view for the mobile menu
     var content = `
-      <div id='mobileMenu' style="background: red">
-        <p>My dinner</p>
+      <div id='mobileMenu' >
+      <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
         <p>MENU</p>
       </div>
       <div id='dishSearchViewWrapper'>

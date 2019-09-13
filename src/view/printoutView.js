@@ -6,9 +6,6 @@ class PrintoutView {
 
   render() {
     var content = `
-      <div id="loader" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
       <div id="dishSearchViewWrapper">
         <div id="dishSearchBody">
           <div id="dishSearchHeader">
@@ -27,7 +24,7 @@ class PrintoutView {
     this.model.getAllDishes().then(data => {
       data.forEach(dish => {
         this.model.getDish(dish.id).then(data => {
-          document.getElementById("dishItems").innerHTML += `
+          document.getElementById('dishItems').innerHTML += `
           <div class="dish">
             <img class="dishImage image border" src="${data.image}"/>
             <p class="dishText text border value-main-course-name">${cutOverflowingText(
