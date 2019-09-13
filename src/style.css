@@ -74,7 +74,7 @@
 }
 
 #homeWrapper {
-  width: 80%;
+  width: 100%;
 }
 
 #loaderWrapper {
@@ -150,6 +150,25 @@
   }
   .dishText {
     width: 10rem;
+  }
+  #mobileMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 469px) {
+  .dishImage {
+    width: 100%;
+    height: auto !important;
+  }
+  #sideBarView {
+    display: none;
+  }
+  #mobileMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.1rem;
   }
 }
 

@@ -50,8 +50,14 @@ class SearchView {
       'dinner'
     ];
     var content = `
+      <div id='mobileMenu' style="background: red">
+        <p>My dinner</p>
+        <p>MENU</p>
+      </div>
       <div id='dishSearchViewWrapper'>
+        
         <div id='sideBarView'></div>
+        
         <div id='dishSearchBody'>
           <div id='dishSearchHeader'>
             <div><p class="title">Find a dish</p></div>
@@ -68,6 +74,7 @@ class SearchView {
 
           <div id='dishItems'></div>
         </div>
+        
       </div>
       `;
     this.container.innerHTML = content;
