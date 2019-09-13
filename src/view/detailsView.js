@@ -21,7 +21,6 @@ class DetailsView {
     this.model
       .getDish(559251)
       .then(dish => {
-        console.log('dish', dish);
         var ingredientsHTML = '';
         dish.extendedIngredients.forEach(ingredient => {
           const ingredientRow = `<div class="dishIngredient">
@@ -36,7 +35,7 @@ class DetailsView {
                     SEK 
                   </div>
                 </div>`;
-          console.log('ingredientRow', ingredientRow);
+
           ingredientsHTML += ingredientRow;
         });
 

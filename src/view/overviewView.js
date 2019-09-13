@@ -23,9 +23,9 @@ class OverviewView {
   async render() {
     /* Adding some dishes to display - should be removed when adding UI is implemented */
 
-    // await this.addingDishesToMenu(818941);
-    // await this.addingDishesToMenu(547775);
-    // await this.addingDishesToMenu(592479);
+    await this.addingDishesToMenu(818941);
+    await this.addingDishesToMenu(547775);
+    await this.addingDishesToMenu(592479);
 
     var content = `
       <div>

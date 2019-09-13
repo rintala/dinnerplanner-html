@@ -79,6 +79,7 @@ class DinnerModel {
   }
 
   addDishToMenu(dishToAdd) {
+    console.log('adding dish to meni');
     if (!this.menu.length) {
       this.menu.push(dishToAdd);
     } else {
