@@ -8,12 +8,11 @@ class SearchSideBarView {
     var content = /* template */ `
         <div>
         <div>
-              <div id="sideBarTitle">My dinner</div>
-              <div id="peopleCounter">
-                People 
-                <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
-             
-              </div>
+          <div id="sideBarTitle">My dinner</div>
+          <div id="peopleCounter">
+            People 
+            <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
+          </div>
         </div>
         <div id="dishesInfoTitle">
           <span>Dish name</span>

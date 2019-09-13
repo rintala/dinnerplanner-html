@@ -29,4 +29,8 @@ class HomeView {
   afterRender() {
     this.startBtn = this.container.querySelector("#startBtn");
   }
+
+  update() {
+    // only updates some elements of dom
+  }
 }

@@ -62,7 +62,6 @@
     <script>
       async function renderView() {
         let model = new DinnerModel();
-
         await addingDishesToMenu(model, 818941);
         document.getElementById("loader").style.display = "none";
         let viewInstance = new PrintoutView(

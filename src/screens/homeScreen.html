@@ -21,13 +21,7 @@
     <link rel="stylesheet" href="../style.css" />
   </head>
   <script src="../view/homeView.js"></script>
-  <script>
-    function renderView() {
-      document.getElementById("loader").style.display = "none";
-      let viewInstance = new HomeView(document.getElementById("viewContainer"));
-      viewInstance.render();
-    }
-  </script>
+
   <body>
     <div class="header">
       Dinner Planner
@@ -62,6 +56,15 @@
     <!-- The application JavaScript code -->
     <script src="../../config.js"></script>
     <script src="../app.js"></script>
+
+    <script>
+      function renderView() {
+        let viewInstance = new HomeView(
+          document.getElementById("viewContainer")
+        );
+        viewInstance.render();
+      }
+    </script>
     <script type="text/javascript">
       window.onload = () => renderView();
     </script>

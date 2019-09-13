@@ -6,24 +6,24 @@ class SearchView {
 
   cutOverflowingText = text => {
     if (text.length > 15) {
-      return text.substr(0, 15) + '...';
+      return text.substr(0, 15) + "...";
     }
     return text;
   };
 
   getAllDishes() {
     displayLoader();
-    document.getElementById('dishItems').innerHTML = '';
-    const query = document.getElementById('searchKeyword').value;
-    let dishType = document.getElementById('dropDownMenu').value;
+    document.getElementById("dishItems").innerHTML = "";
+    const query = document.getElementById("searchKeyword").value;
+    let dishType = document.getElementById("dropDownMenu").value;
 
-    if (dishType === 'all') dishType = '';
+    if (dishType === "all") dishType = "";
 
     this.model
       .getAllDishes(dishType, query)
       .then(data => {
         data.forEach(dish => {
-          document.getElementById('dishItems').innerHTML += `
+          document.getElementById("dishItems").innerHTML += `
         <div class="dish">
           <img class="dishImage image border" src="${this.model.getFullDishImageURL(
             dish.imageUrls
@@ -40,14 +40,14 @@ class SearchView {
 
   render() {
     const dishTypes = [
-      'all',
-      'lunch',
-      'main course',
-      'morning meal',
-      'brunch',
-      'main dish',
-      'breakfast',
-      'dinner'
+      "all",
+      "lunch",
+      "main course",
+      "morning meal",
+      "brunch",
+      "main dish",
+      "breakfast",
+      "dinner"
     ];
 
     // TODO: create a new view for the mobile menu
@@ -82,18 +82,20 @@ class SearchView {
     this.container.innerHTML = content;
 
     dishTypes.forEach(dishName => {
-      document.getElementById('dropDownMenu').innerHTML += `<option>${dishName}</option>`;
+      document.getElementById(
+        "dropDownMenu"
+      ).innerHTML += `<option>${dishName}</option>`;
     });
 
     this.getAllDishes();
 
     let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById('sideBarView'),
+      document.getElementById("sideBarView"),
       this.model
     );
     sideBarViewInstance.render();
 
-    document.getElementById('searchBtn').onclick = () => {
+    document.getElementById("searchBtn").onclick = () => {
       this.getAllDishes();
     };
 
