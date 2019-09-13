@@ -21,7 +21,7 @@ class DetailsView {
     this.model
       .getDish(559251)
       .then(dish => {
-        var ingredientsHTML = '';
+        var ingredientsHTML = "";
         dish.extendedIngredients.forEach(ingredient => {
           const ingredientRow = `<div class="dishIngredient">
                   <div class="dishIngredientMeasure">
@@ -39,7 +39,7 @@ class DetailsView {
           ingredientsHTML += ingredientRow;
         });
 
-        document.getElementById('dishItem').innerHTML +=
+        document.getElementById("dishItem").innerHTML +=
           `
           <div>
             <div id="dishDetailsWrapper">
@@ -47,7 +47,7 @@ class DetailsView {
                 <p id="dishDetailsTitle" class="value-main-course-name">${dish.title}</p>
                 <img class="image border" src="${dish.image}"/>
                 <div id="dishDetailsBody"> ${dish.instructions}</div>
-                <a id="goBackBtn" class="button" onclick="location.href='../screens/searchScreen.html';">
+                <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
                 back to search
                 </a>
               </div>
@@ -70,7 +70,7 @@ class DetailsView {
 
     this.container.innerHTML = content;
     let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById('sideBarView'),
+      document.getElementById("sideBarView"),
       this.model
     );
     sideBarViewInstance.render();

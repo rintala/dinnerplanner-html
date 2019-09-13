@@ -14,7 +14,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sofia"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../style.css" />
   </head>
 
@@ -58,17 +61,26 @@
     <script src="../view/searchView.js"></script>
     <script src="../view/overviewView.js"></script>
     <script src="../app.js"></script>
-    <script type="text/javascript">
-      window.onload = () => renderView();
-    </script>
 
     <script>
-      function renderView() {
+      async function renderView() {
         let model = new DinnerModel();
-        document.getElementById('loader').style.display = 'none';
-        let viewInstance = new OverviewView(document.getElementById('viewContainer'), model);
+
+        await addingDishesToMenu(model, 818941);
+        await addingDishesToMenu(model, 547775);
+        await addingDishesToMenu(model, 592479);
+
+        document.getElementById("loader").style.display = "none";
+        let viewInstance = new OverviewView(
+          document.getElementById("viewContainer"),
+          model
+        );
         viewInstance.render();
       }
+    </script>
+
+    <script type="text/javascript">
+      window.onload = () => renderView();
     </script>
   </body>
 </html>

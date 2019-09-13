@@ -21,7 +21,7 @@ class PrintoutView {
       <div>
         <div id='pageHeader'>
           <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
-          <button class="button">Go back and edit dinner</button>
+          <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
         </div>
         <hr>
         <div id='pageBody'>

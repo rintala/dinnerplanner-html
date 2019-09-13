@@ -14,7 +14,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sofia"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../style.css" />
   </head>
 
@@ -45,13 +48,6 @@
     ></script>
 
     <!-- The application JavaScript code -->
-    <script>
-      function renderViews() {
-        let viewInstance = new SearchView(document.getElementById('viewContainer'), model);
-        viewInstance.render();
-        document.getElementById('loader').style.display = 'none';
-      }
-    </script>
     <script src="../../config.js"></script>
     <script src="../utils.js"></script>
     <script src="../model/dinnerModel.js"></script>
@@ -60,6 +56,18 @@
     <script src="../view/searchView.js"></script>
     <script src="../view/overviewView.js"></script>
     <script src="../app.js"></script>
+
+    <script>
+      function renderViews() {
+        let model = new DinnerModel();
+        let viewInstance = new SearchView(
+          document.getElementById("viewContainer"),
+          model
+        );
+        viewInstance.render();
+        document.getElementById("loader").style.display = "none";
+      }
+    </script>
 
     <script type="text/javascript">
       window.onload = () => renderViews();
