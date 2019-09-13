@@ -4,6 +4,15 @@ class OverviewView {
     this.model = model;
   }
 
+  addingDishesToMenu = id => {
+    return new Promise(resolve => {
+      this.model.getDish(id).then(dish => {
+        this.model.addDishToMenu(dish);
+        resolve();
+      });
+    });
+  };
+
   cutOverflowingText = text => {
     if (text.length > 20) {
       return text.substr(0, 20) + '...';
@@ -11,16 +20,22 @@ class OverviewView {
     return text;
   };
 
-  render() {
-    this.model.addDishToMenu(this.model.getDish(592479));
-    this.model.addDishToMenu(this.model.getDish(547775));
-    this.model.addDishToMenu(this.model.getDish(818941));
+  async render() {
+    /* Adding some dishes to display - should be removed when adding UI is implemented */
+
+    await this.addingDishesToMenu(818941);
+    await this.addingDishesToMenu(547775);
+    await this.addingDishesToMenu(592479);
 
     var content = `
       <div>
-        <div id='pageHeader'></div>
+        <div id='pageHeader'>
+          <p>My dinner: ${this.model.get}</p>
+        </div>
         <div id='pageBody'>
-          <span id='dishItems'></span>  
+          <div id='dishItems'></div>  
+          <div id='priceDiv'></div>
+          <div class="value-total-price"></div>
         </div>
       </div>`;
 
