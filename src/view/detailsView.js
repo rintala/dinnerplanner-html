@@ -6,11 +6,15 @@ class DetailsView {
 
   render() {
     var content = `
-
+      <div id='mobileMenu' >
+        <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
+        <p>MENU</p>
+      </div>
       <div id="dishSearchViewWrapper">
         <div id="sideBarView"></div>
         <div id="dishSearchBody">
-          <div id="dishItem"></div>
+          <div id="dishItem">
+          </div>
         </div>
       </div>`;
 
@@ -52,15 +56,13 @@ class DetailsView {
               <div id="dishIngredientsTitle">Ingredients</div>` +
           ingredientsHTML +
           `
-          <hr>
-          <div>
-            <button class="button">Add dish to menu</button>
-            <p>${dish.pricePerServing}</p>
-          </div>
+                <hr>
+                <div>
+                  <button class="button">Add dish to menu</button>
+                  <p>${dish.pricePerServing}</p>  
+                </div>
               </div>
-              
             </div>
-            
           </div>
           `;
       })
