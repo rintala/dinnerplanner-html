@@ -23,8 +23,9 @@
   <script src="../model/dinnerModel.js"></script>
   <script src="../view/printoutView.js"></script>
   <script>
-    function renderView() {
+    async function renderView() {
       let model = new DinnerModel();
+      await addingDishesToMenu(model, 818941);
       document.getElementById("loader").style.display = "none";
       let viewInstance = new PrintoutView(
         document.getElementById("viewContainer"),
