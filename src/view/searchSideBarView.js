@@ -29,14 +29,17 @@ class SearchSideBarView {
     this.container.innerHTML = content;
 
     const menuDishes = this.model.getFullMenu();
-    console.log("full menu", menuDishes);
+
+    let dishInfoHTML = "";
     menuDishes.forEach(menuDish => {
-      document.getElementById("dishesInfo").innerHTML += `
+      dishInfoHTML += `
       <div class="dishInfo" >
        <span class="value-main-course-name">${menuDish.title}</span> 
        <span>${menuDish.pricePerServing}</span>
       </div>`;
     });
+
+    document.getElementById("dishesInfo").innerHTML = dishInfoHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPrice();
     document.getElementsByClassName(

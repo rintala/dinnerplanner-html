@@ -39,7 +39,7 @@ class DetailsView {
           ingredientsHTML += ingredientRow;
         });
 
-        document.getElementById("dishItem").innerHTML +=
+        document.getElementById("dishItem").innerHTML =
           `
           <div>
             <div id="dishDetailsWrapper">

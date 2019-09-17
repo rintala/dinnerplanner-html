@@ -19,11 +19,12 @@ class SearchView {
 
     if (dishType === "all") dishType = "";
 
+    let dishesHTML = "";
     this.model
       .getAllDishes(dishType, query)
       .then(data => {
         data.forEach(dish => {
-          document.getElementById("dishItems").innerHTML += `
+          dishesHTML += `
         <div class="dish">
           <img class="dishImage image border" src="${this.model.getFullDishImageURL(
             dish.imageUrls
@@ -35,7 +36,10 @@ class SearchView {
         });
       })
       .catch(error => error)
-      .finally(() => hideLoader());
+      .finally(() => {
+        document.getElementById("dishItems").innerHTML = dishesHTML;
+        hideLoader();
+      });
   }
 
   render() {

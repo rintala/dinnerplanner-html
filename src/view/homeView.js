@@ -5,7 +5,6 @@ class HomeView {
   }
 
   render() {
-    var self = this;
     var content = /* template */ `
     
     <div id="homeWrapper" class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
