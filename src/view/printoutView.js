@@ -42,11 +42,10 @@ class PrintoutView {
       </div>`;
 
     this.container.innerHTML = content;
-    let dishToPrintHTML = "";
-    console.log("gettfullmenu", this.model.getFullMenu());
-    this.model.getFullMenu().forEach(dish => {
-      console.log("dish", dish);
-      dishToPrintHTML += `
+    let dishToPrintHTML = this.model
+      .getFullMenu()
+      .map(
+        dish => `
         <div class="dishToPrint">
             <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
@@ -58,8 +57,9 @@ class PrintoutView {
               <p class="dishText">${dish.pricePerServing} </p>
             </div>
        </div>
-         `;
-    });
+         `
+      )
+      .join("");
 
     document.getElementById("dishItems").innerHTML = dishToPrintHTML;
 

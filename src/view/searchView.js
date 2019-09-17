@@ -19,25 +19,26 @@ class SearchView {
 
     if (dishType === "all") dishType = "";
 
-    let dishesHTML = "";
     this.model
       .getAllDishes(dishType, query)
       .then(data => {
-        data.forEach(dish => {
-          dishesHTML += `
-        <div class="dish">
+        let dishesHTML = data
+          .map(
+            dish =>
+              `<div class="dish">
           <img class="dishImage image border" src="${this.model.getFullDishImageURL(
             dish.imageUrls
           )}"/>
           <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
             dish.title
           )}</p>
-        </div>`;
-        });
+        </div>`
+          )
+          .join("");
+        document.getElementById("dishItems").innerHTML = dishesHTML;
       })
       .catch(error => error)
       .finally(() => {
-        document.getElementById("dishItems").innerHTML = dishesHTML;
         hideLoader();
       });
   }

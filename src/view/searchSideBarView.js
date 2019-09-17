@@ -30,14 +30,15 @@ class SearchSideBarView {
 
     const menuDishes = this.model.getFullMenu();
 
-    let dishInfoHTML = "";
-    menuDishes.forEach(menuDish => {
-      dishInfoHTML += `
+    let dishInfoHTML = menuDishes
+      .map(menuDish => {
+        dishInfoHTML += `
       <div class="dishInfo" >
        <span class="value-main-course-name">${menuDish.title}</span> 
        <span>${menuDish.pricePerServing}</span>
       </div>`;
-    });
+      })
+      .join("");
 
     document.getElementById("dishesInfo").innerHTML = dishInfoHTML;
 

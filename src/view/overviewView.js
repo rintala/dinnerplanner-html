@@ -43,10 +43,11 @@ class OverviewView {
 
     this.container.innerHTML = content;
 
-    let dishItemsHTML = "";
-    this.model.getFullMenu().forEach(dish => {
-      console.log("dish", dish);
-      dishItemsHTML += `
+    let dishItemsHTML = this.model
+      .getFullMenu()
+      .map(dish => {
+        console.log("dish", dish);
+        dishItemsHTML += `
           <div class="dish">
             <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
@@ -56,7 +57,8 @@ class OverviewView {
             )}</p>
             <p class="dishText">${dish.pricePerServing} SEK</p>
           </div>`;
-    });
+      })
+      .join("");
     document.getElementById("dishItems").innerHTML = dishItemsHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPrice();

@@ -21,9 +21,9 @@ class DetailsView {
     this.model
       .getDish(559251)
       .then(dish => {
-        var ingredientsHTML = "";
-        dish.extendedIngredients.forEach(ingredient => {
-          const ingredientRow = `<div class="dishIngredient">
+        var ingredientsHTML = dish.extendedIngredients
+          .map(
+            ingredient => `<div class="dishIngredient">
                   <div class="dishIngredientMeasure">
                     ${ingredient.measures.metric.amount}
                     ${ingredient.measures.metric.unitShort}
@@ -34,10 +34,9 @@ class DetailsView {
                   <div class="dishIngredientPrice">
                     SEK 
                   </div>
-                </div>`;
-
-          ingredientsHTML += ingredientRow;
-        });
+                </div>`
+          )
+          .join("");
 
         document.getElementById("dishItem").innerHTML =
           `
