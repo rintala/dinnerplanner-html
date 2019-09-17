@@ -45,9 +45,8 @@ class OverviewView {
 
     let dishItemsHTML = this.model
       .getFullMenu()
-      .map(dish => {
-        console.log("dish", dish);
-        dishItemsHTML += `
+      .map(
+        dish => `
           <div class="dish">
             <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
@@ -56,8 +55,8 @@ class OverviewView {
               dish.title
             )}</p>
             <p class="dishText">${dish.pricePerServing} SEK</p>
-          </div>`;
-      })
+          </div>`
+      )
       .join("");
     document.getElementById("dishItems").innerHTML = dishItemsHTML;
 
