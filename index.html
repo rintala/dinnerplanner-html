@@ -13,10 +13,18 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="styles/global.css" />
   </head>
   <body>
+    <div class="header">
+      Dinner Planner
+    </div>
     <div class="container page-content">
       <div id="homePage"></div>
+      <div id="overviewPage"></div>
+      <div id="searchPage"></div>
+      <div id="detailsPage"></div>
+      <div id="printoutPage"></div>
     </div>
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
@@ -41,11 +49,14 @@
     <script src="src/model/dinnerModel.js"></script>
     <script src="config.js"></script>
     <script src="src/app.js"></script>
+    <script src="src/utils.js"></script>
 
     <script src="src/view/homeView.js"></script>
     <script src="src/view/overviewView.js"></script>
     <script src="src/view/searchView.js"></script>
     <script src="src/view/sidebarView.js"></script>
+    <script src="src/view/detailsView.js"></script>
+    <script src="src/view/printoutView.js"></script>
 
     <script src="src/controller/generalStateController.js"></script>
     <script src="src/controller/homeController.js"></script>

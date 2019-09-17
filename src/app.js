@@ -3,14 +3,28 @@ window.onload = function() {
   //We instantiate our model
   const model = new DinnerModel();
 
-  const container = document.getElementsByClassName("page-content")[0];
-  const view = new OverviewView(container, model);
-  view.render();
-
   const generalStateController = new GeneralStateController();
 
-  //views
+  // views
   const homeView = new HomeView(document.getElementById("homePage"));
+  const overviewView = new OverviewView(
+    document.getElementById("overviewPage"),
+    model
+  );
+  const searchView = new SearchView(
+    document.getElementById("searchPage"),
+    model
+  );
+  const detailsView = new DetailsView(
+    document.getElementById("detailsPage"),
+    model
+  );
+  const printoutView = new PrintoutView(
+    document.getElementById("printoutPage"),
+    model
+  );
+
+  // controllers
   const homeViewController = new HomeController(
     homeView,
     model,
@@ -19,11 +33,15 @@ window.onload = function() {
 
   // set views to controller
   generalStateController.setView("home", homeView);
+  generalStateController.setView("overview", overviewView);
+  generalStateController.setView("search", searchView);
+  generalStateController.setView("details", detailsView);
+  generalStateController.setView("printout", printoutView);
 
-  // set screens to controller
+  // display view via controller
   displayPage = pageName => {
     generalStateController.displayView(pageName);
   };
 
-  displayPage("home");
+  displayPage("search");
 };

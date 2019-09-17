@@ -31,6 +31,7 @@ class DinnerModel {
 
   setNumberOfGuests(num) {
     if (num > 0) this.guests = num;
+    this.notifyObservers("setNumberOfGuests");
   }
 
   getNumberOfGuests() {
@@ -140,6 +141,7 @@ class DinnerModel {
       .catch(console.error);
   }
 
+  // helper functions
   getFullDishImageURL(imageNameArray) {
     if (imageNameArray && imageNameArray.length) {
       return this.spoonacularImagesURL + imageNameArray[0];
@@ -160,5 +162,18 @@ class DinnerModel {
     );
   }
 
-  addObserver() {}
+  // observer functions
+  addObserver(newObserver) {
+    this.observers.push(newObserver);
+  }
+
+  notifyObservers(detailsToNotify) {
+    this.observers.forEach(observer => observer(detailsToNotify));
+  }
+
+  removeObserver(observerToRemove) {
+    this.observers = this.observers.filter(
+      observer => observerToRemove !== observer
+    );
+  }
 }

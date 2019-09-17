@@ -1,18 +1,52 @@
-class SidebarView {
-  constructor(container) {
+class SideBarView {
+  constructor(container, model) {
     this.container = container;
-    this.guestsInput = null;
+    this.model = model;
   }
-  
+  /* <input style="width: 30px; padding-left: 20px" type="number" value="${this.model.getNumberOfGuests()}"></input> */
   render() {
     var content = /* template */ `
-    <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
-      <input type="number" class="input-num-guests" value="1">
-        Guests
-      </inut>
-    </div>
+        <div>
+        <div>
+          <div id="sideBarTitle">My dinner</div>
+          <div id="peopleCounter">
+            People 
+            <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
+          </div>
+        </div>
+        <div id="dishesInfoTitle">
+          <span>Dish name</span>
+          <span>Cost</span>
+        </div>
+        <div id="dishesInfo"></div>
+        
+        <div id="totalPrice">SEK <span class="value-total-price"></span></div>
+        <a id="confirmBtn" class="button" onClick="location.href='../screens/overviewScreen.html';">
+          Confirm dinner
+        </a>
+      </div>
     `;
     this.container.innerHTML = content;
+
+    const menuDishes = this.model.getFullMenu();
+
+    let dishInfoHTML = menuDishes
+      .map(
+        menuDish => `
+      <div class="dishInfo" >
+       <span class="value-main-course-name">${menuDish.title}</span> 
+       <span>${menuDish.pricePerServing}</span>
+      </div>`
+      )
+      .join("");
+
+    document.getElementById("dishesInfo").innerHTML = dishInfoHTML;
+
+    const totalMenuPrice = this.model.getTotalMenuPrice();
+    document.getElementsByClassName(
+      "value-total-price"
+    )[0].innerHTML = totalMenuPrice;
+
     this.afterRender();
   }
 
