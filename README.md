@@ -1,4 +1,4 @@
-# Interaction Programing - Lab 2
+# Interaction Programming - Lab 2
 
 =================================================
 
