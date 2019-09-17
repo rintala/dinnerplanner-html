@@ -31,13 +31,13 @@ class SearchSideBarView {
     const menuDishes = this.model.getFullMenu();
 
     let dishInfoHTML = menuDishes
-      .map(menuDish => {
-        dishInfoHTML += `
+      .map(
+        menuDish => `
       <div class="dishInfo" >
        <span class="value-main-course-name">${menuDish.title}</span> 
        <span>${menuDish.pricePerServing}</span>
-      </div>`;
-      })
+      </div>`
+      )
       .join("");
 
     document.getElementById("dishesInfo").innerHTML = dishInfoHTML;
