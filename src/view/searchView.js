@@ -52,17 +52,14 @@ class SearchView {
     // TODO: create a new view for the mobile menu
     var content = `
       <div id='mobileMenu' >
-      <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
+       My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
         <p>MENU</p>
       </div>
       <div id='dishSearchViewWrapper'>
-        
         <div id='sideBarView'></div>
-        
         <div id='dishSearchBody'>
           <div id='dishSearchHeader'>
             <div><p class="title">Find a dish</p></div>
-            
             <div id='dishSearchView'>
               <input id='searchKeyword' class="border" type='text' placeholder='Enter keywords'></input>
               <select id='dropDownMenu' class="dropDownMenu"></select>
@@ -91,8 +88,8 @@ class SearchView {
       document.getElementById("sideBarView"),
       this.model
     );
-    sideBarViewInstance.render();
 
+    sideBarViewInstance.render();
     document.getElementById("searchBtn").onclick = () => {
       this.getAllDishes();
     };

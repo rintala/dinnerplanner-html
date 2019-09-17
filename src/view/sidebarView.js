@@ -3,15 +3,18 @@ class SideBarView {
     this.container = container;
     this.model = model;
   }
-  /* <input style="width: 30px; padding-left: 20px" type="number" value="${this.model.getNumberOfGuests()}"></input> */
+
   render() {
     var content = /* template */ `
         <div>
         <div>
           <div id="sideBarTitle">My dinner</div>
-          <div id="peopleCounter">
-            People 
-            <span class="value-num-guests">${this.model.getNumberOfGuests()}</span>
+          <div style="background-color: #ababac">
+            <div style="padding-left: 10px; padding-top: 5px">People</div> 
+            <div id="peopleCounter">
+              <input class="input-num-guests" type="number" value="${this.model.getNumberOfGuests()}">
+              </input>
+            </div>
           </div>
         </div>
         <div id="dishesInfoTitle">

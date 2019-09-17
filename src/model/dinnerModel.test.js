@@ -32,17 +32,15 @@ describe("DinnerModel", () => {
       expect(model.getDish(559251) instanceof Promise).to.equal(true);
       done();
     });
-    it("gets the correct dish", (done) => {
-      model.getDish(559251)
-      .then((data) => {
+    it("gets the correct dish", done => {
+      model.getDish(559251).then(data => {
         expect(data.title).to.equal("Breakfast Pizza");
         done();
       });
     }).timeout(10000);
 
-    it("returns undefined if dish is not found", (done) => {
-      model.getDish(-1)
-      .then((data) => {
+    it("returns undefined if dish is not found", done => {
+      model.getDish(-1).then(data => {
         expect(data.code).to.equal(404);
         done();
       });
@@ -50,20 +48,20 @@ describe("DinnerModel", () => {
   });
 
   describe("filtering for dishes", () => {
-    it("returns all dishes if no args are specified", (done) => {
-      model.getAllDishes()
-      .then((data) => {
+    it("returns all dishes if no args are specified", done => {
+      model.getAllDishes().then(data => {
         console.log("data length", data.length);
         expect(data.length).to.equal(10);
         done();
       });
     }).timeout(10000);
 
-    it("returns the correct dish type of main course and pizza", (done) => {
-      model.getAllDishes("main course", "pizza")
-      .then((data) => {
+    it("returns the correct dish type of main course and pizza", done => {
+      model.getAllDishes("main course", "pizza").then(data => {
         console.log("filtered", data);
-        const onlyHasPizzas = data.every(dish => dish.title.toLowerCase().indexOf("pizza") > -1);
+        const onlyHasPizzas = data.every(
+          dish => dish.title.toLowerCase().indexOf("pizza") > -1
+        );
         expect(onlyHasPizzas).to.equal(true);
         done();
       });
@@ -71,22 +69,25 @@ describe("DinnerModel", () => {
   });
 
   describe("menu", () => {
-    it("can add dishes", (done) => {
-      model.addDishToMenu(559251);
-      expect(model.getFullMenu().length).to.equal(1);
-      expect(model.getFullMenu()[0].id).to.equal(559251);
-      done();
+    it("can add dishes", done => {
+      model.getDish(559251).then(data => {
+        model.addDishToMenu(data);
+        expect(model.getFullMenu().length).to.equal(1);
+        expect(model.getFullMenu()[0].id).to.equal(559251);
+        done();
+      });
     }).timeout(10000);
 
-    it("can remove dishes", (done) => {
-      model.addDishToMenu(559251);
-      expect(model.getFullMenu().length).to.equal(1);
-      expect(model.getFullMenu()[0].id).to.equal(559251);
-
-      model.removeDishFromMenu(559251);
-      expect(model.getFullMenu().length).to.equal(0);
-      expect(model.getFullMenu()).to.not.include(data);
-      done();
+    it("can remove dishes", done => {
+      model.getDish(559251).then(data => {
+        model.addDishToMenu(data);
+        expect(model.getFullMenu().length).to.equal(1);
+        expect(model.getFullMenu()[0].id).to.equal(559251);
+        model.removeDishFromMenu(559251);
+        expect(model.getFullMenu().length).to.equal(0);
+        expect(model.getFullMenu()).to.not.include(data);
+        done();
+      });
     }).timeout(10000);
   });
 });
