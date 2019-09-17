@@ -68,9 +68,10 @@
           model
         );
 
-        model.getDish(801710).then(data => {
-          model.addDishToMenu(data);
-          model.setNumberOfGuests(2);
+        model.getDish(80178).then(data => {
+          /* model.addDishToMenu(data); */
+          model.setCurrentDish(data);
+          model.setNumberOfGuests(3);
           viewInstance.render();
         });
       }
