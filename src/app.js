@@ -21,10 +21,9 @@ window.onload = function() {
   generalStateController.setView("home", homeView);
 
   // set screens to controller
-
-  this.displayPage = pageName => {
+  displayPage = pageName => {
     generalStateController.displayView(pageName);
   };
 
-  this.displayPage("home");
+  displayPage("home");
 };

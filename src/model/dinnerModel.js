@@ -5,13 +5,15 @@ class DinnerModel {
     this.GROUP_ID = 16;
     this.API_KEY = config.SECRET_API_KEY;
     this.baseURLRecipes =
-      'http://sunset.nada.kth.se:8080/iprog/group/' + this.GROUP_ID + '/recipes/';
-    this.spoonacularImagesURL = 'https://spoonacular.com/recipeImages/';
-    //TODO Lab 0
-    // implement the data structure that will hold number of guests
-    // and selected dishes for the dinner menu
+      "http://sunset.nada.kth.se:8080/iprog/group/" +
+      this.GROUP_ID +
+      "/recipes/";
+    this.spoonacularImagesURL = "https://spoonacular.com/recipeImages/";
+
     this.guests = 0;
     this.menu = [];
+
+    this.observers = [];
   }
 
   _handleHTTPError(response) {
@@ -79,12 +81,15 @@ class DinnerModel {
   }
 
   addDishToMenu(dishToAdd) {
-    console.log('adding dish to meni');
+    console.log("adding dish to meni");
     if (!this.menu.length) {
       this.menu.push(dishToAdd);
     } else {
       this.menu = Array.from(
-        new Set([...this.menu.filter(dish => dish.id !== dishToAdd.id), dishToAdd])
+        new Set([
+          ...this.menu.filter(dish => dish.id !== dishToAdd.id),
+          dishToAdd
+        ])
       );
     }
   }
@@ -101,14 +106,14 @@ class DinnerModel {
 
     let url;
     if (!type && !query) {
-      url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?`;
+      url = this.baseURLRecipes + `search?`;
     } else {
-      url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?query=${query}&dishTypes=${type}`;
+      url = this.baseURLRecipes + `search?query=${query}&dishTypes=${type}`;
     }
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-Mashape-Key': config.SECRET_API_KEY
+        "X-Mashape-Key": config.SECRET_API_KEY
       }
     })
       .then(res => {
@@ -124,11 +129,11 @@ class DinnerModel {
 
   //Returns a dish of specific ID
   getDish(id) {
-    let url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/${id}/information`;
+    let url = this.baseURLRecipes + `${id}/information`;
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-Mashape-Key': config.SECRET_API_KEY
+        "X-Mashape-Key": config.SECRET_API_KEY
       }
     })
       .then(this._handleHTTPErrorGetDish)
@@ -139,12 +144,21 @@ class DinnerModel {
     if (imageNameArray && imageNameArray.length) {
       return this.spoonacularImagesURL + imageNameArray[0];
     }
-    return this.spoonacularImagesURL + 'matcha-green-tea-and-pineapple-smoothie-801710.jpg';
+    return (
+      this.spoonacularImagesURL +
+      "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
+    );
   }
+
   getDishImageURLFromString(imageNameString) {
     if (imageNameString) {
       return imageNameString;
     }
-    return this.spoonacularImagesURL + 'matcha-green-tea-and-pineapple-smoothie-801710.jpg';
+    return (
+      this.spoonacularImagesURL +
+      "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
+    );
   }
+
+  addObserver() {}
 }
