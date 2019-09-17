@@ -4,13 +4,6 @@ class SearchView {
     this.model = model;
   }
 
-  cutOverflowingText = text => {
-    if (text.length > 15) {
-      return text.substr(0, 15) + "...";
-    }
-    return text;
-  };
-
   getAllDishes() {
     displayLoader();
     document.getElementById("dishItems").innerHTML = "";
@@ -29,8 +22,9 @@ class SearchView {
           <img class="dishImage image border" src="${this.model.getFullDishImageURL(
             dish.imageUrls
           )}"/>
-          <p class="dishText text border value-main-course-name">${this.cutOverflowingText(
-            dish.title
+          <p class="dishText text border value-main-course-name">${cutOverflowingText(
+            dish.title,
+            15
           )}</p>
         </div>`
           )

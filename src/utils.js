@@ -1,6 +1,7 @@
-cutOverflowingText = text => {
-  if (text.length > 10) {
-    return text.substr(0, 10) + "...";
+cutOverflowingText = (text, numberOfChars) => {
+  console.log("cut overflowing text", numberOfChars);
+  if (text.length > numberOfChars) {
+    return text.substr(0, numberOfChars) + "...";
   }
   return text;
 };
