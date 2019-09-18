@@ -13,13 +13,6 @@ class OverviewView {
     });
   };
 
-  cutOverflowingText = text => {
-    if (text.length > 20) {
-      return text.substr(0, 20) + "...";
-    }
-    return text;
-  };
-
   render() {
     /* Adding some dishes to display - should be removed when adding UI is implemented */
     var content = `
@@ -51,8 +44,9 @@ class OverviewView {
             <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
             )}"/>
-            <p class="dishText value-main-course-name">${this.cutOverflowingText(
-              dish.title
+            <p class="dishText value-main-course-name">${cutOverflowingText(
+              dish.title,
+              20
             )}</p>
             <p class="dishText">${dish.pricePerServing} SEK</p>
           </div>`
