@@ -9,11 +9,12 @@ class DinnerModel {
       this.GROUP_ID +
       "/recipes/";
     this.spoonacularImagesURL = "https://spoonacular.com/recipeImages/";
-
+    //TODO Lab 0
+    // implement the data structure that will hold number of guests
+    // and selected dishes for the dinner menu
     this.guests = 0;
     this.menu = [];
-
-    this.observers = [];
+    this.currentDish = undefined;
   }
 
   _handleHTTPError(response) {
@@ -31,7 +32,6 @@ class DinnerModel {
 
   setNumberOfGuests(num) {
     if (num > 0) this.guests = num;
-    this.notifyObservers("setNumberOfGuests");
   }
 
   getNumberOfGuests() {
@@ -52,6 +52,14 @@ class DinnerModel {
         })
       );
     });
+  }
+
+  getCurrentDish() {
+    return this.currentDish;
+  }
+
+  setCurrentDish(dish) {
+    this.currentDish = dish;
   }
 
   getFullMenu() {
@@ -82,6 +90,7 @@ class DinnerModel {
   }
 
   addDishToMenu(dishToAdd) {
+    console.log("adding dish to meni");
     if (!this.menu.length) {
       this.menu.push(dishToAdd);
     } else {
@@ -106,9 +115,9 @@ class DinnerModel {
 
     let url;
     if (!type && !query) {
-      url = this.baseURLRecipes + `search?`;
+      url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?`;
     } else {
-      url = this.baseURLRecipes + `search?query=${query}&dishTypes=${type}`;
+      url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/search?query=${query}&dishTypes=${type}`;
     }
     return fetch(url, {
       method: "GET",
@@ -129,7 +138,7 @@ class DinnerModel {
 
   //Returns a dish of specific ID
   getDish(id) {
-    let url = this.baseURLRecipes + `${id}/information`;
+    let url = `http://sunset.nada.kth.se:8080/iprog/group/13/recipes/${id}/information`;
     return fetch(url, {
       method: "GET",
       headers: {
@@ -140,7 +149,6 @@ class DinnerModel {
       .catch(console.error);
   }
 
-  // helper functions
   getFullDishImageURL(imageNameArray) {
     if (imageNameArray && imageNameArray.length) {
       return this.spoonacularImagesURL + imageNameArray[0];
@@ -150,7 +158,6 @@ class DinnerModel {
       "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
     );
   }
-
   getDishImageURLFromString(imageNameString) {
     if (imageNameString) {
       return imageNameString;
@@ -158,21 +165,6 @@ class DinnerModel {
     return (
       this.spoonacularImagesURL +
       "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
-    );
-  }
-
-  // observer functions
-  addObserver(newObserver) {
-    this.observers.push(newObserver);
-  }
-
-  notifyObservers(detailsToNotify) {
-    this.observers.forEach(observer => observer(detailsToNotify));
-  }
-
-  removeObserver(observerToRemove) {
-    this.observers = this.observers.filter(
-      observer => observerToRemove !== observer
     );
   }
 }

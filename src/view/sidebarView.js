@@ -36,9 +36,10 @@ class SideBarView {
     let dishInfoHTML = menuDishes
       .map(
         menuDish => `
+       
       <div class="dishInfo" >
-       <span class="value-main-course-name">${menuDish.title}</span> 
-       <span>${menuDish.pricePerServing}</span>
+          <span class="value-main-course-name">${menuDish.title}</span> 
+          <span>${menuDish.pricePerServing}</span>
       </div>`
       )
       .join("");
