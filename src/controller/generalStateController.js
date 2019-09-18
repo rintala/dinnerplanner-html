@@ -5,10 +5,19 @@ class GeneralStateController {
 
   setView(viewName, view) {
     this.views[viewName] = view;
+    const viewToRender = this.views[viewName];
+    viewToRender.render();
   }
 
   displayView(viewName) {
-    const viewToRender = this.views[viewName];
-    viewToRender.render();
+    // show view here somehow
+    document.getElementById(viewName + "Page").style.display = "block";
+  }
+
+  hideAllViews() {
+    console.log("hide all views");
+    Array.from(document.getElementsByClassName("viewContainer")).forEach(
+      view => (view.style.display = "none")
+    );
   }
 }

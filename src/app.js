@@ -25,6 +25,10 @@ window.onload = function() {
           document.getElementById("searchPage"),
           model
         );
+        const sideBarView = new SideBarView(
+          document.getElementById("sideBarPage"),
+          model
+        );
         const detailsView = new DetailsView(
           document.getElementById("detailsPage"),
           model
@@ -48,13 +52,27 @@ window.onload = function() {
         generalStateController.setView("search", searchView);
         generalStateController.setView("details", detailsView);
         generalStateController.setView("printout", printoutView);
+        generalStateController.setView("sideBar", sideBarView);
 
         // display view via controller
         displayPage = pageName => {
           generalStateController.displayView(pageName);
         };
 
-        displayPage("search");
+        displayPage("sideBar");
+
+        // TODO: currently have to put this init after render is called - try to modify structure
+        const sideBarController = new SideBarController(
+          sideBarView,
+          model,
+          generalStateController
+        );
+
+        // hide all views initially
+        generalStateController.hideAllViews();
+
+        // then start by displaying the home page
+        generalStateController.displayView("search");
       });
   }
 };

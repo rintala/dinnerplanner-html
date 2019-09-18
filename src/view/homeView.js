@@ -7,9 +7,6 @@ class HomeView {
   // An example of creating HTML declaratively. Think about the pros and cons of this approach.
   render() {
     var content = /* template */ `
-    <div class="header d-flex align-items-center justify-content-center">
-      <h1>Dinner Planner</h1>
-    </div>
     <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
         <p class="text-center p-max-width">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam

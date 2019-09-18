@@ -2,6 +2,7 @@ class SideBarView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
+    this.confirmButton = null;
   }
 
   render() {
@@ -24,7 +25,7 @@ class SideBarView {
         <div id="dishesInfo"></div>
         
         <div id="totalPrice">SEK <span class="value-total-price"></span></div>
-        <a id="confirmBtn" class="button" onClick="location.href='../screens/overviewScreen.html';">
+        <a id="confirmBtn" class="button">
           Confirm dinner
         </a>
       </div>
@@ -55,6 +56,6 @@ class SideBarView {
   }
 
   afterRender() {
-    this.startBtn = this.container.getElementsByClassName("value-num-guests");
+    this.confirmButton = this.container.querySelector("#confirmBtn");
   }
 }

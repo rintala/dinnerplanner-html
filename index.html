@@ -24,12 +24,13 @@
       Dinner Planner
     </div>
     <div class="container page-content">
-      <div id="configMissingPage"></div>
-      <div id="homePage"></div>
-      <div id="overviewPage"></div>
-      <div id="searchPage"></div>
-      <div id="detailsPage"></div>
-      <div id="printoutPage"></div>
+      <div id="configMissingPage" class="viewContainer"></div>
+      <div id="homePage" class="viewContainer"></div>
+      <div id="sideBarPage" class="viewContainer"></div>
+      <div id="overviewPage" class="viewContainer"></div>
+      <div id="searchPage" class="viewContainer"></div>
+      <div id="detailsPage" class="viewContainer"></div>
+      <div id="printoutPage" class="viewContainer"></div>
     </div>
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
@@ -65,6 +66,7 @@
     <script src="src/view/printoutView.js"></script>
 
     <script src="src/controller/generalStateController.js"></script>
+    <script src="src/controller/sideBarController.js"></script>
     <script src="src/controller/homeController.js"></script>
   </body>
 </html>
