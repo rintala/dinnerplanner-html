@@ -87,11 +87,12 @@ describe("DinnerPlanner App", () => {
   });
 
   describe("Overview page", () => {
-    beforeEach(async () => {
-      const dishToAdd = await model.getDish(559251);
-      model.addDishToMenu(dishToAdd);
-      overviewView.render();
-    });
+    beforeEach(() =>
+      model.getDish(559251).then(() => {
+        model.addDishToMenu(dishToAdd);
+        overviewView.render();
+      })
+    );
 
     it("exists", () => {
       const overviewContainer = document.getElementById("overviewView");

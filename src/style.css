@@ -193,7 +193,7 @@
 
 #sideBarView {
   background-color: gray;
-  width: 40%;
+  width: 100%;
 }
 
 #pageHeader {
@@ -219,14 +219,14 @@
 }
 
 #dishesInfo {
-  display: flex;
-  justify-content: space-between;
   padding: 10px;
 }
 
 .dishInfo {
   border-width: 1px;
   border-style: solid;
+  display: flex;
+  justify-content: space-between;
 }
 
 #totalPrice {

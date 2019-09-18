@@ -60,11 +60,25 @@
     <script>
       function renderViews() {
         let model = new DinnerModel();
-        let viewInstance = new SearchView(
-          document.getElementById("viewContainer"),
-          model
-        );
-        viewInstance.render();
+
+        model
+          .getDish(592479)
+          .then(dish1 => {
+            /* model.addDishToMenu(data); */
+            model.addDishToMenu(dish1);
+          })
+          .then(() => model.getDish(592479))
+          .then(dish2 => {
+            model.addDishToMenu(dish2);
+            model.setNumberOfGuests(3);
+
+            let viewInstance = new SearchView(
+              document.getElementById("viewContainer"),
+              model
+            );
+
+            viewInstance.render();
+          });
       }
     </script>
 
