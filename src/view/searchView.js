@@ -29,7 +29,7 @@ class SearchView {
         </div>`
           )
           .join("");
-        document.getElementById("dishItems").innerHTML = dishesHTML;
+        this.container.querySelector("#dishItems").innerHTML = dishesHTML;
       })
       .catch(error => error)
       .finally(() => {

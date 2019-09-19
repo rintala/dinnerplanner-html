@@ -17,12 +17,17 @@ class SideBarController {
       this.view.container.querySelector("#confirmBtn")
     );
 
-    const confirmButton = this.view.container.querySelector("#confirmBtn");
-    confirmButton.addEventListener("click", () => {
-      console.log(this, "confirm button is clicked, lets show overview");
-      /* return this.generalStateController.displayView("overview"); */
-    });
-    console.log("confirmbtn", confirmButton);
+    /* const confirmButton = this.view.container.querySelector("#confirmBtn"); */
+    console.log("this.view.confirmButton", this.view.confirmButton);
+    this.view.confirmButton.addEventListener(
+      "click",
+      () => {
+        console.log(this, "confirm button is clicked, lets show overview");
+        return this.generalStateController.displayView("overview");
+      },
+      false
+    );
+    console.log("confirmbtn", this.view.confirmButton);
   }
 
   update(payload) {
