@@ -6,9 +6,9 @@ class SearchView {
 
   getAllDishes() {
     displayLoader();
-    document.getElementById("dishItems").innerHTML = "";
-    const query = document.getElementById("searchKeyword").value;
-    let dishType = document.getElementById("dropDownMenu").value;
+    this.container.querySelector("#dishItems").innerHTML = "";
+    const query = this.container.querySelector("#searchKeyword").value;
+    let dishType = this.container.querySelector("#dropDownMenu").value;
 
     if (dishType === "all") dishType = "";
 
@@ -80,7 +80,7 @@ class SearchView {
       .map(dishName => `<option>${dishName}</option>`)
       .join("");
 
-    document.getElementById("dropDownMenu").innerHTML = dishTypesHTML;
+    this.container.querySelector("#dropDownMenu").innerHTML = dishTypesHTML;
 
     this.getAllDishes();
 
@@ -90,6 +90,8 @@ class SearchView {
     );
 
     sideBarViewInstance.render();
+
+    // TODO: move this to controller
     document.getElementById("searchBtn").onclick = () => {
       this.getAllDishes();
     };
