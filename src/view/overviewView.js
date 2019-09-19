@@ -52,10 +52,11 @@ class OverviewView {
           </div>`
       )
       .join("");
-    document.getElementById("dishItems").innerHTML = dishItemsHTML;
+
+    this.container.querySelector("#dishItems").innerHTML = dishItemsHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName(
+    this.container.getElementsByClassName(
       "value-total-price"
     )[0].innerHTML = totalMenuPrice;
 

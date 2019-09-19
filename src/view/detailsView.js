@@ -38,7 +38,7 @@ class DetailsView {
           )
           .join("");
 
-        document.getElementById("dishItem").innerHTML =
+        this.container.querySelector("#dishItems").innerHTML =
           `
             <div>
               <div id="dishDetailsWrapper">
@@ -69,7 +69,7 @@ class DetailsView {
 
     this.container.innerHTML = content;
     let sideBarViewInstance = new SideBarView(
-      document.getElementById("sideBarView"),
+      this.container.querySelector("#sideBarView"),
       this.model
     );
     sideBarViewInstance.render();

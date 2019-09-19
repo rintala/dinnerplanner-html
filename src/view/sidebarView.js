@@ -45,10 +45,10 @@ class SideBarView {
       )
       .join("");
 
-    document.getElementById("dishesInfo").innerHTML = dishInfoHTML;
+    this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName(
+    this.container.getElementsByClassName(
       "value-total-price"
     )[0].innerHTML = totalMenuPrice;
 

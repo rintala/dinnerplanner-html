@@ -50,10 +50,10 @@ class PrintoutView {
       )
       .join("");
 
-    document.getElementById("dishItems").innerHTML = dishesToPrintHTML;
+    this.container.querySelector("#dishItems").innerHTML = dishesToPrintHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPrice();
-    document.getElementsByClassName(
+    this.container.getElementsByClassName(
       "value-total-price"
     )[0].innerHTML = totalMenuPrice;
 
