@@ -13,7 +13,10 @@ window.onload = function() {
       .getDish(592479)
       .then(dish1 => model.addDishToMenu(dish1))
       .then(() => model.getDish(818941))
-      .then(dish2 => model.addDishToMenu(dish2))
+      .then(dish2 => {
+        model.addDishToMenu(dish2);
+        model.setCurrentDish(dish2);
+      })
       .then(() => {
         // views
         const homeView = new HomeView(document.getElementById("homePage"));
@@ -72,7 +75,7 @@ window.onload = function() {
         generalStateController.hideAllViews();
 
         // then start by displaying the home page
-        generalStateController.displayView("search");
+        generalStateController.displayView("details");
       });
   }
 };

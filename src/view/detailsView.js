@@ -17,13 +17,12 @@ class DetailsView {
             </div>
           </div>
         </div>`;
+    this.container.innerHTML = content;
 
-    this.model
-      .getDish(559251)
-      .then(dish => {
-        var ingredientsHTML = dish.extendedIngredients
-          .map(
-            ingredient => `<div class="dishIngredient">
+    const dish = this.model.getCurrentDish();
+    var ingredientsHTML = dish.extendedIngredients
+      .map(
+        ingredient => `<div class="dishIngredient">
                     <div class="dishIngredientMeasure">
                       ${ingredient.measures.metric.amount}
                       ${ingredient.measures.metric.unitShort}
@@ -32,19 +31,19 @@ class DetailsView {
                       ${ingredient.name}
                     </div>
                     <div class="dishIngredientPrice">
-                      SEK 
+                      XX SEK 
                     </div>
                   </div>`
-          )
-          .join("");
+      )
+      .join("");
 
-        this.container.querySelector("#dishItems").innerHTML =
-          `
+    this.container.querySelector("#dishItem").innerHTML =
+      `
             <div>
               <div id="dishDetailsWrapper">
                 <div id="dishDetails">
                   <p id="dishDetailsTitle" class="value-main-course-name">${dish.title}</p>
-                  <img class="image border" src="${dish.image}"/>
+                  <img id="dishDetailsImage" class="image border" src="${dish.image}"/>
                   <div id="dishDetailsBody"> ${dish.instructions}</div>
                   <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
                   back to search
@@ -52,22 +51,19 @@ class DetailsView {
                 </div>
                 <div id="dishIngredients">
                 <div id="dishIngredientsTitle">Ingredients</div>` +
-          ingredientsHTML +
-          `
+      ingredientsHTML +
+      `             
+                <hr> 
+                <div style="padding-right: 20px; display: flex; justify-content: space-between">TOTAL <p>${dish.pricePerServing} SEK </p> </div>
                   <hr>
                   <div>
                     <button class="button">Add dish to menu</button>
-                    <p>${dish.pricePerServing}</p>  
                   </div>
                 </div>
               </div>
             </div>
             `;
-      })
 
-      .catch(error => error);
-
-    this.container.innerHTML = content;
     let sideBarViewInstance = new SideBarView(
       this.container.querySelector("#sideBarView"),
       this.model
