@@ -56,6 +56,7 @@ class SearchView {
         <p>MENU</p>
       </div>
       <div id='dishSearchViewWrapper'>
+        <div id='sideBarView'></div>
         <div id='dishSearchBody'>
           <div id='dishSearchHeader'>
             <div><p class="title">Find a dish</p></div>
