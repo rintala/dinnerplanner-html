@@ -1,14 +1,20 @@
 class OverviewController {
-  constructor(view, model) {
+  constructor(view, model, generalStateController) {
     this.view = view;
     this.model = model;
-
+    this.generalStateController = generalStateController;
+    const self = this;
     // TODO lab 3
+    this.renderView(self);
   }
 
-  renderView() {
-    this.view.render();
+  async renderView(self) {
+    await this.view.render();
     // TODO lab 3
+    this.view.goBackButton.addEventListener("click", () => {
+      self.generalStateController.displayView("search");
+      self.generalStateController.hideView("overview");
+    });
   }
 
   update(payload) {

@@ -2,6 +2,7 @@ class OverviewView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
+    this.goBackButton = null;
   }
 
   addingDishesToMenu = id => {
@@ -19,7 +20,7 @@ class OverviewView {
       <div>
         <div id='pageHeader'>
           <p>My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people</p>
-          <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
+          <button class="button" id="goBackBtn">Go back and edit dinner</button>
         </div>
         <hr>
         <div id='pageBody'>
@@ -63,5 +64,7 @@ class OverviewView {
     this.afterRender();
   }
 
-  afterRender() {}
+  afterRender() {
+    this.goBackButton = this.container.querySelector("#goBackBtn");
+  }
 }

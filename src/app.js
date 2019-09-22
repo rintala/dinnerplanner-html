@@ -71,12 +71,18 @@ window.onload = function() {
           generalStateController
         );
 
+        const overviewController = new OverviewController(
+          overviewView,
+          model,
+          generalStateController
+        );
+
         // hide all views initially
         generalStateController.hideAllViews();
 
         // then start by displaying the home page
-        generalStateController.displayView("details");
-        generalStateController.displayView("sideBar");
+        generalStateController.displayView("overview");
+        /* generalStateController.displayView("sideBar"); */
       });
   }
 };
