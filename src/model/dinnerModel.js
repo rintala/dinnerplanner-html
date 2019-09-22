@@ -15,6 +15,7 @@ class DinnerModel {
     this.guests = 0;
     this.menu = [];
     this.currentDish = undefined;
+    this._observers = [];
   }
 
   _handleHTTPError(response) {
@@ -166,5 +167,17 @@ class DinnerModel {
       this.spoonacularImagesURL +
       "matcha-green-tea-and-pineapple-smoothie-801710.jpg"
     );
+  }
+
+  // observer functions
+  addObserver(observer) {
+    this._observers.push(observer);
+  }
+
+  // implemenent remove function for observers as well
+
+  updateObservers() {
+    // instead define update function in each observer that doesnt re-render entire view
+    this._observers.forEach(obs => obs.render());
   }
 }

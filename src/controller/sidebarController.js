@@ -26,7 +26,14 @@ class SideBarController {
       },
       false
     );
-    console.log("this.view after", this.view);
+    console.log("inputnubmerchanger", this.view.inputNumberChanger);
+    this.view.inputNumberChanger.addEventListener("input", e => {
+      if (!isNaN(parseInt(e.data))) {
+        this.model.setNumberOfGuests(parseInt(e.data));
+        this.model.updateObservers();
+      }
+      console.log("this.view after", this.view, this.model);
+    });
   }
 
   update(payload) {

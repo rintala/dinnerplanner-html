@@ -12,7 +12,7 @@ class SearchView {
 
     if (dishType === "all") dishType = "";
 
-    this.model
+    return this.model
       .getAllDishes(dishType, query)
       .then(data => {
         let dishesHTML = data
@@ -22,7 +22,7 @@ class SearchView {
           <img class="dishImage image border" src="${this.model.getFullDishImageURL(
             dish.imageUrls
           )}"/>
-          <p class="dishText text border value-main-course-name">${cutOverflowingText(
+          <p class="dishText text border">${cutOverflowingText(
             dish.title,
             15
           )}</p>
@@ -37,7 +37,7 @@ class SearchView {
       });
   }
 
-  render() {
+  async render() {
     const dishTypes = [
       "all",
       "lunch",
@@ -82,7 +82,7 @@ class SearchView {
 
     this.container.querySelector("#dropDownMenu").innerHTML = dishTypesHTML;
 
-    this.getAllDishes();
+    await this.getAllDishes();
 
     // TODO: move this to controller
     document.getElementById("searchBtn").onclick = () => {

@@ -35,7 +35,8 @@ describe("DinnerPlanner App", () => {
     beforeEach(async () => {
       const dish = await model.getDish(559251);
       model.addDishToMenu(dish);
-      searchView.render();
+      await sideBarView.render();
+      await searchView.render();
     });
 
     it("has a sidebar", () => {
@@ -76,6 +77,7 @@ describe("DinnerPlanner App", () => {
       const valueHolders = document.getElementsByClassName(
         "value-main-course-name"
       );
+
       expect(valueHolders.length).to.be.above(0);
       for (let v of valueHolders) {
         expect(v).to.not.be.a("null");
@@ -153,7 +155,6 @@ describe("DinnerPlanner App", () => {
     });
 
     it("Has a number of guests input", () => {
-      console.log("num of guests", model.getNumberOfGuests());
       const input = document.getElementsByClassName("input-num-guests")[0];
       expect(input).to.not.be.a("null");
       expect(input.tagName).to.equal("INPUT");
@@ -162,8 +163,11 @@ describe("DinnerPlanner App", () => {
 
     it("Controller modifies the model", () => {
       const input = document.getElementsByClassName("input-num-guests")[0];
-      input.value = 5;
+      input.value = "5";
+      console.log("inputvalue", input);
       input.dispatchEvent(new Event("input"));
+      console.log("DOCUMENT...", document);
+      console.log("DOCUMENT2...", input);
       expect("" + model.getNumberOfGuests()).to.equal("5");
     });
 

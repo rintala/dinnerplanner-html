@@ -3,6 +3,7 @@ class SideBarView {
     this.container = container;
     this.model = model;
     this.confirmButton = null;
+    this.inputNumberChanger = null;
   }
 
   render() {
@@ -40,7 +41,8 @@ class SideBarView {
        
       <div class="dishInfo" >
           <span class="value-main-course-name">${menuDish.title}</span> 
-          <span>${menuDish.pricePerServing}</span>
+          <span>${menuDish.pricePerServing *
+            this.model.getNumberOfGuests()}</span>
       </div>`
       )
       .join("");
@@ -57,7 +59,9 @@ class SideBarView {
 
   afterRender() {
     this.confirmButton = this.container.querySelector("#confirmBtn");
+    this.inputNumberChanger = this.container.querySelector(".input-num-guests");
 
+    this.model.addObserver(this);
     /* this.confirmButton.addEventListener(
       "click",
       () => {

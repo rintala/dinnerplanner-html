@@ -77,11 +77,17 @@ window.onload = function() {
           generalStateController
         );
 
+        /* const searchController = new SearchController(
+          searchView,
+          model,
+          generalStateController
+        ); */
+
         // hide all views initially
         generalStateController.hideAllViews();
 
         // then start by displaying the home page
-        generalStateController.displayView("overview");
+        generalStateController.displayView("sideBar");
         /* generalStateController.displayView("sideBar"); */
       });
   }
