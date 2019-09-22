@@ -9,10 +9,10 @@ class SideBarController {
     console.log("gsc", this.generalStateController);
     const self = this;
     console.log("self", self);
-    this._initializeListeners(self);
+    this.renderView(self);
   }
 
-  async _initializeListeners(self) {
+  async renderView(self) {
     console.log("SELF", self);
     await this.view.render();
 
