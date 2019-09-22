@@ -63,6 +63,10 @@ class DinnerModel {
     this.currentDish = dish;
   }
 
+  getDishPriceForNumberOfPeople(menuDish) {
+    return Math.round(menuDish.pricePerServing * this.getNumberOfGuests());
+  }
+
   getFullMenu() {
     return this.menu;
   }
@@ -85,6 +89,18 @@ class DinnerModel {
     return this.menu
       .map(dish => {
         return dish.pricePerServing;
+      })
+      .reduce((sum, add) => sum + add)
+      .toFixed(2); //Rounding to 2 decimals
+  }
+
+  getTotalMenuPriceForNumberOfPeople() {
+    if (this.menu.length === 0) {
+      return 0;
+    }
+    return this.menu
+      .map(dish => {
+        return Math.round(dish.pricePerServing * this.getNumberOfGuests());
       })
       .reduce((sum, add) => sum + add)
       .toFixed(2); //Rounding to 2 decimals
@@ -176,8 +192,8 @@ class DinnerModel {
 
   // implemenent remove function for observers as well
 
-  updateObservers() {
+  updateObservers(detailsToUpdateWith) {
     // instead define update function in each observer that doesnt re-render entire view
-    this._observers.forEach(obs => obs.render());
+    this._observers.forEach(obs => obs.updateView(detailsToUpdateWith));
   }
 }

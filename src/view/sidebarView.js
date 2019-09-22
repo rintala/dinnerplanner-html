@@ -41,15 +41,14 @@ class SideBarView {
        
       <div class="dishInfo" >
           <span class="value-main-course-name">${menuDish.title}</span> 
-          <span>${menuDish.pricePerServing *
-            this.model.getNumberOfGuests()}</span>
+          <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
       </div>`
       )
       .join("");
 
     this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
 
-    const totalMenuPrice = this.model.getTotalMenuPrice();
+    const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
     this.container.getElementsByClassName(
       "value-total-price"
     )[0].innerHTML = totalMenuPrice;
@@ -69,5 +68,30 @@ class SideBarView {
       },
       false
     ); */
+  }
+
+  updateView(details) {
+    console.log("ydopatecidwe", details);
+    this.container.querySelector("#" + details).innerHTML = "";
+
+    const menuDishes = this.model.getFullMenu();
+
+    let dishInfoHTML = menuDishes
+      .map(
+        menuDish => `
+       
+      <div class="dishInfo" >
+          <span class="value-main-course-name">${menuDish.title}</span> 
+          <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
+      </div>`
+      )
+      .join("");
+
+    this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
+
+    const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
+    this.container.getElementsByClassName(
+      "value-total-price"
+    )[0].innerHTML = totalMenuPrice;
   }
 }

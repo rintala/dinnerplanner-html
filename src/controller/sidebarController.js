@@ -30,7 +30,7 @@ class SideBarController {
     this.view.inputNumberChanger.addEventListener("input", e => {
       if (!isNaN(parseInt(e.data))) {
         this.model.setNumberOfGuests(parseInt(e.data));
-        this.model.updateObservers();
+        this.model.updateObservers("dishesInfo");
       }
       console.log("this.view after", this.view, this.model);
     });
