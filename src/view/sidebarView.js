@@ -58,12 +58,12 @@ class SideBarView {
   afterRender() {
     this.confirmButton = this.container.querySelector("#confirmBtn");
 
-    this.confirmButton.addEventListener(
+    /* this.confirmButton.addEventListener(
       "click",
       () => {
         console.log(this, "confirm button is clicked, lets show overview");
       },
       false
-    );
+    ); */
   }
 }

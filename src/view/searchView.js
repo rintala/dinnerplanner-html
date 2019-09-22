@@ -56,7 +56,6 @@ class SearchView {
         <p>MENU</p>
       </div>
       <div id='dishSearchViewWrapper'>
-        <div id='sideBarView'></div>
         <div id='dishSearchBody'>
           <div id='dishSearchHeader'>
             <div><p class="title">Find a dish</p></div>
@@ -83,13 +82,6 @@ class SearchView {
     this.container.querySelector("#dropDownMenu").innerHTML = dishTypesHTML;
 
     this.getAllDishes();
-
-    let sideBarViewInstance = new SideBarView(
-      document.getElementById("sideBarView"),
-      this.model
-    );
-
-    sideBarViewInstance.render();
 
     // TODO: move this to controller
     document.getElementById("searchBtn").onclick = () => {

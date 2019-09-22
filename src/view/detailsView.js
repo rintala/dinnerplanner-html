@@ -11,7 +11,6 @@ class DetailsView {
           <p>MENU</p>
         </div>
         <div id="dishSearchViewWrapper">
-          <div id="sideBarView"></div>
           <div id="dishSearchBody">
             <div id="dishItem">
             </div>
@@ -63,12 +62,6 @@ class DetailsView {
               </div>
             </div>
             `;
-
-    let sideBarViewInstance = new SideBarView(
-      this.container.querySelector("#sideBarView"),
-      this.model
-    );
-    sideBarViewInstance.render();
 
     this.afterRender();
   }

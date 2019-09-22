@@ -76,6 +76,7 @@ window.onload = function() {
 
         // then start by displaying the home page
         generalStateController.displayView("details");
+        generalStateController.displayView("sideBar");
       });
   }
 };

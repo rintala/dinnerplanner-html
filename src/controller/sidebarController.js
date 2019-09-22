@@ -7,27 +7,26 @@ class SideBarController {
 
     console.log("sidebar view");
     console.log("gsc", this.generalStateController);
-
-    this._initializeListeners();
+    const self = this;
+    console.log("self", self);
+    this._initializeListeners(self);
   }
 
-  _initializeListeners() {
-    console.log(
-      "Controller is initialized..",
-      this.view.container.querySelector("#confirmBtn")
-    );
+  async _initializeListeners(self) {
+    console.log("SELF", self);
+    await this.view.render();
 
     /* const confirmButton = this.view.container.querySelector("#confirmBtn"); */
     console.log("this.view.confirmButton", this.view.confirmButton);
     this.view.confirmButton.addEventListener(
       "click",
       () => {
-        console.log(this, "confirm button is clicked, lets show overview");
-        return this.generalStateController.displayView("overview");
+        self.generalStateController.displayView("overview");
+        self.generalStateController.hideView("details");
       },
       false
     );
-    console.log("confirmbtn", this.view.confirmButton);
+    console.log("this.view after", this.view);
   }
 
   update(payload) {
