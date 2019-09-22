@@ -21,8 +21,8 @@ class SideBarController {
     this.view.confirmButton.addEventListener(
       "click",
       () => {
+        self.generalStateController.hideAllViews();
         self.generalStateController.displayView("overview");
-        self.generalStateController.hideView("details");
       },
       false
     );
