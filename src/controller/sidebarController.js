@@ -1,5 +1,6 @@
 class SideBarController {
   constructor(view, model, generalStateController) {
+    console.log('Sidebar is being created');
     this.view = view;
     this.model = model;
     this.generalStateController = generalStateController;

@@ -52,6 +52,7 @@ class SideBarView {
     this.container.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
 
     this.afterRender();
+    document.getElementById('sidebar').innerHTML = this.container.innerHTML;
   }
 
   afterRender() {

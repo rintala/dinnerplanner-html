@@ -16,12 +16,13 @@ class GeneralStateController {
         new PrintoutView(document.createElement('div'), this.model),
         model
       ),
-      sideBar: new SideBarController(
-        new SideBarView(document.createElement('div'), this.model),
-        model
-      ),
       search: new SearchController(new SearchView(document.createElement('div'), this.model), model)
     };
+
+    const sideBar = new SideBarController(
+      new SideBarView(document.createElement('div'), this.model),
+      model
+    );
 
     this.hashChange = this.hashChange.bind(this);
     window.addEventListener('hashchange', this.hashChange);
@@ -30,7 +31,6 @@ class GeneralStateController {
 
   hashChange() {
     const hash = window.location.hash;
-
     if (!hash) {
       this.pages['home'].renderView();
     } else {
