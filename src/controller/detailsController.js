@@ -7,7 +7,15 @@ class DetailsController {
   }
 
   renderView() {
-    this.view.render();
+    const hash = window.location.hash;
+    const idIndex = hash.indexOf('id');
+    const id = hash.substring(idIndex + 3, hash.length);
+    console.log('Trying to render a details view. ID: ', id);
+
+    this.model.getDish(id).then(dish => {
+      this.view.render(dish);
+    });
+
     // TODO lab 3
   }
 

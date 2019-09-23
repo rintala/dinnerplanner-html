@@ -11,11 +11,12 @@ class HomeController {
 
   addListeners() {
     //  console.log('Adding event listner');
+
     document.getElementById('startBtn').addEventListener('click', this.startButtonEvent);
   }
 
   startButtonEvent() {
-    window.location = '#searchView';
+    window.location = '#search';
   }
 
   update(payload) {}

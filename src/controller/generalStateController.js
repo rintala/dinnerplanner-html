@@ -30,13 +30,17 @@ class GeneralStateController {
 
   hashChange() {
     const hash = window.location.hash;
-    console.log('Window change detected, loading new page: ' + hash);
 
     if (!hash) {
       this.pages['home'].renderView();
     } else {
       //This has to be updated to some kind of regex to support parameters like ID
-      this.pages[hash.substring(1, hash.length)];
+      const qIndex = hash.indexOf('?');
+      if (qIndex > 0) {
+        this.pages[hash.substring(1, qIndex)].renderView();
+      } else {
+        this.pages[hash.substring(1, hash.length)].renderView();
+      }
     }
   }
 }

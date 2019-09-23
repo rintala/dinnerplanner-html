@@ -4,7 +4,26 @@ class DetailsView {
     this.model = model;
   }
 
-  render() {
+  render(dish) {
+    console.log(dish);
+
+    var ingredientsHTML = dish.extendedIngredients
+      .map(
+        ingredient => `<div class="dishIngredient">
+                  <div class="dishIngredientMeasure">
+                    ${ingredient.measures.metric.amount}
+                    ${ingredient.measures.metric.unitShort}
+                  </div>
+                  <div class="dishIngredientTitle">
+                    ${ingredient.name}
+                  </div>
+                  <div class="dishIngredientPrice">
+                    XX SEK 
+                  </div>
+                </div>`
+      )
+      .join('');
+
     var content = `
         <div id='mobileMenu' >
           <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
@@ -13,31 +32,6 @@ class DetailsView {
         <div id="dishSearchViewWrapper">
           <div id="dishSearchBody">
             <div id="dishItem">
-            </div>
-          </div>
-        </div>`;
-    this.container.innerHTML = content;
-
-    const dish = this.model.getCurrentDish();
-    var ingredientsHTML = dish.extendedIngredients
-      .map(
-        ingredient => `<div class="dishIngredient">
-                    <div class="dishIngredientMeasure">
-                      ${ingredient.measures.metric.amount}
-                      ${ingredient.measures.metric.unitShort}
-                    </div>
-                    <div class="dishIngredientTitle">
-                      ${ingredient.name}
-                    </div>
-                    <div class="dishIngredientPrice">
-                      XX SEK 
-                    </div>
-                  </div>`
-      )
-      .join("");
-
-    this.container.querySelector("#dishItem").innerHTML =
-      `
             <div>
               <div id="dishDetailsWrapper">
                 <div id="dishDetails">
@@ -49,11 +43,12 @@ class DetailsView {
                   </a>
                 </div>
                 <div id="dishIngredients">
-                <div id="dishIngredientsTitle">Ingredients</div>` +
-      ingredientsHTML +
-      `             
+                <div id="dishIngredientsTitle">Ingredients</div>
+      ${ingredientsHTML}
                 <hr> 
-                <div style="padding-right: 20px; display: flex; justify-content: space-between">TOTAL <p>${dish.pricePerServing} SEK </p> </div>
+                <div style="padding-right: 20px; display: flex; justify-content: space-between">TOTAL <p>${
+                  dish.pricePerServing
+                } SEK </p> </div>
                   <hr>
                   <div>
                     <button class="button">Add dish to menu</button>
@@ -61,9 +56,11 @@ class DetailsView {
                 </div>
               </div>
             </div>
-            `;
-
-    this.afterRender();
+            </div>
+          </div>
+        </div>`;
+    this.container.innerHTML = content;
+    document.getElementById('app').innerHTML = content;
   }
   afterRender() {}
 }

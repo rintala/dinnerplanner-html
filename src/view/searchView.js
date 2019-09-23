@@ -4,52 +4,22 @@ class SearchView {
     this.model = model;
   }
 
-  getAllDishes() {
-    displayLoader();
-    this.container.querySelector("#dishItems").innerHTML = "";
-    const query = this.container.querySelector("#searchKeyword").value;
-    let dishType = this.container.querySelector("#dropDownMenu").value;
-
-    if (dishType === "all") dishType = "";
-
-    return this.model
-      .getAllDishes(dishType, query)
-      .then(data => {
-        let dishesHTML = data
-          .map(
-            dish =>
-              `<div class="dish">
-          <img class="dishImage image border" src="${this.model.getFullDishImageURL(
-            dish.imageUrls
-          )}"/>
-          <p class="dishText text border">${cutOverflowingText(
-            dish.title,
-            15
-          )}</p>
-        </div>`
-          )
-          .join("");
-        this.container.querySelector("#dishItems").innerHTML = dishesHTML;
-      })
-      .catch(error => error)
-      .finally(() => {
-        hideLoader();
-      });
-  }
-
   async render() {
+    console.log('rendering search view');
     const dishTypes = [
-      "all",
-      "lunch",
-      "main course",
-      "morning meal",
-      "brunch",
-      "main dish",
-      "breakfast",
-      "dinner"
+      'all',
+      'lunch',
+      'main course',
+      'morning meal',
+      'brunch',
+      'main dish',
+      'breakfast',
+      'dinner'
     ];
 
     // TODO: create a new view for the mobile menu
+    let dishTypesHTML = dishTypes.map(dishName => `<option>${dishName}</option>`).join('');
+
     var content = `
       <div id='mobileMenu' >
        My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
@@ -62,8 +32,8 @@ class SearchView {
             <div><p class="title">Find a dish</p></div>
             <div id='dishSearchView'>
               <input id='searchKeyword' class="border" type='text' placeholder='Enter keywords'></input>
-              <select id='dropDownMenu' class="dropDownMenu"></select>
-              <button id='searchBtn' class="button" @onclick(this.searchButton())> search </button>
+              <select id='dropDownMenu' class="dropDownMenu">${dishTypesHTML}</select>
+              <button id='searchBtn' class="button"> search </button>
               <div id='loader' class='spinner-border' role='status'>
                 <span class='sr-only'>Loading...</span>
               </div>      
@@ -74,22 +44,23 @@ class SearchView {
         
       </div>
       `;
+
     this.container.innerHTML = content;
+    document.getElementById('app').innerHTML = content;
+  }
 
-    let dishTypesHTML = dishTypes
-      .map(dishName => `<option>${dishName}</option>`)
-      .join("");
+  addSearchResults(data) {
+    const dishesHTML = data
+      .map(dish => {
+        return `
+        <div id="${dish.id}" class="dish">
+          <img class="dishImage image border" src="${dish.imageUrl}"/>
+          <p class="dishText text border">${cutOverflowingText(dish.title, 15)}</p>
+        </div>`;
+      })
+      .join('');
 
-    this.container.querySelector("#dropDownMenu").innerHTML = dishTypesHTML;
-
-    await this.getAllDishes();
-
-    // TODO: move this to controller
-    document.getElementById("searchBtn").onclick = () => {
-      this.getAllDishes();
-    };
-
-    this.afterRender();
+    document.querySelector('#dishItems').innerHTML = dishesHTML;
   }
   afterRender() {}
 }
