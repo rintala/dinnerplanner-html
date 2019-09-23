@@ -1,5 +1,5 @@
-/* const assert = chai.assert;
-const expect = chai.expect; */
+var assert = chai.assert;
+var expect = chai.expect;
 
 describe("DinnerModel", () => {
   let model = new DinnerModel();
@@ -28,6 +28,10 @@ describe("DinnerModel", () => {
   });
 
   describe("getting individual dishes", () => {
+    it("returns a promise", done => {
+      expect(model.getDish(559251) instanceof Promise).to.equal(true);
+      done();
+    });
     it("gets the correct dish", done => {
       model.getDish(559251).then(data => {
         expect(data.title).to.equal("Breakfast Pizza");
@@ -46,7 +50,7 @@ describe("DinnerModel", () => {
   describe("filtering for dishes", () => {
     it("returns all dishes if no args are specified", done => {
       model.getAllDishes().then(data => {
-        console.log("data length", data.length);
+      //  console.log("data length", data.length);
         expect(data.length).to.equal(10);
         done();
       });
@@ -54,7 +58,7 @@ describe("DinnerModel", () => {
 
     it("returns the correct dish type of main course and pizza", done => {
       model.getAllDishes("main course", "pizza").then(data => {
-        console.log("filtered", data);
+      //  console.log("filtered", data);
         const onlyHasPizzas = data.every(
           dish => dish.title.toLowerCase().indexOf("pizza") > -1
         );
@@ -79,7 +83,6 @@ describe("DinnerModel", () => {
         model.addDishToMenu(data);
         expect(model.getFullMenu().length).to.equal(1);
         expect(model.getFullMenu()[0].id).to.equal(559251);
-
         model.removeDishFromMenu(559251);
         expect(model.getFullMenu().length).to.equal(0);
         expect(model.getFullMenu()).to.not.include(data);

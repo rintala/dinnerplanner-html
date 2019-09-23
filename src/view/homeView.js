@@ -1,13 +1,12 @@
 class HomeView {
-  constructor(container) {
+  constructor(container, model) {
     this.container = container;
-    this.startBtn = null;
+    this.startButton = null;
   }
 
+  // An example of creating HTML declaratively. Think about the pros and cons of this approach.
   render() {
-    var self = this;
     var content = /* template */ `
-    
     <div class="container text-center full-vh d-flex align-items-center justify-content-center flex-column">
         <p class="text-center p-max-width">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam
@@ -15,18 +14,14 @@ class HomeView {
           arcu. Maecenas a efficitur leo.
         </p>
         <div class="spacing-medium"></div>
-        <a id="startBtn" class="button btn btn-lg btn-primary-color" onClick="location.href='../screens/searchScreen.html';">
+        <a id="startBtn" class="button">
           Create new dinner
         </a>
       </div>
     `;
-
     this.container.innerHTML = content;
-
-    this.afterRender();
+    document.getElementById('app').innerHTML = content;
   }
 
-  afterRender() {
-    this.startBtn = this.container.querySelector("#startBtn");
-  }
+  afterRender() {}
 }

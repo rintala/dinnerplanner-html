@@ -4,47 +4,63 @@ class SearchView {
     this.model = model;
   }
 
-  render() {
-    var content = `
-      <div id="dishSearchViewWrapper">
-      <div id="loader" class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div id="sideBarView"></div>
-        <div>Add another one</div>
-        <div id="dishSearchView">
-          <input id="searchKeyword" type="text" placeholder="Enter keywords"></input>
-          <a id="searchBtn" class="button">
-            search
-          </a>
-        </div>
-        <div id="dishItems">
-            <span id="dishContainer">
-            </span>
-        </div>
-      </div>`;
-    this.model.getAllDishes().then(data => {
-      data.forEach(dish => {
-        this.model.getDish(dish.id).then(data => {
-          document.getElementById('dishContainer').innerHTML += `
-          <div class="dish">
-            <img class="image border" src="${data.image}"/>
-            <p class="text border">${data.title}</p>
-          </div>`;
-        });
-      });
-    });
-    console.log('this containe', this.container);
-    this.container.innerHTML = content;
-    console.log('undefined?', this.model);
-    let sideBarViewInstance = new SearchSideBarView(
-      document.getElementById('sideBarView'),
-      this.model
-    );
-    sideBarViewInstance.render();
+  async render() {
+    console.log('rendering search view');
+    const dishTypes = [
+      'all',
+      'lunch',
+      'main course',
+      'morning meal',
+      'brunch',
+      'main dish',
+      'breakfast',
+      'dinner'
+    ];
 
-    this.afterRender();
+    // TODO: create a new view for the mobile menu
+    let dishTypesHTML = dishTypes.map(dishName => `<option>${dishName}</option>`).join('');
+
+    var content = `
+      <div id='mobileMenu' >
+       My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people
+        <p>MENU</p>
+      </div>
+      <div id='dishSearchViewWrapper'>
+        <div id='sideBarView'></div>
+        <div id='dishSearchBody'>
+          <div id='dishSearchHeader'>
+            <div><p class="title">Find a dish</p></div>
+            <div id='dishSearchView'>
+              <input id='searchKeyword' class="border" type='text' placeholder='Enter keywords'></input>
+              <select id='dropDownMenu' class="dropDownMenu">${dishTypesHTML}</select>
+              <button id='searchBtn' class="button"> search </button>
+              <div id='loader' class='spinner-border' role='status'>
+                <span class='sr-only'>Loading...</span>
+              </div>      
+            </div>
+          </div>
+          <div id='dishItems'></div>
+        </div>
+        
+      </div>
+      `;
+
+    this.container.innerHTML = content;
+    document.getElementById('app').innerHTML = content;
   }
 
+  addSearchResults(data) {
+    const dishesHTML = data
+      .map(dish => {
+        return `
+        <div id="${dish.id}" class="dish">
+          <img class="dishImage image border" src="${dish.imageUrl}"/>
+          <p class="dishText text border">${cutOverflowingText(dish.title, 15)}</p>
+        </div>`;
+      })
+      .join('');
+
+    document.querySelector('#dishItems').innerHTML = dishesHTML;
+  }
   afterRender() {}
 }
