@@ -1,27 +1,42 @@
 class GeneralStateController {
-  constructor(view, model) {
+  constructor(model) {
+    this.model = model;
     this.views = {};
+    this.pages = {
+      home: new HomeController(new HomeView(document.createElement('div'), this.model), model),
+      details: new DetailsController(
+        new DetailsView(document.createElement('div'), this.model),
+        model
+      ),
+      overview: new OverviewController(
+        new OverviewView(document.createElement('div'), this.model),
+        model
+      ),
+      printout: new PrintoutController(
+        new PrintoutView(document.createElement('div'), this.model),
+        model
+      ),
+      sideBar: new SideBarController(
+        new SideBarView(document.createElement('div'), this.model),
+        model
+      ),
+      search: new SearchController(new SearchView(document.createElement('div'), this.model), model)
+    };
+
+    this.hashChange = this.hashChange.bind(this);
+    window.addEventListener('hashchange', this.hashChange);
+    this.hashChange();
   }
 
-  setView(viewName, view) {
-    this.views[viewName] = view;
-    const viewToRender = this.views[viewName];
-    viewToRender.render();
-  }
+  hashChange() {
+    const hash = window.location.hash;
+    console.log('Window change detected, loading new page: ' + hash);
 
-  displayView(viewName) {
-    // show view here somehow
-    document.getElementById(viewName + "Page").style.display = "block";
-  }
-
-  hideView(viewName) {
-    document.getElementById(viewName + "Page").style.display = "none";
-  }
-
-  hideAllViews() {
-    console.log("hide all views");
-    Array.from(document.getElementsByClassName("viewContainer")).forEach(
-      view => (view.style.display = "none")
-    );
+    if (!hash) {
+      this.pages['home'].renderView();
+    } else {
+      //This has to be updated to some kind of regex to support parameters like ID
+      this.pages[hash.substring(1, hash.length)];
+    }
   }
 }

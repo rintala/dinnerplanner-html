@@ -13,25 +13,14 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Sofia"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet" />
     <link rel="stylesheet" href="styles/global.css" />
   </head>
   <body>
     <div class="header">
       Dinner Planner
     </div>
-    <div class="container page-content">
-      <div id="configMissingPage" class="viewContainer"></div>
-      <div id="homePage" class="viewContainer"></div>
-      <div id="sideBarPage" class="viewContainer"></div>
-      <div id="overviewPage" class="viewContainer"></div>
-      <div id="searchPage" class="viewContainer"></div>
-      <div id="detailsPage" class="viewContainer"></div>
-      <div id="printoutPage" class="viewContainer"></div>
-    </div>
+    <div id="app" class="container page-content"></div>
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <!-- It also includes jQuery, only for use by Bootstrap -->
@@ -69,5 +58,8 @@
     <script src="src/controller/sideBarController.js"></script>
     <script src="src/controller/homeController.js"></script>
     <script src="src/controller/overviewController.js"></script>
+    <script src="src/controller/detailsController.js"></script>
+    <script src="src/controller/printoutController.js"></script>
+    <script src="src/controller/searchController.js"></script>
   </body>
 </html>

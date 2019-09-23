@@ -50,7 +50,7 @@ describe("DinnerModel", () => {
   describe("filtering for dishes", () => {
     it("returns all dishes if no args are specified", done => {
       model.getAllDishes().then(data => {
-        console.log("data length", data.length);
+      //  console.log("data length", data.length);
         expect(data.length).to.equal(10);
         done();
       });
@@ -58,7 +58,7 @@ describe("DinnerModel", () => {
 
     it("returns the correct dish type of main course and pizza", done => {
       model.getAllDishes("main course", "pizza").then(data => {
-        console.log("filtered", data);
+      //  console.log("filtered", data);
         const onlyHasPizzas = data.every(
           dish => dish.title.toLowerCase().indexOf("pizza") > -1
         );

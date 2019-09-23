@@ -1,5 +1,5 @@
 class HomeView {
-  constructor(container) {
+  constructor(container, model) {
     this.container = container;
     this.startButton = null;
   }
@@ -20,10 +20,8 @@ class HomeView {
       </div>
     `;
     this.container.innerHTML = content;
-    this.afterRender();
+    document.getElementById('app').innerHTML = content;
   }
 
-  afterRender() {
-    this.startButton = this.container.querySelector("#startBtn");
-  }
+  afterRender() {}
 }
