@@ -8,7 +8,7 @@ class SideBarView {
 
   render() {
     var content = /* template */ `
-        <div>
+        <div id="sideBarViewContainer">
         <div>
           <div id="sideBarTitle">My dinner</div>
           <div style="background-color: #ababac">
@@ -72,26 +72,27 @@ class SideBarView {
 
   updateView(details) {
     console.log("ydopatecidwe", details);
-    this.container.querySelector("#" + details).innerHTML = "";
+    if (this.container.querySelector("#" + details) !== null) {
+      this.container.querySelector("#" + details).innerHTML = "";
+      const menuDishes = this.model.getFullMenu();
 
-    const menuDishes = this.model.getFullMenu();
+      let dishInfoHTML = menuDishes
+        .map(
+          menuDish => `
+         
+        <div class="dishInfo" >
+            <span class="value-main-course-name">${menuDish.title}</span> 
+            <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
+        </div>`
+        )
+        .join("");
 
-    let dishInfoHTML = menuDishes
-      .map(
-        menuDish => `
-       
-      <div class="dishInfo" >
-          <span class="value-main-course-name">${menuDish.title}</span> 
-          <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
-      </div>`
-      )
-      .join("");
+      this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
 
-    this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
-
-    const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-    this.container.getElementsByClassName(
-      "value-total-price"
-    )[0].innerHTML = totalMenuPrice;
+      const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
+      this.container.getElementsByClassName(
+        "value-total-price"
+      )[0].innerHTML = totalMenuPrice;
+    }
   }
 }

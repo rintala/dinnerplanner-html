@@ -2,13 +2,21 @@ class HomeController {
   constructor(view, model, generalStateController) {
     this.view = view;
     this.model = model;
-    this.controller = generalStateController;
-
+    this.generalStateController = generalStateController;
+    const self = this;
     // TODO lab 3
+    this.renderView(self);
   }
 
-  renderView() {
+  renderView(self) {
     this.view.render();
+    /* console.log("self", self.generalStateController); */
+    console.log("thisview", this.view);
+    this.view.startButton.addEventListener("click", () => {
+      self.generalStateController.hideAllViews();
+      self.generalStateController.displayView("sideBar");
+      self.generalStateController.displayView("search");
+    });
     // TODO lab 3
   }
 

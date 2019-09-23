@@ -83,11 +83,24 @@ window.onload = function() {
           generalStateController
         ); */
 
+        /* const detailsController = new DetailsController(
+          detailsView,
+          model,
+          generalStateController
+        )
+        */
+
+        const homeController = new HomeController(
+          homeView,
+          model,
+          generalStateController
+        );
+
         // hide all views initially
         generalStateController.hideAllViews();
 
         // then start by displaying the home page
-        generalStateController.displayView("sideBar");
+        generalStateController.displayView("home");
         /* generalStateController.displayView("sideBar"); */
       });
   }

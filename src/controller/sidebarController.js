@@ -31,6 +31,7 @@ class SideBarController {
       if (!isNaN(parseInt(e.data))) {
         this.model.setNumberOfGuests(parseInt(e.data));
         this.model.updateObservers("dishesInfo");
+        this.model.updateObservers("value-num-guests");
       }
       console.log("this.view after", this.view, this.model);
     });

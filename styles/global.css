@@ -194,9 +194,8 @@
   margin: 10px;
 }
 
-#sideBarView {
+#sideBarViewContainer {
   background-color: gray;
-  width: 40%;
 }
 
 #pageHeader {

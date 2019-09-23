@@ -19,7 +19,7 @@ class OverviewView {
     var content = `
       <div>
         <div id='pageHeader'>
-          <p>My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people</p>
+          <p id="numberOfGuests">My dinner: <span class="value-num-guests">${this.model.getNumberOfGuests()}</span> people</p>
           <button class="button" id="goBackBtn">Go back and edit dinner</button>
         </div>
         <hr>
@@ -64,7 +64,17 @@ class OverviewView {
     this.afterRender();
   }
 
+  updateView(details) {
+    if (this.container.querySelector("." + details) !== null) {
+      this.container.querySelector("." + details).innerHTML = "";
+      this.container.querySelector(
+        "." + details
+      ).innerHTML = `${this.model.getNumberOfGuests()}`;
+    }
+  }
+
   afterRender() {
     this.goBackButton = this.container.querySelector("#goBackBtn");
+    this.model.addObserver(this);
   }
 }

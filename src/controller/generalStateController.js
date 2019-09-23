@@ -11,7 +11,6 @@ class GeneralStateController {
 
   displayView(viewName) {
     // show view here somehow
-    console.log("displaytview called");
     document.getElementById(viewName + "Page").style.display = "block";
   }
 

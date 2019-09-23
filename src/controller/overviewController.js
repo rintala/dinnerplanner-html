@@ -11,6 +11,7 @@ class OverviewController {
   async renderView(self) {
     await this.view.render();
     // TODO lab 3
+
     this.view.goBackButton.addEventListener("click", () => {
       self.generalStateController.displayView("sideBar");
       self.generalStateController.displayView("search");
