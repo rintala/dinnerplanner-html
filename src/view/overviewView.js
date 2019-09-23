@@ -39,8 +39,9 @@ class OverviewView {
 
     let dishItemsHTML = this.model
       .getFullMenu()
-      .map(
-        dish => `
+      .map(dish => {
+        this.model.getDishPriceForNumberOfPeople(dish);
+        return `
           <div class="dish">
             <img class="dishImage border" src="${this.model.getDishImageURLFromString(
               dish.image
@@ -49,9 +50,11 @@ class OverviewView {
               dish.title,
               20
             )}</p>
-            <p class="dishText">${dish.pricePerServing} SEK</p>
-          </div>`
-      )
+            <p class="dishText">${this.model.getDishPriceForNumberOfPeople(
+              dish
+            )} SEK</p>
+          </div>`;
+      })
       .join("");
 
     this.container.querySelector("#dishItems").innerHTML = dishItemsHTML;
@@ -70,6 +73,37 @@ class OverviewView {
       this.container.querySelector(
         "." + details
       ).innerHTML = `${this.model.getNumberOfGuests()}`;
+    }
+
+    if (this.container.querySelector("#" + details)) {
+      let dishItemsHTML = this.model
+        .getFullMenu()
+        .map(dish => {
+          this.model.getDishPriceForNumberOfPeople(dish);
+          return `
+          <div class="dish">
+            <img class="dishImage border" src="${this.model.getDishImageURLFromString(
+              dish.image
+            )}"/>
+            <p class="dishText value-main-course-name">${cutOverflowingText(
+              dish.title,
+              20
+            )}</p>
+            <p class="dishText">${this.model.getDishPriceForNumberOfPeople(
+              dish
+            )} SEK</p>
+          </div>`;
+        })
+        .join("");
+
+      this.container.querySelector("#dishItems").innerHTML = dishItemsHTML;
+    }
+
+    if (this.container.querySelector("." + details)) {
+      const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
+      this.container.getElementsByClassName(
+        "value-total-price"
+      )[0].innerHTML = totalMenuPrice;
     }
   }
 

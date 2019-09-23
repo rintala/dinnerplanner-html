@@ -32,6 +32,8 @@ class SideBarController {
         this.model.setNumberOfGuests(parseInt(e.data));
         this.model.updateObservers("dishesInfo");
         this.model.updateObservers("value-num-guests");
+        this.model.updateObservers("dishItems");
+        this.model.updateObservers("value-total-price");
       }
       console.log("this.view after", this.view, this.model);
     });
