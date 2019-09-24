@@ -38,20 +38,20 @@ class DetailsView {
                   <p id="dishDetailsTitle" class="value-main-course-name">${dish.title}</p>
                   <img id="dishDetailsImage" class="image border" src="${dish.image}"/>
                   <div id="dishDetailsBody"> ${dish.instructions}</div>
-                  <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
+                  <button id="backButton" class="button">Go back and edit dinner</button>
                   back to search
                   </a>
                 </div>
                 <div id="dishIngredients">
                 <div id="dishIngredientsTitle">Ingredients</div>
-      ${ingredientsHTML}
+                ${ingredientsHTML}
                 <hr> 
                 <div style="padding-right: 20px; display: flex; justify-content: space-between">TOTAL <p>${
                   dish.pricePerServing
                 } SEK </p> </div>
                   <hr>
                   <div>
-                    <button class="button">Add dish to menu</button>
+                    <button id="addDishToMenuButton" class="button">Add dish to menu</button>
                   </div>
                 </div>
               </div>
@@ -60,7 +60,6 @@ class DetailsView {
           </div>
         </div>`;
     this.container.innerHTML = content;
-    document.getElementById('app').innerHTML = content;
   }
   afterRender() {}
 }

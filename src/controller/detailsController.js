@@ -14,9 +14,20 @@ class DetailsController {
 
     this.model.getDish(id).then(dish => {
       this.view.render(dish);
+      this.addListeners(dish);
     });
 
     // TODO lab 3
+  }
+  addListeners(dish) {
+    //The sexy way would be if a cookie remebers the searchqueris
+    this.view.container.querySelector('#backButton').addEventListener('click', () => {
+      window.location = '#search';
+    });
+    this.view.container.querySelector('#addDishToMenuButton').addEventListener('click', () => {
+      this.model.addDishToMenu(dish);
+      console.log(this.model.getFullMenu());
+    });
   }
 
   update(payload) {
