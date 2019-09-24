@@ -16,14 +16,15 @@ class SideBarController {
       window.location = "#overview";
     });
     this.view.inputNumberChanger.addEventListener("input", e => {
-      if (!isNaN(parseInt(e.data))) {
-        this.model.setNumberOfGuests(parseInt(e.data));
+      if (!isNaN(parseInt(this.view.inputNumberChanger.value))) {
+        this.model.setNumberOfGuests(
+          parseInt(this.view.inputNumberChanger.value)
+        );
         this.model.updateObservers("dishesInfo");
         this.model.updateObservers("value-num-guests");
         this.model.updateObservers("dishItems");
         this.model.updateObservers("value-total-price");
       }
-      //  console.log("this.view after", this.view, this.model);
     });
   }
 

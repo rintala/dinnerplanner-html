@@ -147,10 +147,7 @@ describe("DinnerPlanner App", () => {
     beforeEach(() => {
       model = new DinnerModel();
       model.setNumberOfGuests(1);
-      sideBarView = new SideBarView(
-        document.getElementById("page-content"),
-        model
-      );
+      sideBarView = new SideBarView(document.getElementById("sidebar"), model);
       sideBarController = new SideBarController(sideBarView, model);
       sideBarController.renderView();
     });
@@ -164,17 +161,15 @@ describe("DinnerPlanner App", () => {
 
     it("Controller modifies the model", () => {
       const input = document.getElementsByClassName("input-num-guests")[0];
-      input.value = "5";
-      //  console.log("inputvalue", input);
+      input.value = 5;
       input.dispatchEvent(new Event("input"));
-      //  console.log("DOCUMENT...", document);
-      //  console.log("DOCUMENT2...", input);
       expect("" + model.getNumberOfGuests()).to.equal("5");
     });
 
     it("Observer updates the view", () => {
       model.setNumberOfGuests(6);
       const input = document.getElementsByClassName("input-num-guests")[0];
+      console.log("input", input);
       expect("" + input.value).to.equal("6");
     });
   });

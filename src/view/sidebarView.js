@@ -73,6 +73,7 @@ class SideBarView {
 
   updateView(details) {
     console.log("sidebar updateView", details);
+    console.log("model contains", this.model.getNumberOfGuests());
     if (this.container.querySelector("#" + details) !== null) {
       this.container.querySelector("#" + details).innerHTML = "";
       const menuDishes = this.model.getFullMenu();
@@ -94,6 +95,11 @@ class SideBarView {
       this.container.getElementsByClassName(
         "value-total-price"
       )[0].innerHTML = totalMenuPrice;
+    }
+    if (this.container.querySelector("." + details) !== null) {
+      this.container.querySelector(
+        "." + details
+      ).value = `${this.model.getNumberOfGuests()}`;
     }
   }
 }
