@@ -44,20 +44,22 @@ class SideBarView {
           <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
       </div>`
       )
-      .join('');
+      .join("");
 
-    this.container.querySelector('#dishesInfo').innerHTML = dishInfoHTML;
+    this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-    this.container.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
+    this.container.getElementsByClassName(
+      "value-total-price"
+    )[0].innerHTML = totalMenuPrice;
 
+    document.getElementById("sidebar").innerHTML = this.container.innerHTML;
     this.afterRender();
-    document.getElementById('sidebar').innerHTML = this.container.innerHTML;
   }
 
   afterRender() {
-    this.confirmButton = this.container.querySelector('#confirmBtn');
-    this.inputNumberChanger = this.container.querySelector('.input-num-guests');
+    this.confirmButton = this.container.querySelector("#confirmBtn");
+    this.inputNumberChanger = this.container.querySelector(".input-num-guests");
 
     this.model.addObserver(this);
     /* this.confirmButton.addEventListener(
@@ -71,8 +73,8 @@ class SideBarView {
 
   updateView(details) {
     //  console.log("ydopatecidwe", details);
-    if (this.container.querySelector('#' + details) !== null) {
-      this.container.querySelector('#' + details).innerHTML = '';
+    if (this.container.querySelector("#" + details) !== null) {
+      this.container.querySelector("#" + details).innerHTML = "";
       const menuDishes = this.model.getFullMenu();
 
       let dishInfoHTML = menuDishes
@@ -84,12 +86,14 @@ class SideBarView {
             <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
         </div>`
         )
-        .join('');
+        .join("");
 
-      this.container.querySelector('#dishesInfo').innerHTML = dishInfoHTML;
+      this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
 
       const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-      this.container.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
+      this.container.getElementsByClassName(
+        "value-total-price"
+      )[0].innerHTML = totalMenuPrice;
     }
   }
 }
