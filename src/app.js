@@ -11,74 +11,72 @@ window.onload = function() {
     this.console.log("LOADING NEW WINDOW");
     const model = new DinnerModel();
 
-    model
-      .getDish(592479)
-      .then(dish1 => model.addDishToMenu(dish1))
-      .then(() => model.getDish(818941))
-      .then(dish2 => {
-        model.addDishToMenu(dish2);
-        model.setCurrentDish(dish2);
-      })
-      .then(() => {
-        const generalController = new GeneralStateController(model);
+    const generalController = new GeneralStateController(model);
 
-        const homeController = new HomeController(
-          new HomeView(document.querySelector("#app"), model),
-          model
-        );
-        const detailsController = new DetailsController(
-          new DetailsView(document.querySelector("#app"), model),
-          model
-        );
-        // const overview = new OverviewController(
-        //   new OverviewView(document.querySelector('#app'), model),
-        //   model
-        // );
-        // const printout = new PrintoutController(
-        //   new PrintoutView(document.querySelector('#app'), model),
-        //   model
-        // );
-        const search = new SearchController(
-          new SearchView(document.querySelector("#app"), model),
-          model
-        );
+    const homeController = new HomeController(
+      new HomeView(document.querySelector("#home"), model),
+      model
+    );
+    const detailsController = new DetailsController(
+      new DetailsView(document.querySelector("#details"), model),
+      model
+    );
+    const overview = new OverviewController(
+      new OverviewView(document.querySelector("#overview"), model),
+      model
+    );
+    const printout = new PrintoutController(
+      new PrintoutView(document.querySelector("#printout"), model),
+      model
+    );
+    const search = new SearchController(
+      new SearchView(document.querySelector("#search"), model),
+      model
+    );
 
-        this.console.log(
-          "document.querySelector('#sidebar')",
-          document.querySelector("#sidebar")
-        );
-        const sideBar = new SideBarController(
-          new SideBarView(document.querySelector("#sidebar"), model),
-          model
-        );
+    this.console.log(
+      "document.querySelector('#sidebar')",
+      document.querySelector("#sidebar")
+    );
+    const sideBar = new SideBarController(
+      new SideBarView(document.querySelector("#sidebar"), model),
+      model
+    );
 
-        generalController.addPage({
-          path: "search",
-          controller: search,
-          hasSideBar: true
-        });
-        generalController.addPage({
-          path: "home",
-          controller: homeController,
-          hasSideBar: false
-        });
-        generalController.addPage({
-          path: "sidebar",
-          controller: sideBar,
-          hasSideBar: false
-        });
-        generalController.addPage({
-          path: "details",
-          controller: detailsController,
-          hasSideBar: false
-        });
-        // generalController.addPage({ path: 'overview', controller: overview });
-        // generalController.addPage({ path: 'printout', controller: printout });
+    generalController.addPage({
+      path: "search",
+      controller: search,
+      hasSideBar: true
+    });
+    generalController.addPage({
+      path: "home",
+      controller: homeController,
+      hasSideBar: false
+    });
+    generalController.addPage({
+      path: "sidebar",
+      controller: sideBar,
+      hasSideBar: false
+    });
+    generalController.addPage({
+      path: "details",
+      controller: detailsController,
+      hasSideBar: true
+    });
+    generalController.addPage({
+      path: "overview",
+      controller: overview,
+      hasSideBar: false
+    });
+    generalController.addPage({
+      path: "printout",
+      controller: printout,
+      hasSideBar: false
+    });
 
-        generalController.renderPage("home");
-        /* generalController.displayView("sidebar"); */
-        /* generalController.hideView("sidebar"); */
-        /* generalController.sPage("sidebar"); */
-      });
+    generalController.renderPage("home");
+    /* generalController.displayView("sidebar"); */
+    /* generalController.hideView("sidebar"); */
+    /* generalController.sPage("sidebar"); */
   }
 };

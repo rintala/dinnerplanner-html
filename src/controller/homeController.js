@@ -13,11 +13,11 @@ class HomeController {
     //  console.log('Adding event listner');
 
     // document
-    this.view.startButton.addEventListener('click', this.startButtonEvent);
+    this.view.startButton.addEventListener("click", this.startButtonEvent);
   }
 
   startButtonEvent() {
-    window.location = '#search';
+    window.location = "#search";
   }
 
   update(payload) {}

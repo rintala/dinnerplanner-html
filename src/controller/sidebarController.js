@@ -28,6 +28,7 @@ class SideBarController {
     //  console.log("this.view.confirmButton", this.view.confirmButton);
     this.view.confirmButton.addEventListener("click", () => {
       console.log("click to confirm");
+      window.location = "#overview";
       /*  this.generalStateController.hideAllViews();
       this.generalStateController.displayView("overview"); */
     });

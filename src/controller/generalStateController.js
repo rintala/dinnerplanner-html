@@ -16,9 +16,13 @@ class GeneralStateController {
   }
 
   renderPage(path) {
+    this.hideAll();
+    console.log("path ", path);
     let hash = window.location.hash;
     if (!hash) {
+      console.log("hash undefined", hash);
       this.pages[path].controller.renderView();
+      this.displayView(path);
     } else {
       //This has to be updated to some kind of regex to support parameters like ID
       const qIndex = hash.indexOf("?");
@@ -32,19 +36,29 @@ class GeneralStateController {
       console.log("this.pages[hash].hasSideBar", this.pages[hash].hasSideBar);
       if (this.pages[hash].hasSideBar) {
         this.pages["sidebar"].controller.renderView();
+        this.displayView("sidebar");
       } else {
         console.log(this.pages["sidebar"]);
         this.pages["sidebar"].controller.hideView();
       }
+      this.displayView(hash);
     }
   }
 
-  /* displayView(viewName) {
+  hideAll() {
+    console.log("hide all views");
+    Array.from(document.getElementsByClassName("viewContainer")).forEach(
+      view => (view.style.display = "none")
+    );
+  }
+
+  displayView(viewName) {
+    console.log("viewname", viewName);
     // show view here somehow
     document.getElementById(viewName).style.display = "block";
   }
 
   hideView(viewName) {
     document.getElementById(viewName).style.display = "none";
-  } */
+  }
 }

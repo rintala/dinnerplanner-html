@@ -59,7 +59,7 @@ class OverviewView {
 
     this.container.querySelector("#dishItems").innerHTML = dishItemsHTML;
 
-    const totalMenuPrice = this.model.getTotalMenuPrice();
+    const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
     this.container.getElementsByClassName(
       "value-total-price"
     )[0].innerHTML = totalMenuPrice;

@@ -3,19 +3,17 @@ class OverviewController {
     this.view = view;
     this.model = model;
     this.generalStateController = generalStateController;
-    const self = this;
-    // TODO lab 3
-    this.renderView(self);
+    this.renderView = this.renderView.bind(this);
   }
 
-  async renderView(self) {
+  async renderView() {
     await this.view.render();
     // TODO lab 3
 
     this.view.goBackButton.addEventListener("click", () => {
-      self.generalStateController.displayView("sideBar");
-      self.generalStateController.displayView("search");
-      self.generalStateController.hideView("overview");
+      window.location = "#search";
+      /* self.generalStateController.displayView("search");
+      self.generalStateController.hideView("overview"); */
     });
   }
 
