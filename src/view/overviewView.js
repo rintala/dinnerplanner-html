@@ -99,12 +99,18 @@ class OverviewView {
 
       this.container.querySelector("#dishItems").innerHTML = dishItemsHTML;
     }
-
-    if (this.container.querySelector("." + details)) {
-      const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-      this.container.getElementsByClassName(
-        "value-total-price"
-      )[0].innerHTML = totalMenuPrice;
+    if (this.container.querySelector("." + details) !== null) {
+      console.log("this container!!", details);
+      if (details === "value-total-price") {
+        const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
+        this.container.getElementsByClassName(
+          "value-total-price"
+        )[0].innerHTML = totalMenuPrice;
+      } else if (details === "value-num-guests") {
+        this.container.querySelector(
+          ".value-num-guests"
+        ).value = this.model.getNumberOfGuests();
+      }
     }
   }
 

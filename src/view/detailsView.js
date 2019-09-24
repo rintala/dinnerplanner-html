@@ -63,5 +63,6 @@ class DetailsView {
         </div>`;
     this.container.innerHTML = content;
   }
+
   afterRender() {}
 }

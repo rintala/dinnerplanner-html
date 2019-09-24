@@ -8,6 +8,8 @@ describe("DinnerPlanner App", () => {
   let overviewView = null;
   let sideBarView = null;
   let sideBarController = null;
+  let detailsView = null;
+  let detailsController = null;
 
   beforeEach(() => {
     model = new DinnerModel();
@@ -18,6 +20,10 @@ describe("DinnerPlanner App", () => {
       model
     );
     sideBarView = new SideBarView(document.querySelector("#sidebar"), model);
+    detailsView = new DetailsView(
+      document.querySelector("#page-content"),
+      model
+    );
   });
 
   describe("Home View", () => {
@@ -141,6 +147,16 @@ describe("DinnerPlanner App", () => {
         );
       }
     });
+
+    // Own tests
+    it("Own: Observes changes in the model correctly", () => {
+      model.setNumberOfGuests(6);
+      const displayedNumberOfGuests = document.getElementsByClassName(
+        "value-num-guests"
+      );
+      console.log("displayedNumberOfGuests", displayedNumberOfGuests);
+      expect(displayedNumberOfGuests[0].value).to.equal(6);
+    });
   });
 
   describe("Sidebar view", () => {
@@ -171,6 +187,23 @@ describe("DinnerPlanner App", () => {
       const input = document.getElementsByClassName("input-num-guests")[0];
       console.log("input", input);
       expect("" + input.value).to.equal("6");
+    });
+  });
+
+  describe("Details view", () => {
+    beforeEach(async () => {
+      model = new DinnerModel();
+      let dish = await model.getDish(559251);
+      detailsView.render(dish);
+      detailsController = new DetailsController(detailsView, model);
+      detailsController.addListeners(dish);
+    });
+
+    it("Own: Adds dish to menu through user interaction", () => {
+      let addDishButton = document.querySelector("#addDishToMenuButton");
+      addDishButton.click();
+      console.log("add dish button", addDishButton);
+      expect(model.getFullMenu().length).to.equal(1);
     });
   });
 });
