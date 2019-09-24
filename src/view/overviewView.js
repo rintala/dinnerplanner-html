@@ -3,6 +3,7 @@ class OverviewView {
     this.container = container;
     this.model = model;
     this.goBackButton = null;
+    this.printoutButton = null;
   }
 
   addingDishesToMenu = id => {
@@ -31,7 +32,7 @@ class OverviewView {
             <p class="value-total-price"></p>
           </div>
           <hr> 
-          <button id="toPrintBtn" class="button" onclick="location.href='../screens/printoutScreen.html';">Print full recipe</button>
+          <button id="toPrintBtn" class="button">Print full recipe</button>
         </div>
       </div>`;
 
@@ -109,6 +110,7 @@ class OverviewView {
 
   afterRender() {
     this.goBackButton = this.container.querySelector("#goBackBtn");
+    this.printoutButton = this.container.querySelector("#toPrintBtn");
     this.model.addObserver(this);
   }
 }

@@ -2,6 +2,7 @@ class PrintoutView {
   constructor(container, model) {
     this.container = container;
     this.model = model;
+    this.goBackButton = null;
   }
 
   render() {
@@ -9,7 +10,7 @@ class PrintoutView {
       <div>
         <div id='pageHeader'>
           <p>My dinner: ${this.model.getNumberOfGuests()} people</p>
-          <button class="button" onclick="location.href='../screens/searchScreen.html'">Go back and edit dinner</button>
+          <button id="goBackBtn" class="button">Go back and edit dinner</button>
         </div>
         <hr>
         <div id='pageBody'>
@@ -60,5 +61,7 @@ class PrintoutView {
     this.afterRender();
   }
 
-  afterRender() {}
+  afterRender() {
+    this.goBackButton = this.container.querySelector("#goBackBtn");
+  }
 }

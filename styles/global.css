@@ -96,11 +96,6 @@
   padding: 10px;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
 #dishSearchViewWrapper {
   background-color: beige;
   display: flex;

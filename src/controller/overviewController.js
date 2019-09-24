@@ -12,8 +12,10 @@ class OverviewController {
 
     this.view.goBackButton.addEventListener("click", () => {
       window.location = "#search";
-      /* self.generalStateController.displayView("search");
-      self.generalStateController.hideView("overview"); */
+    });
+
+    this.view.printoutButton.addEventListener("click", () => {
+      window.location = "#printout";
     });
   }
 

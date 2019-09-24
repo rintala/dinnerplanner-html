@@ -22,7 +22,7 @@ class DetailsView {
                   </div>
                 </div>`
       )
-      .join('');
+      .join("");
 
     var content = `
         <div id='mobileMenu' >
@@ -35,12 +35,14 @@ class DetailsView {
             <div>
               <div id="dishDetailsWrapper">
                 <div id="dishDetails">
-                  <p id="dishDetailsTitle" class="value-main-course-name">${dish.title}</p>
-                  <img id="dishDetailsImage" class="image border" src="${dish.image}"/>
+                  <p id="dishDetailsTitle" class="value-main-course-name">${
+                    dish.title
+                  }</p>
+                  <img id="dishDetailsImage" class="image border" src="${
+                    dish.image
+                  }"/>
                   <div id="dishDetailsBody"> ${dish.instructions}</div>
                   <button id="backButton" class="button">Go back and edit dinner</button>
-                  back to search
-                  </a>
                 </div>
                 <div id="dishIngredients">
                 <div id="dishIngredientsTitle">Ingredients</div>

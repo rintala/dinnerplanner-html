@@ -9,6 +9,9 @@ class PrintoutController {
   renderView() {
     this.view.render();
     // TODO lab 3
+    this.view.goBackButton.addEventListener("click", () => {
+      window.location = "#search";
+    });
   }
 
   update(payload) {

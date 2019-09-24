@@ -8,9 +8,9 @@ class DetailsController {
 
   renderView() {
     const hash = window.location.hash;
-    const idIndex = hash.indexOf('id');
+    const idIndex = hash.indexOf("id");
     const id = hash.substring(idIndex + 3, hash.length);
-    console.log('Trying to render a details view. ID: ', id);
+    console.log("Trying to render a details view. ID: ", id);
 
     this.model.getDish(id).then(dish => {
       this.view.render(dish);
@@ -21,13 +21,18 @@ class DetailsController {
   }
   addListeners(dish) {
     //The sexy way would be if a cookie remebers the searchqueris
-    this.view.container.querySelector('#backButton').addEventListener('click', () => {
-      window.location = '#search';
-    });
-    this.view.container.querySelector('#addDishToMenuButton').addEventListener('click', () => {
-      this.model.addDishToMenu(dish);
-      console.log(this.model.getFullMenu());
-    });
+    this.view.container
+      .querySelector("#backButton")
+      .addEventListener("click", () => {
+        window.location = "#search";
+      });
+    this.view.container
+      .querySelector("#addDishToMenuButton")
+      .addEventListener("click", () => {
+        this.model.addDishToMenu(dish);
+        this.model.updateObservers("dishesInfo");
+        console.log(this.model.getFullMenu());
+      });
   }
 
   update(payload) {

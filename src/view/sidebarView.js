@@ -72,7 +72,7 @@ class SideBarView {
   }
 
   updateView(details) {
-    //  console.log("ydopatecidwe", details);
+    console.log("sidebar updateView", details);
     if (this.container.querySelector("#" + details) !== null) {
       this.container.querySelector("#" + details).innerHTML = "";
       const menuDishes = this.model.getFullMenu();
