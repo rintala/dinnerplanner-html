@@ -2,34 +2,17 @@ class GeneralStateController {
   constructor(model) {
     this.model = model;
     this.views = {};
-    this.pages = {
-      home: new HomeController(new HomeView(document.createElement('div'), this.model), model),
-      details: new DetailsController(
-        new DetailsView(document.createElement('div'), this.model),
-        model
-      ),
-      overview: new OverviewController(
-        new OverviewView(document.createElement('div'), this.model),
-        model
-      ),
-      printout: new PrintoutController(
-        new PrintoutView(document.createElement('div'), this.model),
-        model
-      ),
-      search: new SearchController(new SearchView(document.createElement('div'), this.model), model)
-    };
+    this.pages = {};
 
-    const sideBar = new SideBarController(
-      new SideBarView(document.createElement('div'), this.model),
-      model
-    );
-
-    this.hashChange = this.hashChange.bind(this);
-    window.addEventListener('hashchange', this.hashChange);
-    this.hashChange();
+    this.renderPage = this.renderPage.bind(this);
+    window.addEventListener('hashchange', this.renderPage);
   }
 
-  hashChange() {
+  addPage(data) {
+    this.pages[data.path] = data.controller;
+  }
+
+  renderPage() {
     const hash = window.location.hash;
     if (!hash) {
       this.pages['home'].renderView();

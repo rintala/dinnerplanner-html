@@ -46,7 +46,6 @@ class SearchView {
       `;
 
     this.container.innerHTML = content;
-    document.getElementById('app').innerHTML = content;
   }
 
   addSearchResults(data) {
@@ -60,7 +59,8 @@ class SearchView {
       })
       .join('');
 
-    document.querySelector('#dishItems').innerHTML = dishesHTML;
+    this.container.querySelector('#dishItems').innerHTML = dishesHTML;
   }
+
   afterRender() {}
 }

@@ -12,7 +12,8 @@ class HomeController {
   addListeners() {
     //  console.log('Adding event listner');
 
-    document.getElementById('startBtn').addEventListener('click', this.startButtonEvent);
+    // document
+    this.view.startButton.addEventListener('click', this.startButtonEvent);
   }
 
   startButtonEvent() {

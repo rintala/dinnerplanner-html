@@ -20,8 +20,10 @@ class HomeView {
       </div>
     `;
     this.container.innerHTML = content;
-    document.getElementById('app').innerHTML = content;
+    this.afterRender();
   }
 
-  afterRender() {}
+  afterRender() {
+    this.startButton = this.container.querySelector('#startBtn');
+  }
 }

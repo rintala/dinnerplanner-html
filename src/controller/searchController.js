@@ -21,9 +21,9 @@ class SearchController {
 
   addListeners() {
     console.log('Adding event listner');
-    document.getElementById('searchBtn').addEventListener('click', this.getAllDishes);
+    this.view.container.querySelector('#searchBtn').addEventListener('click', this.getAllDishes);
 
-    document.querySelector('#dishItems').addEventListener('click', dish => {
+    this.view.container.querySelector('#dishItems').addEventListener('click', dish => {
       window.location = `#details?id=${dish.target.parentElement.id}`;
     });
   }
