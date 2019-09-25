@@ -112,8 +112,9 @@ class DinnerModel {
     if (!this.menu.length) {
       this.menu.push(dishToAdd);
     } else {
-      /* this.menu = [1, 2, 3]; */
-      Array.from(new Set([...this.menu.filter(dish => dish.id !== dishToAdd.id), dishToAdd]));
+      this.menu = Array.from(
+        new Set([...this.menu.filter(dish => dish.id !== dishToAdd.id), dishToAdd])
+      );
     }
     document.cookie = 'dishes=' + this.getFullMenu().map(dish => dish.id);
     this.updateObservers('dishItems');

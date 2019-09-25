@@ -79,31 +79,28 @@ window.onload = function() {
 };
 
 function readingCookie(model) {
-  return new Promise(resolve => {
-    if (!!document.cookie) {
-      const cookie = this.parsingCookie();
-      if (!isNaN(parseInt(cookie.guests))) {
-        model.setNumberOfGuests(cookie.guests);
-      }
+  if (!!document.cookie) {
+    const cookie = this.parsingCookie();
+    if (!isNaN(parseInt(cookie.guests))) {
+      model.setNumberOfGuests(cookie.guests);
+    }
 
-      if ((cookie.dishes + '').split(',').length > 0) {
-        let dishArray = (cookie.dishes + '').split(',');
-        let counter = 0;
-        dishArray.forEach(dishId => {
+    if ((cookie.dishes + '').split(',').length > 0) {
+      let dishArray = (cookie.dishes + '').split(',');
+      let promiseArray = dishArray.map(dishId => {
+        return new Promise(resolve => {
           model.getDish(dishId).then(dish => {
             model.addDishToMenu(dish);
-          });
-          counter++;
-          if (counter === dishArray.length) {
-            console.log('cookie loading done');
             resolve();
-          }
+          });
         });
-      }
-    } else {
-      resolve();
+      });
+      console.log('does this happen? ', promiseArray);
+      return Promise.all(promiseArray);
     }
-  });
+  } else {
+    return;
+  }
 }
 
 function parsingCookie() {
