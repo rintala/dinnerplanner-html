@@ -8,86 +8,103 @@ window.onload = function() {
     //We instantiate our model
     const model = new DinnerModel();
 
+    this.readingCookie(model).then(() => {
+      this.console.log('creating page, ', model);
+      const generalController = new GeneralStateController(model);
+
+      const homeController = new HomeController(
+        new HomeView(document.querySelector('#home'), model),
+        model
+      );
+      const detailsController = new DetailsController(
+        new DetailsView(document.querySelector('#details'), model),
+        model
+      );
+      const overview = new OverviewController(
+        new OverviewView(document.querySelector('#overview'), model),
+        model
+      );
+      const printout = new PrintoutController(
+        new PrintoutView(document.querySelector('#printout'), model),
+        model
+      );
+      const search = new SearchController(
+        new SearchView(document.querySelector('#search'), model),
+        model
+      );
+
+      // this.console.log("document.querySelector('#sidebar')", document.querySelector('#sidebar'));
+      const sideBar = new SideBarController(
+        new SideBarView(document.querySelector('#sidebar'), model),
+        model
+      );
+
+      generalController.addPage({
+        path: 'search',
+        controller: search,
+        hasSideBar: true
+      });
+      generalController.addPage({
+        path: 'home',
+        controller: homeController,
+        hasSideBar: false
+      });
+      generalController.addPage({
+        path: 'sidebar',
+        controller: sideBar,
+        hasSideBar: false
+      });
+      generalController.addPage({
+        path: 'details',
+        controller: detailsController,
+        hasSideBar: true
+      });
+      generalController.addPage({
+        path: 'overview',
+        controller: overview,
+        hasSideBar: false
+      });
+      generalController.addPage({
+        path: 'printout',
+        controller: printout,
+        hasSideBar: false
+      });
+
+      generalController.renderPage('home');
+      /* generalController.displayView("sidebar"); */
+      /* generalController.hideView("sidebar"); */
+      /* generalController.sPage("sidebar"); */
+    });
+  }
+};
+
+function readingCookie(model) {
+  return new Promise(resolve => {
     if (!!document.cookie) {
       const cookie = this.parsingCookie();
       if (!isNaN(parseInt(cookie.guests))) {
         model.setNumberOfGuests(cookie.guests);
       }
+
       if ((cookie.dishes + '').split(',').length > 0) {
-        (cookie.dishes + '').split(',').forEach(dishId => {
+        let dishArray = (cookie.dishes + '').split(',');
+        let counter = 0;
+        dishArray.forEach(dishId => {
           model.getDish(dishId).then(dish => {
             model.addDishToMenu(dish);
           });
+          counter++;
+          if (counter === dishArray.length) {
+            console.log('cookie loading done');
+            resolve();
+          }
         });
       }
+    } else {
+      resolve();
     }
-
-    const generalController = new GeneralStateController(model);
-
-    const homeController = new HomeController(
-      new HomeView(document.querySelector('#home'), model),
-      model
-    );
-    const detailsController = new DetailsController(
-      new DetailsView(document.querySelector('#details'), model),
-      model
-    );
-    const overview = new OverviewController(
-      new OverviewView(document.querySelector('#overview'), model),
-      model
-    );
-    const printout = new PrintoutController(
-      new PrintoutView(document.querySelector('#printout'), model),
-      model
-    );
-    const search = new SearchController(
-      new SearchView(document.querySelector('#search'), model),
-      model
-    );
-
-    this.console.log("document.querySelector('#sidebar')", document.querySelector('#sidebar'));
-    const sideBar = new SideBarController(
-      new SideBarView(document.querySelector('#sidebar'), model),
-      model
-    );
-
-    generalController.addPage({
-      path: 'search',
-      controller: search,
-      hasSideBar: true
-    });
-    generalController.addPage({
-      path: 'home',
-      controller: homeController,
-      hasSideBar: false
-    });
-    generalController.addPage({
-      path: 'sidebar',
-      controller: sideBar,
-      hasSideBar: false
-    });
-    generalController.addPage({
-      path: 'details',
-      controller: detailsController,
-      hasSideBar: true
-    });
-    generalController.addPage({
-      path: 'overview',
-      controller: overview,
-      hasSideBar: false
-    });
-    generalController.addPage({
-      path: 'printout',
-      controller: printout,
-      hasSideBar: false
-    });
-
-    generalController.renderPage('home');
-    /* generalController.displayView("sidebar"); */
-    /* generalController.hideView("sidebar"); */
-    /* generalController.sPage("sidebar"); */
-  }
-};
+  });
+}
 
 function parsingCookie() {
   return document.cookie.split(';').reduce((res, c) => {

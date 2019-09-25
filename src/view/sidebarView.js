@@ -7,6 +7,7 @@ class SideBarView {
   }
 
   render() {
+    console.log('model in sideview', this.model);
     var content = /* template */ `
         <div id="sideBarViewContainer">
         <div>
@@ -32,9 +33,19 @@ class SideBarView {
       </div>
     `;
     this.container.innerHTML = content;
-
+    console.log('%cBUG searching', 'color: green; font-size: 2rem;');
+    console.log('the model', this.model);
+    console.log('getting menu', this.model.getFullMenu());
+    // var m = this.model;
+    // console.log('keys', Object.keys(m));
+    // console.log(m + '');
+    // console.log(m.menu + '');
+    // console.log(m['menu']);
+    // console.log([] + '');
+    // console.log(m.menu.length);
+    // console.log(m.menu[0]);
     const menuDishes = this.model.getFullMenu();
-
+    console.log('still in sidebar', menuDishes);
     let dishInfoHTML = menuDishes
       .map(
         menuDish => `
@@ -44,22 +55,20 @@ class SideBarView {
           <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
       </div>`
       )
-      .join("");
+      .join('');
 
-    this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
+    this.container.querySelector('#dishesInfo').innerHTML = dishInfoHTML;
 
     const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-    this.container.getElementsByClassName(
-      "value-total-price"
-    )[0].innerHTML = totalMenuPrice;
+    this.container.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
 
-    document.getElementById("sidebar").innerHTML = this.container.innerHTML;
+    document.getElementById('sidebar').innerHTML = this.container.innerHTML;
     this.afterRender();
   }
 
   afterRender() {
-    this.confirmButton = this.container.querySelector("#confirmBtn");
-    this.inputNumberChanger = this.container.querySelector(".input-num-guests");
+    this.confirmButton = this.container.querySelector('#confirmBtn');
+    this.inputNumberChanger = this.container.querySelector('.input-num-guests');
 
     this.model.addObserver(this);
     /* this.confirmButton.addEventListener(
@@ -72,10 +81,10 @@ class SideBarView {
   }
 
   updateView(details) {
-    console.log("sidebar updateView", details);
-    console.log("model contains", this.model.getNumberOfGuests());
-    if (this.container.querySelector("#" + details) !== null) {
-      this.container.querySelector("#" + details).innerHTML = "";
+    console.log('sidebar updateView', details);
+    console.log('model contains', this.model.getNumberOfGuests());
+    if (this.container.querySelector('#' + details) !== null) {
+      this.container.querySelector('#' + details).innerHTML = '';
       const menuDishes = this.model.getFullMenu();
 
       let dishInfoHTML = menuDishes
@@ -87,19 +96,15 @@ class SideBarView {
             <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
         </div>`
         )
-        .join("");
+        .join('');
 
-      this.container.querySelector("#dishesInfo").innerHTML = dishInfoHTML;
+      this.container.querySelector('#dishesInfo').innerHTML = dishInfoHTML;
 
       const totalMenuPrice = this.model.getTotalMenuPriceForNumberOfPeople();
-      this.container.getElementsByClassName(
-        "value-total-price"
-      )[0].innerHTML = totalMenuPrice;
+      this.container.getElementsByClassName('value-total-price')[0].innerHTML = totalMenuPrice;
     }
-    if (this.container.querySelector("." + details) !== null) {
-      this.container.querySelector(
-        "." + details
-      ).value = `${this.model.getNumberOfGuests()}`;
+    if (this.container.querySelector('.' + details) !== null) {
+      this.container.querySelector('.' + details).value = `${this.model.getNumberOfGuests()}`;
     }
   }
 }
