@@ -8,16 +8,18 @@ window.onload = function() {
     //We instantiate our model
     const model = new DinnerModel();
 
-    this.console.log('LOADING NEW WINDOW');
-    console.log('checking cookie: ', document.cookie);
-    if (!document.cookie) {
-      this.console.log('creating new cookie');
-      model.changeCookie({ attribute: 'path', value: 'home' });
-      model.changeCookie({ attribute: 'guests', value: '0' });
-      model.changeCookie({ attribute: 'test', value: 'test' });
-      model.changeCookie({ attribute: 'test', value: 'test2' });
-    } else {
-      this.console.log('reading cookie');
+    if (!!document.cookie) {
+      const cookie = this.parsingCookie();
+      if (!isNaN(parseInt(cookie.guests))) {
+        model.setNumberOfGuests(cookie.guests);
+      }
+      if ((cookie.dishes + '').split(',').length > 0) {
+        (cookie.dishes + '').split(',').forEach(dishId => {
+          model.getDish(dishId).then(dish => {
+            model.addDishToMenu(dish);
+          });
+        });
+      }
     }
 
     const generalController = new GeneralStateController(model);
@@ -86,3 +88,17 @@ window.onload = function() {
     /* generalController.sPage("sidebar"); */
   }
 };
+
+function parsingCookie() {
+  return document.cookie.split(';').reduce((res, c) => {
+    const [key, val] = c
+      .trim()
+      .split('=')
+      .map(decodeURIComponent);
+    try {
+      return Object.assign(res, { [key]: JSON.parse(val) });
+    } catch (e) {
+      return Object.assign(res, { [key]: val });
+    }
+  }, {});
+}

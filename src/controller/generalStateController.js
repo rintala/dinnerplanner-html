@@ -5,7 +5,7 @@ class GeneralStateController {
     this.pages = {};
 
     this.renderPage = this.renderPage.bind(this);
-    window.addEventListener("hashchange", this.renderPage);
+    window.addEventListener('hashchange', this.renderPage);
   }
 
   addPage(data) {
@@ -17,15 +17,15 @@ class GeneralStateController {
 
   renderPage(path) {
     this.hideAll();
-    console.log("path ", path);
+    console.log('path ', path);
     let hash = window.location.hash;
     if (!hash) {
-      console.log("hash undefined", hash);
+      console.log('hash undefined', hash);
       this.pages[path].controller.renderView();
       this.displayView(path);
     } else {
       //This has to be updated to some kind of regex to support parameters like ID
-      const qIndex = hash.indexOf("?");
+      const qIndex = hash.indexOf('?');
       if (qIndex > 0) {
         hash = hash.substring(1, qIndex);
       } else {
@@ -33,32 +33,32 @@ class GeneralStateController {
       }
 
       this.pages[hash].controller.renderView();
-      console.log("this.pages[hash].hasSideBar", this.pages[hash].hasSideBar);
+      console.log('this.pages[hash].hasSideBar', this.pages[hash].hasSideBar);
       if (this.pages[hash].hasSideBar) {
-        this.pages["sidebar"].controller.renderView();
-        this.displayView("sidebar");
+        this.pages['sidebar'].controller.renderView();
+        this.displayView('sidebar');
       } else {
-        console.log(this.pages["sidebar"]);
-        this.pages["sidebar"].controller.hideView();
+        console.log(this.pages['sidebar']);
+        this.pages['sidebar'].controller.hideView();
       }
       this.displayView(hash);
     }
   }
 
   hideAll() {
-    console.log("hide all views");
-    Array.from(document.getElementsByClassName("viewContainer")).forEach(
-      view => (view.style.display = "none")
+    console.log('hide all views');
+    Array.from(document.getElementsByClassName('viewContainer')).forEach(
+      view => (view.style.display = 'none')
     );
   }
 
   displayView(viewName) {
-    console.log("viewname", viewName);
+    console.log('viewname', viewName);
     // show view here somehow
-    document.getElementById(viewName).style.display = "block";
+    document.getElementById(viewName).style.display = 'block';
   }
 
   hideView(viewName) {
-    document.getElementById(viewName).style.display = "none";
+    document.getElementById(viewName).style.display = 'none';
   }
 }

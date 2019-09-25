@@ -35,6 +35,7 @@ class DinnerModel {
     this.updateObservers('input-num-guests');
     this.updateObservers('value-num-guests');
     this.changeCookie({ attribute: 'guests', value: num });
+    document.cookie = `guests=${num};`;
   }
 
   getNumberOfGuests() {
@@ -117,6 +118,7 @@ class DinnerModel {
         new Set([...this.menu.filter(dish => dish.id !== dishToAdd.id), dishToAdd])
       );
     }
+    document.cookie = 'dishes=' + this.getFullMenu().map(dish => dish.id);
   }
 
   removeDishFromMenu(id) {
@@ -191,11 +193,6 @@ class DinnerModel {
   }
 
   changeCookie(data) {
-    this.cookie[data.attribute] = data.value;
-    document.cookie = Object.keys(this.cookie)
-      .map(key => {
-        return key + '=' + this.cookie[key];
-      })
-      .join(';');
+    document.cookie = data.attribute + '=' + data.value + ';';
   }
 }
