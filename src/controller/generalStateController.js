@@ -22,9 +22,9 @@ class GeneralStateController {
     if (!hash) {
       console.log('hash undefined', hash);
       this.pages[path].controller.renderView();
+      //Await here
       this.displayView(path);
     } else {
-      //This has to be updated to some kind of regex to support parameters like ID
       const qIndex = hash.indexOf('?');
       if (qIndex > 0) {
         hash = hash.substring(1, qIndex);

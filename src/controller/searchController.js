@@ -9,7 +9,7 @@ class SearchController {
   }
 
   async renderView() {
-    console.log("rendering !.");
+    console.log('rendering !.');
     this.view.render();
     //loading content
     await this.getAllDishes();
@@ -17,20 +17,18 @@ class SearchController {
   }
 
   testFunction() {
-    console.log("TEST IS WORKING");
+    console.log('TEST IS WORKING');
   }
 
   addListeners() {
-    console.log("Adding event listner");
-    this.view.container
-      .querySelector("#searchBtn")
-      .addEventListener("click", this.getAllDishes);
+    console.log('Adding event listner');
+    this.view.container.querySelector('#searchBtn').addEventListener('click', this.getAllDishes);
 
-    this.view.container
-      .querySelector("#dishItems")
-      .addEventListener("click", dish => {
+    this.view.container.querySelector('#dishItems').addEventListener('click', dish => {
+      if (dish.target.parentElement.className === 'dish') {
         window.location = `#details?id=${dish.target.parentElement.id}`;
-      });
+      }
+    });
   }
 
   update(payload) {
@@ -41,11 +39,11 @@ class SearchController {
     /* Makes an API call for dishes matching the search queries, then pushes the result to the view */
     return new Promise(resolve => {
       displayLoader();
-      document.querySelector("#dishItems").innerHTML = "";
-      const query = document.querySelector("#searchKeyword").value;
-      let dishType = document.querySelector("#dropDownMenu").value;
+      document.querySelector('#dishItems').innerHTML = '';
+      const query = document.querySelector('#searchKeyword').value;
+      let dishType = document.querySelector('#dropDownMenu').value;
 
-      if (dishType === "all") dishType = "";
+      if (dishType === 'all') dishType = '';
 
       //Why does this return a promise?
       const dishData = this.model
