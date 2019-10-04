@@ -32,7 +32,7 @@ class DinnerModel {
     if (num > 0) this.guests = num;
     this.updateObservers('input-num-guests');
     this.updateObservers('value-num-guests');
-    this.changeCookie({ attribute: 'guests', value: num });
+    // this.changeCookie({ attribute: 'guests', value: num });
     document.cookie = `guests=${num};`;
   }
 
@@ -121,7 +121,11 @@ class DinnerModel {
   }
 
   removeDishFromMenu(id) {
-    this.menu = this.menu.filter(dish => dish.id !== id);
+    console.log('removing dish in model: ', id);
+    this.menu = this.menu.filter(dish => dish.id != id);
+    console.log(this.getFullMenu());
+    this.updateObservers('dishesInfo');
+    document.cookie = 'dishes=' + this.getFullMenu().map(dish => dish.id);
   }
 
   //Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
@@ -191,7 +195,7 @@ class DinnerModel {
     this._observers.forEach(obs => obs.updateView(detailsToUpdateWith));
   }
 
-  changeCookie(data) {
-    document.cookie = data.attribute + '=' + data.value + ';';
-  }
+  // changeCookie(data) {
+  //   document.cookie = data.attribute + '=' + data.value + ';';
+  // }
 }

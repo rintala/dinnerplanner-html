@@ -99,7 +99,9 @@ function readingCookie(model) {
       return Promise.all(promiseArray);
     }
   } else {
-    return;
+    return new Promise(resolve => {
+      resolve();
+    });
   }
 }
 

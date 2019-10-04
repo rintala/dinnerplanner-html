@@ -4,6 +4,8 @@ class SideBarView {
     this.model = model;
     this.confirmButton = null;
     this.inputNumberChanger = null;
+
+    this.model.addObserver(this);
   }
 
   render() {
@@ -33,27 +35,16 @@ class SideBarView {
       </div>
     `;
     this.container.innerHTML = content;
-    console.log('%cBUG searching', 'color: green; font-size: 2rem;');
 
-    console.log('the model', this.model);
-    console.log('getting menu', this.model.getFullMenu());
-    var m = this.model;
-    console.log('keys', Object.keys(m));
-    console.log(m + '');
-    console.log(m.menu + '');
-    console.log(m['menu']);
-    console.log([] + '');
-    console.log(m.menu.length);
-    console.log(m.menu[0]);
     const menuDishes = this.model.getFullMenu();
-    console.log('still in sidebar', menuDishes);
     let dishInfoHTML = menuDishes
       .map(
         menuDish => `
        
-      <div class="dishInfo" >
-          <span class="value-main-course-name">${menuDish.title}</span> 
+      <div id="dishInfo" class="dishInfo" >
+          <span class="value-main-course-name">${cutOverflowingText(menuDish.title, 12)}</span> 
           <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
+          <span id="${menuDish.id}">X</span>
       </div>`
       )
       .join('');
@@ -71,7 +62,6 @@ class SideBarView {
     this.confirmButton = this.container.querySelector('#confirmBtn');
     this.inputNumberChanger = this.container.querySelector('.input-num-guests');
 
-    this.model.addObserver(this);
     /* this.confirmButton.addEventListener(
       "click",
       () => {
@@ -92,10 +82,11 @@ class SideBarView {
         .map(
           menuDish => `
          
-        <div class="dishInfo" >
-            <span class="value-main-course-name">${menuDish.title}</span> 
-            <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
-        </div>`
+      <div id="dishInfo" class="dishInfo" >
+          <span class="value-main-course-name">${cutOverflowingText(menuDish.title, 12)}</span> 
+          <span>${this.model.getDishPriceForNumberOfPeople(menuDish)}</span>
+          <span id="${menuDish.id}">X</span>
+      </div>`
         )
         .join('');
 

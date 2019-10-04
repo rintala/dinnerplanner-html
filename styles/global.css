@@ -22,7 +22,7 @@
 
 .dropDownMenu:after {
   position: absolute;
-  content: "";
+  content: '';
   top: 14px;
   right: 10px;
   width: 0;
@@ -54,12 +54,12 @@
   flex-direction: column;
   align-items: center;
   font-size: 20px;
-  font-family: "Sofia";
+  font-family: 'Sofia';
 }
 
 #sideBarTitle {
   font-size: 18px;
-  font-family: "Sofia";
+  font-family: 'Sofia';
   font-weight: bold;
   padding: 10px;
 }
@@ -85,7 +85,7 @@
 }
 
 .header {
-  font-family: "Sofia";
+  font-family: 'Sofia';
   font-size: 44px;
   font-weight: bold;
   display: flex;
@@ -208,7 +208,7 @@
 }
 
 #dishesInfoTitle {
-  font-family: "Sofia";
+  font-family: 'Sofia';
   font-weight: bold;
   justify-content: space-between;
   display: flex;
@@ -224,6 +224,7 @@
   display: flex;
   border-width: 1px;
   border-style: solid;
+  justify-content: space-between;
 }
 
 #totalPrice {
